@@ -8,5 +8,5 @@ public interface UserService {
 
     public boolean checkEmail(String email);
 
-    public boolean checkUserName();
+    public boolean checkUserName(String user_name);
 }

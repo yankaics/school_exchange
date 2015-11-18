@@ -117,7 +117,21 @@ function checkRegisterName() {
     }
 
     /*Ajax异步验证用户名是否存在*/
-
+    $.post(
+        "check_name",
+        {
+            user_name:js_value
+        },
+        function(data){
+            if(data == "yes"){
+                document.getElementById("span_name").innerHTML = "<font color='green'>该用户名可以注册</font>";
+                return true;
+            }else{
+                document.getElementById("span_name").innerHTML = "<font color='red'>该用户名已被注册</font>";
+                return false;
+            }
+        }
+    );
 
 
     return true;

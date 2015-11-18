@@ -31,8 +31,15 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public boolean checkUserName() {
-
+    public boolean checkUserName(String user_name) {
+        List<User> users = new ArrayList<User>();
+        users = userDao.getAllUser();
+        if (users.size() > 0){
+            for (User user:users){
+                if (user.getUser_name().equals(user_name))
+                    return true;
+            }
+        }
         return false;
     }
 }
