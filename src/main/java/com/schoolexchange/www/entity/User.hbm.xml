@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.schoolexchange.www.entity">
+    <class name="User" table="user">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="user_name" column="user_name" length="20" type="java.lang.String"
+                not-null="true"/>
+        <property name="user_email" column="user_email" length="50" type="java.lang.String"
+                not-null="false"/>
+        <property name="user_tel" column="user_tel" length="20" type="java.lang.String"
+                  not-null="false"/>
+        <property name="user_password" column="user_password" length="20" type="java.lang.String"
+                  not-null="true"/>
+        <property name="user_university" column="user_university" length="50" type="java.lang.String"
+                  not-null="false"/>
+        <property name="user_faces" column="user_faces" length="100" type="java.lang.String"
+                  not-null="false"/>
+        <property name="user_goods_counts" column="user_goods_counts" type="java.lang.Integer"
+                  not-null="true"/>
+        <property name="user_state" column="user_state" type="java.lang.Integer"
+                  not-null="true"/>
+        <property name="message_count" column="message_count" type="java.lang.Integer"
+                  not-null="true"/>
+    </class>
+</hibernate-mapping>

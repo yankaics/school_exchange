@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.schoolexchange.www.entity">
+       <class name="BuyGoods" table="buy_goods">
+              <id name="id" column="id">
+                     <generator class="identity"/>
+              </id>
+              <property name="user_id" column="user_id" type="java.lang.Integer"
+                        not-null="true"/>
+              <property name="goods_name" column="goods_name" type="java.lang.String"
+                        not-null="true"/>
+              <property name="goods_deadline" column="goods_deadline" type="java.util.Date"
+                        not-null="true"/>
+              <property name="goods_count" column="goods_count" type="java.lang.Integer"
+                        not-null="true"/>
+              <property name="goods_contact" column="goods_contact" type="java.lang.String"
+                        not-null="true"/>
+              <property name="goods_desc" column="goods_desc" type="java.lang.String"
+                        not-null="false"/>
+              <property name="goods_state" column="goods_price" type="java.lang.Integer"
+                        not-null="true"/>
+              <property name="create_time" column="create_time" type="java.util.Date"
+                        not-null="true"/>
+
+       </class>
+</hibernate-mapping>

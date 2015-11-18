@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.schoolexchange.www.entity">
+    <class name="Message" table="message">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="send_user_id" column="send_user_id" type="java.lang.Integer"
+                  not-null="false"/>
+        <property name="accept_user_id" column="accept_user_id" type="java.lang.Integer"
+                  not-null="false"/>
+        <property name="message_content" column="message_content" type="java.lang.String"
+                  not-null="true"/>
+        <property name="message_state" column="message_state" type="java.lang.Integer"
+                  not-null="true"/>
+
+    </class>
+</hibernate-mapping>

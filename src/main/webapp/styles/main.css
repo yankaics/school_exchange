@@ -1,0 +1,57 @@
+.form_style {
+    background: #4C4C4A;
+    height: 300px;
+}
+
+.login_logo {
+    margin-top: 30px;
+}
+
+.login_form {
+    top: 50px;
+    margin-left: 25px;
+}
+
+.login_submit {
+    top: 30px;
+}
+
+.login_button {
+    width: 100%;
+}
+
+.login_center {
+    margin-top: 100px;
+}
+
+.login_center_right {
+    margin-left: 100px;
+}
+
+.login_center_left {
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.login_fail {
+    width: 306px;
+    height: 30px;
+    background: #DE2449;
+    margin-top: 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    display: none;
+}
+.register_center_right{
+    margin-left: 100px;
+}
+
+#university option{
+    font-weight: bold;
+    font-size: 18px;
+}
+.register_center_left{
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
