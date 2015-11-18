@@ -59,6 +59,7 @@ function checkRegister() {
  * 判断邮箱格式是否合法以及是否被注册
  */
 function checkEmail() {
+
     var js_value = document.getElementById("register_email");
     if (0 == js_value.value.length && "" == js_value.value) {
         document.getElementById("span_email").innerHTML = "<font color='red'>邮箱不能为空</font>";
@@ -70,10 +71,25 @@ function checkEmail() {
         return false;
     } else {
         document.getElementById("span_email").innerText = "邮箱";
-        return true;
     }
     /*Ajax异步验证邮箱是否被注册*/
+    var email = js_value.value;
 
+    $.post(
+        "check_email",
+        {
+            email:email
+        },
+        function(data){
+            if(data == "yes"){
+                document.getElementById("span_email").innerHTML = "<font color='green'>该邮箱可以注册</font>";
+                return true;
+            }else{
+                document.getElementById("span_email").innerHTML = "<font color='red'>该邮箱已被注册</font>";
+                return false;
+            }
+        }
+    );
 
     return true;
 
