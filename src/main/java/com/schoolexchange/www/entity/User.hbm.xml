@@ -14,7 +14,7 @@
                 not-null="false"/>
         <property name="user_tel" column="user_tel" length="20" type="java.lang.String"
                   not-null="false"/>
-        <property name="user_password" column="user_password" length="20" type="java.lang.String"
+        <property name="user_password" column="user_password" length="100" type="java.lang.String"
                   not-null="true"/>
         <property name="user_university" column="user_university" length="50" type="java.lang.String"
                   not-null="false"/>

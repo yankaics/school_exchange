@@ -3,6 +3,7 @@ package com.schoolexchange.www.service.impl;
 import com.schoolexchange.www.dao.UserDao;
 import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.UserService;
+import com.schoolexchange.www.tools.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setUser_email(user_email);
         user.setUser_name(user_name);
-        user.setUser_password(user_password);
+        user.setUser_password(encrypt_password(user_password));
         user.setUser_university(belong_university);
         userDao.saveUser(user);
     }
@@ -68,5 +69,12 @@ public class UserServiceImpl implements UserService {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         String create_time_str = sf.format(create_time);
         return sf.parse(create_time_str);
+    }
+
+    //密码加密
+    public String  encrypt_password(String password){
+        String encrypt_password = BCrypt.hashpw(password , BCrypt.gensalt());
+
+        return encrypt_password;
     }
 }
