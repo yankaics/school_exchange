@@ -9,4 +9,7 @@ public interface UserService {
     public boolean checkEmail(String email);
 
     public boolean checkUserName(String user_name);
+
+    public void registerUser(String user_email , String user_name
+            , String user_password , String belong_university);
 }

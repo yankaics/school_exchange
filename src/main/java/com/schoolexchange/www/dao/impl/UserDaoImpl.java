@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     public void saveUser(User user) {
-
+        sessionFactory.openSession().save(user);
     }
 
     public void editUser(User user) {

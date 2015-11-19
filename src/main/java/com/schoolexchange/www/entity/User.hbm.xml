@@ -26,5 +26,7 @@
                   not-null="true"/>
         <property name="message_count" column="message_count" type="java.lang.Integer"
                   not-null="true"/>
+        <property name="create_time" column="create_time" type="java.util.Date"
+                  not-null="true"/>
     </class>
 </hibernate-mapping>

@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 
+    @RequestMapping(value = "/views/index")
+    public String index(){
+
+        return "index";
+    }
+
     @RequestMapping(value = "/views/to_register_user")
     public String toRegister(){
 

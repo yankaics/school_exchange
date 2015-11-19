@@ -1,5 +1,7 @@
 package com.schoolexchange.www.entity;
 
+import java.util.Date;
+
 /**
  * Created by shadow on 2015/11/16.
  * User:用户表
@@ -37,6 +39,8 @@ public class User {
 
     //未浏览的消息总数(留言)
     private int message_count;
+
+    private Date create_time;
 
     public Integer getId() {
         return id;
@@ -116,5 +120,13 @@ public class User {
 
     public void setMessage_count(int message_count) {
         this.message_count = message_count;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
     }
 }

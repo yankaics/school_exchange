@@ -12,6 +12,8 @@ import java.io.IOException;
 /**
  * Created by shadow on 2015/11/18.
  * 注册事件
+ * checkEmail方法:检测Email是否被注册
+ * checkName方法:检测用户名是否被注册
  */
 @Controller
 public class CheckRegisterController {
@@ -40,5 +42,15 @@ public class CheckRegisterController {
             response.getWriter().write("yes");
         }
 
+    }
+
+    @RequestMapping(value = "/views/register_action")
+    public void registerAction(HttpServletRequest request , HttpServletResponse response){
+        String user_email = null != request.getParameter("user_email")?request.getParameter("user_email"):"";
+        String user_name = null != request.getParameter("user_name")?request.getParameter("user_name"):"";
+        String user_password = null != request.getParameter("user_password")?request.getParameter("user_password"):"";
+        String belong_university = null != request.getParameter("belong_university")?request.getParameter("belong_university"):"";
+
+        userService.registerUser(user_email , user_name , user_password , belong_university);
     }
 }

@@ -49,6 +49,7 @@ function checkLoginSubmit() {
  */
 function checkRegister() {
     if(checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()){
+        saveUser();
         $('#register_success').show().delay(60000).fadeOut("slow");
         autoJump(5 , 'index');
     }
@@ -185,4 +186,24 @@ function autoJump(secs,surl){
     else{
         location.href=surl;
     }
+}
+
+/*注册到数据库Ajax*/
+function saveUser(){
+    var user_email = document.getElementById("register_email").value;
+    var user_name = document.getElementById("register_name").value;
+    var user_password = document.getElementById("register_password").value;
+    var belong_university = document.getElementById("university").value;
+
+    //ajax保存到数据库
+    $.post(
+        "register_action",
+        {
+            user_email:user_email,
+            user_name:user_name,
+            user_password:user_password,
+            belong_university:belong_university
+        },
+        function(){}
+    );
 }
