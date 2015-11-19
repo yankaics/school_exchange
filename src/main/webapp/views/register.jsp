@@ -24,8 +24,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="login_fail" id="login_fail">
-                用户登录失败,请检查用户名,密码是否正确
+            <div class="register_success" id="register_success">
+                恭喜，注册成功!! <span id="jumpTo">5</span>秒后自动跳转到校内交易首页
             </div>
         </div>
         <div class="col-md-4"></div>
@@ -42,7 +42,7 @@
             <div class="col-md-4 register_center_right">
                 <!--右侧注册-->
                 <div class="login_form">
-                    <form method="post" action="register" onsubmit="return checkRegister()">
+                    <form method="post"  onsubmit="false">
                         <div class="form-group">
                             <label for="register_email"><span id="span_email">邮箱</span></label>
                             <input class="form-control" id="register_email" placeholder="请输入Email"
@@ -77,7 +77,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8 login_submit">
-                                <button type="submit" class="btn btn-primary login_button">注册
+                                <button type="submit" class="btn btn-primary login_button" onclick="return checkRegister()">注册
                                 </button>
                             </div>
                             <div class="col-md-2"></div>

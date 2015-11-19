@@ -45,14 +45,14 @@ function checkLoginSubmit() {
 }
 
 /*
- *注册页面判空处理
+ *判断能否submit
  */
 function checkRegister() {
     if(checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()){
-        return true;
-    }else{
-        return false;
+        $('#register_success').show().delay(60000).fadeOut("slow");
+        autoJump(5 , 'index');
     }
+    return false;
 }
 
 /*
@@ -171,4 +171,18 @@ function checkPasswordsAgreement() {
     document.getElementById("re_span_password").innerText = "确认密码";
 
     return true;
+}
+
+/*
+ *自动跳转
+ */
+function autoJump(secs,surl){
+    var jumpTo = document.getElementById('jumpTo');
+    jumpTo.innerHTML=secs;
+    if(--secs>0){
+        setTimeout("autoJump("+secs+",'"+surl+"')",1000);
+    }
+    else{
+        location.href=surl;
+    }
 }

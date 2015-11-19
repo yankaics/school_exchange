@@ -41,6 +41,7 @@
     color: white;
     font-size: 16px;
     font-weight: bold;
+    padding-top: 5px ;
     display: none;
 }
 .register_center_right{
@@ -54,4 +55,15 @@
 .register_center_left{
     margin-right: 50px;
     margin-bottom: 50px;
+}
+.register_success{
+    width: 360px;
+    height: 30px;
+    background: #DE2449;
+    margin-top: 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 5px;
+    display: none;
 }
