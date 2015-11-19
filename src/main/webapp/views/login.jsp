@@ -42,7 +42,7 @@
             <div class="col-md-4 login_center_right">
                 <!--右侧登录-->
                 <div class="login_form">
-                    <form method="post" action="" onsubmit="return checkLoginSubmit();">
+                    <form method="post"  onsubmit="return false">
                         <div class="form-group">
                             <label for="user_name"><span id="login_name">用户名</span></label>
                             <input class="form-control" id="user_name" placeholder="用户名/email/电话"

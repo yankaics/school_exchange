@@ -8,9 +8,24 @@ function checkLogin() {
     if (checkLoginName() && checkLoginPassword()) {
         var user_name = document.getElementById("user_name").value;
         var user_password = document.getElementById("user_password").value;
-        $('#login_fail').show().delay(2000).fadeOut();
+        //ajax验证账号和密码
+        $.post(
+            "/login",
+            {
+                user_name:user_name,
+                user_password:user_password
+            },
+            function(data){
+                if(data == "yes"){
+                    location.href ="index";
+                }else{
+                    $('#login_fail').show().delay(2000).fadeOut();
+                    return false;
+                }
+            }
+        );
+
     }
-    return false;
 }
 /*
  *用户名判空

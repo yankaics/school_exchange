@@ -11,20 +11,7 @@
 </head>
 <body>
 <div>
-    <h2>七牛云存储测试</h2>
-
-    <div>
-        <form method="post" action="http://upload.qiniu.com/"
-              enctype="multipart/form-data">
-            <input name="key" type="hidden" value="<resource_key>">
-            <input name="x:<custom_name>" type="hidden" value="<custom_value>">
-            <input name="token" type="hidden" value="<upload_token>">
-            <input name="file" type="file"/>
-            <input name="crc32" type="hidden"/>
-            <input name="accept" type="hidden"/>
-            <input type="submit" value="上传">
-        </form>
-    </div>
+   <h1>首页</h1>
 </div>
 <script>
 
