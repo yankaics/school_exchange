@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -45,12 +46,15 @@ public class CheckRegisterController {
     }
 
     @RequestMapping(value = "/views/register_action")
-    public void registerAction(HttpServletRequest request , HttpServletResponse response){
+    public void registerAction(HttpServletRequest request , HttpSession session){
         String user_email = null != request.getParameter("user_email")?request.getParameter("user_email"):"";
         String user_name = null != request.getParameter("user_name")?request.getParameter("user_name"):"";
         String user_password = null != request.getParameter("user_password")?request.getParameter("user_password"):"";
         String belong_university = null != request.getParameter("belong_university")?request.getParameter("belong_university"):"";
 
         userService.registerUser(user_email , user_name , user_password , belong_university);
+        session.setAttribute("user_name" ,user_name);
+        //设置session存活一个月
+        session.setMaxInactiveInterval(60*60*24*30);
     }
 }
