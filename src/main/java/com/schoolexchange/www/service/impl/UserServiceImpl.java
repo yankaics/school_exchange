@@ -64,6 +64,31 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
     }
 
+    public boolean checkLogin(String user_name, String user_password) {
+        List<User> users = new ArrayList<User>();
+        users = userDao.getAllUser();
+        if (users.size() > 0){
+            for (User user:users){
+                if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name))
+                        && judge_password(user.getUser_password() , user_password))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public String getUniversityByUserNameOrEmail(String userNameOrEmail) {
+        List<User> users = new ArrayList<User>();
+        users = userDao.getAllUser();
+        if (users.size() > 0){
+            for (User user:users){
+                if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)))
+                    return user.getUser_university();
+            }
+        }
+        return null;
+    }
+
     public Date getCurrentTime() throws ParseException {
         Date create_time = new Date();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
@@ -73,8 +98,13 @@ public class UserServiceImpl implements UserService {
 
     //密码加密
     public String  encrypt_password(String password){
-        String encrypt_password = BCrypt.hashpw(password , BCrypt.gensalt());
+        String encrypt_password = BCrypt.hashpw(password, BCrypt.gensalt());
 
         return encrypt_password;
+    }
+    //解密
+    public boolean judge_password(String db_pwd , String input_pwd){
+
+        return  BCrypt.checkpw(input_pwd,db_pwd);
     }
 }
