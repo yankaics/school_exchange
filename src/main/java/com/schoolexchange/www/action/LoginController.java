@@ -39,8 +39,9 @@ public class LoginController {
         String user_password = null != request.getParameter("user_password")?request.getParameter("user_password"):"";
         boolean flag = userService.checkLogin(user_name , user_password);
         if (flag){
-            session.setAttribute("user_name", user_name);
-            session.setAttribute("university" , userService.getUniversityByUserNameOrEmail(user_name));
+            String nameAndUniversity = userService.getUniversityByUserNameOrEmail(user_name);
+            session.setAttribute("user_name", nameAndUniversity.substring(nameAndUniversity.indexOf('$') +1));
+            session.setAttribute("university" , nameAndUniversity.substring(0 , nameAndUniversity.indexOf('$')));
             session.setMaxInactiveInterval(60*60*24*30);
             response.getWriter().write("yes");
         }else {

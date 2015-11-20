@@ -18,8 +18,11 @@ public class Test {
        /* boolean correct = BCrypt.checkpw("Hello", passwordHash);
         boolean wrong = BCrypt.checkpw("World", passwordHash);
         System.out.println(correct);*/
-        UserServiceImpl userService = new UserServiceImpl();
-        System.out.println(userService.judge_password(passwordHash,"123456"));
+        String str = "zhang$san";
+        System.out.println(str.substring(str.indexOf('$') +1));
+        System.out.println(str.substring(0 , str.indexOf('$')));
+       /* System.out.println(str.split("$")[0]);
+        System.out.println(str.split("$")[1]);*/
 
     }
 

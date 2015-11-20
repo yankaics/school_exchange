@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
         if (users.size() > 0){
             for (User user:users){
                 if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)))
-                    return user.getUser_university();
+                    return user.getUser_university() + "$" + user.getUser_name();
             }
         }
         return null;

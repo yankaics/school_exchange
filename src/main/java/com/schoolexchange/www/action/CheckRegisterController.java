@@ -15,6 +15,7 @@ import java.io.IOException;
  * 注册事件
  * checkEmail方法:检测Email是否被注册
  * checkName方法:检测用户名是否被注册
+ * registerAction:保存用户到数据库
  */
 @Controller
 public class CheckRegisterController {
