@@ -12,13 +12,13 @@ function checkLogin() {
         $.post(
             "/login",
             {
-                user_name:user_name,
-                user_password:user_password
+                user_name: user_name,
+                user_password: user_password
             },
-            function(data){
-                if(data == "yes"){
-                    location.href ="index";
-                }else{
+            function (data) {
+                if (data == "yes") {
+                    location.href = "index";
+                } else {
                     $('#login_fail').show().delay(2000).fadeOut();
                     return false;
                 }
@@ -63,10 +63,10 @@ function checkLoginSubmit() {
  *判断能否submit
  */
 function checkRegister() {
-    if(checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()){
+    if (checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()) {
         saveUser();
         $('#register_success').show().delay(60000).fadeOut("slow");
-        autoJump(5 , 'index');
+        autoJump(5, 'index');
     }
     return false;
 }
@@ -94,13 +94,13 @@ function checkEmail() {
     $.post(
         "check_email",
         {
-            email:email
+            email: email
         },
-        function(data){
-            if(data == "yes"){
+        function (data) {
+            if (data == "yes") {
                 document.getElementById("span_email").innerHTML = "<font color='green'>该邮箱可以注册</font>";
                 return true;
-            }else{
+            } else {
                 document.getElementById("span_email").innerHTML = "<font color='red'>该邮箱已被注册</font>";
                 return false;
             }
@@ -136,13 +136,13 @@ function checkRegisterName() {
     $.post(
         "check_name",
         {
-            user_name:js_value
+            user_name: js_value
         },
-        function(data){
-            if(data == "yes"){
+        function (data) {
+            if (data == "yes") {
                 document.getElementById("span_name").innerHTML = "<font color='green'>该用户名可以注册</font>";
                 return true;
-            }else{
+            } else {
                 document.getElementById("span_name").innerHTML = "<font color='red'>该用户名已被注册</font>";
                 return false;
             }
@@ -180,7 +180,7 @@ function checkPasswordsAgreement() {
         document.getElementById("re_span_password").innerHTML = "<font color='red'>确认密码不能为空</font>";
         return false;
     }
-    if(!(pwd1 == pwd2)){
+    if (!(pwd1 == pwd2)) {
         document.getElementById("re_span_password").innerHTML = "<font color='red'>两次密码不一致</font>";
         return false;
     }
@@ -192,19 +192,19 @@ function checkPasswordsAgreement() {
 /*
  *自动跳转
  */
-function autoJump(secs,surl){
+function autoJump(secs, surl) {
     var jumpTo = document.getElementById('jumpTo');
-    jumpTo.innerHTML=secs;
-    if(--secs>0){
-        setTimeout("autoJump("+secs+",'"+surl+"')",1000);
+    jumpTo.innerHTML = secs;
+    if (--secs > 0) {
+        setTimeout("autoJump(" + secs + ",'" + surl + "')", 1000);
     }
-    else{
-        location.href=surl;
+    else {
+        location.href = surl;
     }
 }
 
 /*注册到数据库Ajax*/
-function saveUser(){
+function saveUser() {
     var user_email = document.getElementById("register_email").value;
     var user_name = document.getElementById("register_name").value;
     var user_password = document.getElementById("register_password").value;
@@ -214,50 +214,69 @@ function saveUser(){
     $.post(
         "register_action",
         {
-            user_email:user_email,
-            user_name:user_name,
-            user_password:user_password,
-            belong_university:belong_university
+            user_email: user_email,
+            user_name: user_name,
+            user_password: user_password,
+            belong_university: belong_university
         },
-        function(){}
+        function () {
+        }
     );
 }
 
 
 /*找回密码js*/
-function forgetPassword(){
+function forgetPassword() {
 
-    if(checkInputEmail()){
-        $('#get_password').show().delay(60000).fadeOut("slow");
+    if (checkInputEmail()) {
+
         var fp = document.getElementById("forget_password").value;
-        document.getElementById("get_password").innerHTML = judgeEmail(fp);
+
+        //重置密码
+        $.post(
+            "reset_password",
+            {
+                email: fp
+            },
+            function (data) {
+                if (data == "yes") {
+                    document.getElementById("fp").innerHTML = "<font color='red'>邮箱不存在</font>";
+                    return false;
+                } else {
+                    document.getElementById("fp").innerText = "邮箱";
+                    $('#get_password').show().delay(60000).fadeOut("slow");
+                    document.getElementById("get_password").innerHTML = judgeEmail(fp);
+                    return false;
+                }
+            }
+        );
     }
 }
 /*
  *判断邮箱类型
  */
-function judgeEmail(fp){
-    if(-1 != fp.lastIndexOf('@qq.com')){
-        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: green'>" + fp +"</a>";
+function judgeEmail(fp) {
+    if (-1 != fp.lastIndexOf('@qq.com')) {
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: green'>" + fp + "</a>";
     }
-    if(-1 != fp.lastIndexOf('@163.com')){
-        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: green'>" + fp +"</a>";
+    if (-1 != fp.lastIndexOf('@163.com')) {
+        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: green'>" + fp + "</a>";
     }
-    if(-1 != fp.lastIndexOf('@126.com')){
-        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: green'>" + fp +"</a>";
+    if (-1 != fp.lastIndexOf('@126.com')) {
+        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: green'>" + fp + "</a>";
     }
-    if(-1 != fp.lastIndexOf('@gmail.com')){
-        return "密码已被重置，发送至您的邮箱: <a href='https://mail.google.com/' style='color: green'>" + fp +"</a>";
+    if (-1 != fp.lastIndexOf('@gmail.com')) {
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.google.com/' style='color: green'>" + fp + "</a>";
     }
     return "密码已被重置，发送至您的邮箱: " + fp;
 }
 
-function checkInputEmail(){
+function checkInputEmail() {
     var fp = document.getElementById("forget_password").value;
-    if(0 == fp.length || "" == fp){
+    if (0 == fp.length || "" == fp) {
         document.getElementById("fp").innerHTML = "<font color='red'>邮箱不能为空</font>";
         return false;
-    }else{
+    } else {
         document.getElementById("fp").innerText = "邮箱";
     }
     /*邮件格式*/
@@ -268,20 +287,6 @@ function checkInputEmail(){
     } else {
         document.getElementById("fp").innerText = "邮箱";
     }
-    /*Ajax检测邮箱是否存在*/
-    /* $.post(
-     "check_email",
-     {
-     email:fp
-     },
-     function(data){
-     if(data == "yes"){
-     document.getElementById("fp").innerHTML = "<font color='red'>邮箱不存在</font>";
-     return false;
-     }else{
-     document.getElementById("fp").innerText = "邮箱";
-     }
-     }
-     );*/
+
     return true;
 }

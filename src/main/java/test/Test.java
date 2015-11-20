@@ -1,9 +1,5 @@
 package test;
 
-import com.schoolexchange.www.service.UserService;
-import com.schoolexchange.www.service.impl.UserServiceImpl;
-import com.schoolexchange.www.tools.BCrypt;
-
 import java.text.ParseException;
 
 /**
@@ -13,16 +9,11 @@ import java.text.ParseException;
 public class Test {
 
     public static void main(String[] args) throws ParseException {
-        //加密测试
-        String passwordHash = BCrypt.hashpw("123456", BCrypt.gensalt());
-       /* boolean correct = BCrypt.checkpw("Hello", passwordHash);
-        boolean wrong = BCrypt.checkpw("World", passwordHash);
-        System.out.println(correct);*/
-        String str = "zhang$san";
-        System.out.println(str.substring(str.indexOf('$') +1));
-        System.out.println(str.substring(0 , str.indexOf('$')));
-       /* System.out.println(str.split("$")[0]);
-        System.out.println(str.split("$")[1]);*/
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0 ; i < 6 ; i ++){
+            sb.append((int)(Math.random()*9 + 1));
+        }
+        System.out.println("找回");
 
     }
 

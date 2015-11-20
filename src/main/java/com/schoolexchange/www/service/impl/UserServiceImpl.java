@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+
     public String getUniversityByUserNameOrEmail(String userNameOrEmail) {
         List<User> users = new ArrayList<User>();
         users = userDao.getAllUser();
@@ -89,11 +90,40 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    public String resetPassword(String email) {
+        String new_pwd = getRandomPassword();
+        System.out.println("重置后的密码为: ============" + new_pwd );
+        List<User> users = new ArrayList<User>();
+        users = userDao.getAllUser();
+        if (users.size() > 0){
+            for (User user:users){
+                if (user.getUser_email().equals(email)){
+                    user.setUser_password(encrypt_password(new_pwd));
+                    userDao.editUser(user);
+                }
+            }
+        }
+
+        return new_pwd;
+    }
+
     public Date getCurrentTime() throws ParseException {
         Date create_time = new Date();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         String create_time_str = sf.format(create_time);
         return sf.parse(create_time_str);
+    }
+
+
+    //随机生成6位数字的密码
+    public String getRandomPassword(){
+        StringBuffer random_pwd = new StringBuffer();
+        for (int i = 0 ; i < 6 ; i ++){
+            random_pwd.append((int)(Math.random()*9 + 1));
+        }
+
+        return random_pwd.toString();
+
     }
 
     //密码加密

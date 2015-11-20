@@ -41,22 +41,25 @@
     color: white;
     font-size: 16px;
     font-weight: bold;
-    padding-top: 5px ;
+    padding-top: 5px;
     display: none;
 }
-.register_center_right{
+
+.register_center_right {
     margin-left: 100px;
 }
 
-#university option{
+#university option {
     font-weight: bold;
     font-size: 18px;
 }
-.register_center_left{
+
+.register_center_left {
     margin-right: 50px;
     margin-bottom: 50px;
 }
-.register_success{
+
+.register_success {
     width: 360px;
     height: 30px;
     background: #DE2449;
@@ -67,7 +70,8 @@
     padding-top: 5px;
     display: none;
 }
-.get_password{
+
+.get_password {
     width: 500px;
     height: 30px;
     /* background: green;*/
