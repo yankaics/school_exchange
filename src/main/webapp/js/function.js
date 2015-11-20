@@ -222,3 +222,66 @@ function saveUser(){
         function(){}
     );
 }
+
+
+/*找回密码js*/
+function forgetPassword(){
+
+    if(checkInputEmail()){
+        $('#get_password').show().delay(60000).fadeOut("slow");
+        var fp = document.getElementById("forget_password").value;
+        document.getElementById("get_password").innerHTML = judgeEmail(fp);
+    }
+}
+/*
+ *判断邮箱类型
+ */
+function judgeEmail(fp){
+    if(-1 != fp.lastIndexOf('@qq.com')){
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: green'>" + fp +"</a>";
+    }
+    if(-1 != fp.lastIndexOf('@163.com')){
+        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: green'>" + fp +"</a>";
+    }
+    if(-1 != fp.lastIndexOf('@126.com')){
+        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: green'>" + fp +"</a>";
+    }
+    if(-1 != fp.lastIndexOf('@gmail.com')){
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.google.com/' style='color: green'>" + fp +"</a>";
+    }
+    return "密码已被重置，发送至您的邮箱: " + fp;
+}
+
+function checkInputEmail(){
+    var fp = document.getElementById("forget_password").value;
+    if(0 == fp.length || "" == fp){
+        document.getElementById("fp").innerHTML = "<font color='red'>邮箱不能为空</font>";
+        return false;
+    }else{
+        document.getElementById("fp").innerText = "邮箱";
+    }
+    /*邮件格式*/
+    var pattern = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+    if (!pattern.test(fp)) {
+        document.getElementById("fp").innerHTML = "<font color='red'>邮箱格式不正确</font>";
+        return false;
+    } else {
+        document.getElementById("fp").innerText = "邮箱";
+    }
+    /*Ajax检测邮箱是否存在*/
+    /* $.post(
+     "check_email",
+     {
+     email:fp
+     },
+     function(data){
+     if(data == "yes"){
+     document.getElementById("fp").innerHTML = "<font color='red'>邮箱不存在</font>";
+     return false;
+     }else{
+     document.getElementById("fp").innerText = "邮箱";
+     }
+     }
+     );*/
+    return true;
+}

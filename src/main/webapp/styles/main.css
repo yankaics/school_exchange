@@ -67,3 +67,13 @@
     padding-top: 5px;
     display: none;
 }
+.get_password{
+    width: 500px;
+    height: 30px;
+    /* background: green;*/
+    margin-top: 20px;
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+    display: none;
+}
