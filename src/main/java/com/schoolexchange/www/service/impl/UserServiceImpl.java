@@ -109,37 +109,35 @@ public class UserServiceImpl implements UserService {
     }
 
     public  void sendMail(String email, String reset_password) {
-        // è®¾ç½®é‚®ä»¶æœåŠ¡å™¨ä¿¡æ¯
+        // ÉèÖÃÓÊ¼ş·şÎñÆ÷ĞÅÏ¢
         MailSenderInfo mailInfo = new MailSenderInfo();
         mailInfo.setMailServerHost("smtp.163.com");
         mailInfo.setMailServerPort("25");
         mailInfo.setValidate(true);
 
-        // é‚®ç®±ç”¨æˆ·å
+        // ÓÊÏäÓÃ»§Ãû
         mailInfo.setUserName("18353507779@163.com");
-        // é‚®ç®±å¯†ç 
+        // ÓÊÏäÃÜÂë
         mailInfo.setPassword("zhangjiadong0418");
-        // å‘ä»¶äººé‚®ç®±
+        // ·¢¼şÈËÓÊÏä
         mailInfo.setFromAddress("18353507779@163.com");
-        // æ”¶ä»¶äººé‚®ç®±
+        // ÊÕ¼şÈËÓÊÏä
         mailInfo.setToAddress(email);
-        // é‚®ä»¶æ ‡é¢˜
+        // ÓÊ¼ş±êÌâ
         mailInfo.setSubject("schoolexchange");
 
-        // é‚®ä»¶å†…å®¹
+        // ÓÊ¼şÄÚÈİ
         StringBuffer buffer = new StringBuffer();
-        buffer.append("å¯†ç =======");
-        buffer.append(reset_password);
+        buffer.append("ÄúµÄÃÜÂëÒÑ±»ÖØÖÃ£¬ÖØÖÃºóµÄÃÜÂëÎª£º" + reset_password);
         mailInfo.setContent(buffer.toString());
 
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
        /* SimpleMailSender sms = new SimpleMailSender();*/
-        // å‘é€æ–‡ä½“æ ¼å¼
+        // ·¢ËÍÎÄÌå¸ñÊ½
        /* sms.sendTextMail(mailInfo);*/
 
-        // å‘é€htmlæ ¼å¼
+        // ·¢ËÍhtml¸ñÊ½
         SimpleMailSender.sendHtmlMail(mailInfo);
-        System.out.println("hello=================");
     }
 
     public Date getCurrentTime() throws ParseException {
@@ -150,7 +148,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //éšæœºç”Ÿæˆ6ä½æ•°å­—çš„å¯†ç 
+    //Ëæ»úÉú³É6Î»Êı×ÖµÄÃÜÂë
     public String getRandomPassword(){
         StringBuffer random_pwd = new StringBuffer();
         for (int i = 0 ; i < 6 ; i ++){
@@ -161,13 +159,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //å¯†ç åŠ å¯†
+    //ÃÜÂë¼ÓÃÜ
     public String  encrypt_password(String password){
         String encrypt_password = BCrypt.hashpw(password, BCrypt.gensalt());
 
         return encrypt_password;
     }
-    //è§£å¯†
+    //½âÃÜ
     public boolean judge_password(String db_pwd , String input_pwd){
 
         return  BCrypt.checkpw(input_pwd,db_pwd);

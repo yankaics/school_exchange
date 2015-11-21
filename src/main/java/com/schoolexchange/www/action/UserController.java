@@ -32,7 +32,6 @@ public class UserController {
         if (flag) {
             //重置密码
             String reset_password = userService.resetPassword(email);
-            System.out.println("密码=======" + reset_password);
             userService.sendMail(email, reset_password);
             response.getWriter().write("no");
         } else {
