@@ -48,7 +48,8 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8 login_submit">
-                                <button type="submit" class="btn btn-primary login_button" onclick="return forgetPassword()">找回密码
+                                <button type="submit" class="btn btn-primary login_button" onclick="return forgetPassword()">
+                                    <span id="reminding">找回密码</span>
                                 </button>
                             </div>
                             <div class="col-md-2"></div>

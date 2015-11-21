@@ -231,7 +231,7 @@ function forgetPassword() {
     if (checkInputEmail()) {
 
         var fp = document.getElementById("forget_password").value;
-
+        document.getElementById("reminding").innerHTML = "<font color='red'>重置密码中......</font>";
         //重置密码
         $.post(
             "reset_password",
@@ -241,11 +241,13 @@ function forgetPassword() {
             function (data) {
                 if (data == "yes") {
                     document.getElementById("fp").innerHTML = "<font color='red'>邮箱不存在</font>";
+                    document.getElementById("reminding").innerHTML = "<font color='white'>找回密码</font>";
                     return false;
                 } else {
                     document.getElementById("fp").innerText = "邮箱";
                     $('#get_password').show().delay(60000).fadeOut("slow");
                     document.getElementById("get_password").innerHTML = judgeEmail(fp);
+                    document.getElementById("reminding").innerHTML = "<font color='white'>找回密码</font>";
                     return false;
                 }
             }
@@ -257,13 +259,13 @@ function forgetPassword() {
  */
 function judgeEmail(fp) {
     if (-1 != fp.lastIndexOf('@qq.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: green'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: green' target='_blank'>" + fp + "</a>";
     }
     if (-1 != fp.lastIndexOf('@163.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: green'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: green' target='_blank'>" + fp + "</a>";
     }
     if (-1 != fp.lastIndexOf('@126.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: green'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: green' target='_blank'>" + fp + "</a>";
     }
     if (-1 != fp.lastIndexOf('@gmail.com')) {
         return "密码已被重置，发送至您的邮箱: <a href='https://mail.google.com/' style='color: green'>" + fp + "</a>";
