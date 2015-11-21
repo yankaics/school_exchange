@@ -23,4 +23,7 @@ public interface UserService {
 
     //重置密码
     public String resetPassword(String email);
+
+    //发送邮件
+    public void sendMail(String email , String reset_password);
 }

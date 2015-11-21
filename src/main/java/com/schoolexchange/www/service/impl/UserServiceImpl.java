@@ -4,6 +4,8 @@ import com.schoolexchange.www.dao.UserDao;
 import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.UserService;
 import com.schoolexchange.www.tools.BCrypt;
+import com.schoolexchange.www.tools.MailSenderInfo;
+import com.schoolexchange.www.tools.SimpleMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -92,7 +94,6 @@ public class UserServiceImpl implements UserService {
 
     public String resetPassword(String email) {
         String new_pwd = getRandomPassword();
-        System.out.println("重置后的密码为: ============" + new_pwd );
         List<User> users = new ArrayList<User>();
         users = userDao.getAllUser();
         if (users.size() > 0){
@@ -105,6 +106,40 @@ public class UserServiceImpl implements UserService {
         }
 
         return new_pwd;
+    }
+
+    public  void sendMail(String email, String reset_password) {
+        // 设置邮件服务器信息
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("25");
+        mailInfo.setValidate(true);
+
+        // 邮箱用户名
+        mailInfo.setUserName("18353507779@163.com");
+        // 邮箱密码
+        mailInfo.setPassword("zhangjiadong0418");
+        // 发件人邮箱
+        mailInfo.setFromAddress("18353507779@163.com");
+        // 收件人邮箱
+        mailInfo.setToAddress(email);
+        // 邮件标题
+        mailInfo.setSubject("schoolexchange");
+
+        // 邮件内容
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("密码=======");
+        buffer.append(reset_password);
+        mailInfo.setContent(buffer.toString());
+
+        // 发送邮件
+       /* SimpleMailSender sms = new SimpleMailSender();*/
+        // 发送文体格式
+       /* sms.sendTextMail(mailInfo);*/
+
+        // 发送html格式
+        SimpleMailSender.sendHtmlMail(mailInfo);
+        System.out.println("hello=================");
     }
 
     public Date getCurrentTime() throws ParseException {

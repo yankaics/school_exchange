@@ -1,5 +1,7 @@
 package test;
 
+import com.schoolexchange.www.service.impl.UserServiceImpl;
+
 import java.text.ParseException;
 
 /**
@@ -9,12 +11,9 @@ import java.text.ParseException;
 public class Test {
 
     public static void main(String[] args) throws ParseException {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0 ; i < 6 ; i ++){
-            sb.append((int)(Math.random()*9 + 1));
-        }
-        System.out.println("找回");
 
+        //UserServiceImpl.sendMail("zhangjiadong0418@qq.com" , "123456");
+        System.out.println("邮件发送完毕");
     }
 
 }
