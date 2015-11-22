@@ -292,3 +292,39 @@ function checkInputEmail() {
 
     return true;
 }
+
+function selectUniversity(){
+    var university = document.getElementById("select_university").value;
+    if(university != "切换学校"){
+        document.getElementById("span_university").innerText = university;
+        /*Ajax异步把学校设置到session中,并刷新首页*/
+
+    }
+
+}
+/*获取焦点获取未读的消息*/
+function get_unread_message(){
+    $(".message_div").show();
+}
+
+/*失去焦点关闭未读消息*/
+function close_unread_message(){
+    $(".message_div").hide();
+}
+
+/*展开个人中心*/
+function show_personal_center(){
+    $(".personal_center").show();
+}
+
+function close_personal_center(){
+    $(".personal_center").hide();
+}
+
+/*展开发布和求购商品*/
+function show_release_buy_goods(){
+    $("#release_and_buy").show();
+}
+function close_release_buy_goods(){
+    $("#release_and_buy").hide();
+}

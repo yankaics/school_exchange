@@ -81,3 +81,97 @@
     font-weight: bold;
     display: none;
 }
+
+/*-------------头部--------------*/
+.top_logo {
+    margin-top: 25px;
+    float: left;
+}
+
+.top_university {
+    margin-top: 25px;
+    margin-left: 20px;
+    float: left;
+}
+
+#belong_university span {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.top_search {
+    margin-top: 50px;
+}
+
+.top_search input {
+    border: 3px solid #2BB8AA;
+    line-height: 30px;
+    border-radius: 15px;
+}
+
+.top_search button {
+
+    line-height: 30px;
+    background: #2BB8AA;
+    color: white;
+    font-weight: bold;
+}
+
+.message {
+    margin-top: 50px;
+}
+
+.personal_avatar {
+    margin-top: 40px;
+    float: right;
+}
+
+.look_all_message {
+    text-align: center;
+}
+
+.look_all_message a {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.message_div {
+    display: none;
+}
+
+.message_div div {
+    text-align: right;
+}
+
+.personal_center {
+    list-style: none;
+    background: #F6F6F6;
+    padding-left: 0px;
+    display: none;
+}
+
+.personal_center li {
+    border: 1px solid #F6F6F6;
+    line-height: 40px;
+}
+
+.personal_center li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.release_buy_goods {
+    float: right;
+    margin-top: 50px;
+}
+
+.release_buy_goods span {
+    font-size: 30px;
+    color: #2BB8AA;
+    cursor: pointer;
+}
+#release_and_buy{
+    margin-top: 84px;
+    display: none;
+}

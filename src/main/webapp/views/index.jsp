@@ -9,17 +9,13 @@
 <html>
 <head>
     <title>校内交易</title>
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
-<div>
-   <h1>首页</h1>
-    <%
-        out.println(session.getAttribute("user_name"));
-        out.println(session.getAttribute("university"));
-    %>
-</div>
-<script>
-
-</script>
+<jsp:include page="../html/top.html"></jsp:include>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/function.js"></script>
 </body>
 </html>
