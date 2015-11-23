@@ -17,7 +17,7 @@ function checkLogin() {
             },
             function (data) {
                 if (data == "yes") {
-                    location.href = "index";
+                    location.href = "/views";
                 } else {
                     $('#login_fail').show().delay(2000).fadeOut();
                     return false;
@@ -66,7 +66,7 @@ function checkRegister() {
     if (checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()) {
         saveUser();
         $('#register_success').show().delay(60000).fadeOut("slow");
-        autoJump(5, 'index');
+        autoJump(5, '/views');
     }
     return false;
 }
