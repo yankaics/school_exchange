@@ -20,7 +20,7 @@
         <div class="col-md-4">
             <!--logo-->
             <div class="login_logo">
-                <a href="index"><img src="../images/logo.png"></a>
+                <a href="/views"><img src="../images/logo.png"></a>
             </div>
         </div>
         <div class="col-md-4">

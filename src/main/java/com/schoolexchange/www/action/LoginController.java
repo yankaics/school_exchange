@@ -20,7 +20,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/views/index")
+    @RequestMapping(value = "/views/")
     public String index(){
 
         return "index";
