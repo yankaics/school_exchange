@@ -63,7 +63,7 @@
                                 class="glyphicon glyphicon-triangle-left"></span>&nbsp;&nbsp;已发布商品</a></li>
                         <li onmouseover="show_personal_center()"><a href="#"><span
                                 class="glyphicon glyphicon-triangle-right"></span>&nbsp;&nbsp;已求购商品</a></li>
-                        <li onmouseover="show_personal_center()"><a href="#"><span
+                        <li onmouseover="show_personal_center()"><a href="/logout"><span
                                 class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>
                     </ul>
                 </div>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -37,5 +38,12 @@ public class UserController {
         } else {
             response.getWriter().write("yes");
         }
+    }
+
+    //退出
+    @RequestMapping(value = "/logout")
+    public String logou_login(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
     }
 }
