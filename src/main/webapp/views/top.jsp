@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="top_logo">
-                <a href="index"><img src="../images/logo.png"></a>
+                <a href="/"><img src="../images/logo.png"></a>
             </div>
             <div class="top_university">
                 <label for="select_university" id="belong_university"> <span

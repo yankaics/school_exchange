@@ -137,6 +137,7 @@
 }
 
 .message_div {
+    position: absolute;
     display: none;
 }
 
@@ -145,6 +146,7 @@
 }
 
 .personal_center {
+    position: absolute;
     list-style: none;
     background: #F6F6F6;
     padding-left: 0px;
@@ -159,6 +161,7 @@
 .personal_center li a {
     text-decoration: none;
     color: #000;
+    font-weight: bold;
 }
 
 .release_buy_goods {
@@ -172,6 +175,7 @@
     cursor: pointer;
 }
 #release_and_buy{
+    position: absolute;
     margin-top: 84px;
     display: none;
 }
