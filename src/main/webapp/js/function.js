@@ -17,7 +17,7 @@ function checkLogin() {
             },
             function (data) {
                 if (data == "yes") {
-                    location.href = "/views";
+                    location.href = "/";
                 } else {
                     $('#login_fail').show().delay(2000).fadeOut();
                     return false;
@@ -66,7 +66,7 @@ function checkRegister() {
     if (checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()) {
         saveUser();
         $('#register_success').show().delay(60000).fadeOut("slow");
-        autoJump(5, '/views');
+        autoJump(5, '/');
     }
     return false;
 }
@@ -218,8 +218,6 @@ function saveUser() {
             user_name: user_name,
             user_password: user_password,
             belong_university: belong_university
-        },
-        function () {
         }
     );
 }

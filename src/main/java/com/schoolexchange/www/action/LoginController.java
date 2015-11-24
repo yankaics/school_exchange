@@ -21,7 +21,13 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/views/")
+    @RequestMapping(value = "to_login")
+    public String login(){
+
+        return "login";
+    }
+
+    @RequestMapping(value = "/")
     public String index(HttpSession session, Model model) {
         String sx_university = userService.getUserUniversity(session);
         if (sx_university == null){
@@ -33,14 +39,8 @@ public class LoginController {
         return "index";
     }
 
-    @RequestMapping(value = "/views/to_register_user")
-    public String toRegister() {
-
-        return "register";
-    }
-
     @RequestMapping(value = "/login")
-    public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+    public void ajax_login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 
         String user_name = null != request.getParameter("user_name") ? request.getParameter("user_name") : "";
         String user_password = null != request.getParameter("user_password") ? request.getParameter("user_password") : "";

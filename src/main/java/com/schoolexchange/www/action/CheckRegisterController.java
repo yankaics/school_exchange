@@ -23,7 +23,13 @@ public class CheckRegisterController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/views/check_email")
+    @RequestMapping(value = "/to_register")
+    public String register(){
+
+        return "register";
+    }
+
+    @RequestMapping(value = "/check_email")
     public void checkEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter("email");
         boolean flag = userService.checkEmail(email);
@@ -34,7 +40,7 @@ public class CheckRegisterController {
         }
     }
 
-    @RequestMapping(value = "/views/check_name")
+    @RequestMapping(value = "/check_name")
     public void checkUserName(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String user_name = null != request.getParameter("user_name") ? request.getParameter("user_name") : "";
         boolean flag = userService.checkUserName(user_name);
@@ -46,7 +52,7 @@ public class CheckRegisterController {
 
     }
 
-    @RequestMapping(value = "/views/register_action")
+    @RequestMapping(value = "/register_action")
     public void registerAction(HttpServletRequest request , HttpSession session){
         String user_email = null != request.getParameter("user_email")?request.getParameter("user_email"):"";
         String user_name = null != request.getParameter("user_name")?request.getParameter("user_name"):"";

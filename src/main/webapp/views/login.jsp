@@ -61,7 +61,7 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <!--注册新用户-->
-                                <a href="to_register_user" class="btn btn-danger">注册新用户</a>
+                                <a href="to_register" class="btn btn-danger">注册新用户</a>
                             </div>
                         </div>
                         <div class="row">

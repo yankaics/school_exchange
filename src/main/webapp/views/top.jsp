@@ -99,12 +99,12 @@
         %>
         <div class="col-md-3">
             <div class="col-md-6" style="margin-top: 50px">
-                <a class="btn btn-primary" style="background: #2BB8AA" href="#">
+                <a class="btn btn-primary" style="background: #2BB8AA" href="/to_login">
                     登录
                 </a>
             </div>
             <div class="col-md-6" style="margin-top: 50px">
-                <a class="btn btn-primary" style="background: #2BB8AA" href="#">
+                <a class="btn btn-primary" style="background: #2BB8AA" href="/to_register">
                     注册
                 </a>
             </div>
