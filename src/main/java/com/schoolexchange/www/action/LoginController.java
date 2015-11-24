@@ -3,6 +3,7 @@ package com.schoolexchange.www.action;
 import com.schoolexchange.www.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,30 +22,36 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/views/")
-    public String index(){
-
+    public String index(HttpSession session, Model model) {
+        String sx_university = userService.getUserUniversity(session);
+        if (sx_university == null){
+            session.setAttribute("sx_university" , "烟台大学文经学院");
+            model.addAttribute("sx_university" , "烟台大学文经学院");
+        }else {
+            model.addAttribute("sx_university" , sx_university);
+        }
         return "index";
     }
 
     @RequestMapping(value = "/views/to_register_user")
-    public String toRegister(){
+    public String toRegister() {
 
         return "register";
     }
 
     @RequestMapping(value = "/login")
-    public void login(HttpServletRequest request , HttpServletResponse response , HttpSession session) throws IOException {
+    public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 
-        String user_name = null != request.getParameter("user_name") ?request.getParameter("user_name"):"";
-        String user_password = null != request.getParameter("user_password")?request.getParameter("user_password"):"";
-        boolean flag = userService.checkLogin(user_name , user_password);
-        if (flag){
+        String user_name = null != request.getParameter("user_name") ? request.getParameter("user_name") : "";
+        String user_password = null != request.getParameter("user_password") ? request.getParameter("user_password") : "";
+        boolean flag = userService.checkLogin(user_name, user_password);
+        if (flag) {
             String nameAndUniversity = userService.getUniversityByUserNameOrEmail(user_name);
-            session.setAttribute("user_name", nameAndUniversity.substring(nameAndUniversity.indexOf('$') +1));
-            session.setAttribute("university" , nameAndUniversity.substring(0 , nameAndUniversity.indexOf('$')));
-            session.setMaxInactiveInterval(60*60*24*30);
+            session.setAttribute("sx_user_name", nameAndUniversity.substring(nameAndUniversity.indexOf('$') + 1));
+            session.setAttribute("sx_university", nameAndUniversity.substring(0, nameAndUniversity.indexOf('$')));
+            session.setMaxInactiveInterval(60 * 60 * 24 * 30);
             response.getWriter().write("yes");
-        }else {
+        } else {
             response.getWriter().write("no");
         }
     }

@@ -9,6 +9,7 @@ import com.schoolexchange.www.tools.SimpleMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -109,35 +110,40 @@ public class UserServiceImpl implements UserService {
     }
 
     public  void sendMail(String email, String reset_password) {
-        // ÉèÖÃÓÊ¼ş·şÎñÆ÷ĞÅÏ¢
+        // è®¾ç½®é‚®ä»¶æœåŠ¡å™¨ä¿¡æ¯
         MailSenderInfo mailInfo = new MailSenderInfo();
         mailInfo.setMailServerHost("smtp.163.com");
         mailInfo.setMailServerPort("25");
         mailInfo.setValidate(true);
 
-        // ÓÊÏäÓÃ»§Ãû
+        // é‚®ç®±ç”¨æˆ·å
         mailInfo.setUserName("18353507779@163.com");
-        // ÓÊÏäÃÜÂë
+        // é‚®ç®±å¯†ç 
         mailInfo.setPassword("zhangjiadong0418");
-        // ·¢¼şÈËÓÊÏä
+        // å‘ä»¶äººé‚®ç®±
         mailInfo.setFromAddress("18353507779@163.com");
-        // ÊÕ¼şÈËÓÊÏä
+        // æ”¶ä»¶äººé‚®ç®±
         mailInfo.setToAddress(email);
-        // ÓÊ¼ş±êÌâ
+        // é‚®ä»¶æ ‡é¢˜
         mailInfo.setSubject("schoolexchange");
 
-        // ÓÊ¼şÄÚÈİ
+        // é‚®ä»¶å†…å®¹
         StringBuffer buffer = new StringBuffer();
-        buffer.append("ÄúµÄÃÜÂëÒÑ±»ÖØÖÃ£¬ÖØÖÃºóµÄÃÜÂëÎª£º" + reset_password);
+        buffer.append("æ‚¨çš„å¯†ç å·²è¢«é‡ç½®ï¼Œé‡ç½®åçš„å¯†ç ä¸ºï¼š" + reset_password);
         mailInfo.setContent(buffer.toString());
 
-        // ·¢ËÍÓÊ¼ş
+        // å‘é€é‚®ä»¶
        /* SimpleMailSender sms = new SimpleMailSender();*/
-        // ·¢ËÍÎÄÌå¸ñÊ½
+        // å‘é€æ–‡ä½“æ ¼å¼
        /* sms.sendTextMail(mailInfo);*/
 
-        // ·¢ËÍhtml¸ñÊ½
+        // å‘é€htmlæ ¼å¼
         SimpleMailSender.sendHtmlMail(mailInfo);
+    }
+
+    public String getUserUniversity(HttpSession session) {
+        String university = null != session.getAttribute("sx_university")? (String)session.getAttribute("sx_university"):null;
+        return university;
     }
 
     public Date getCurrentTime() throws ParseException {
@@ -148,7 +154,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //Ëæ»úÉú³É6Î»Êı×ÖµÄÃÜÂë
+    //éšæœºç”Ÿæˆ6ä½æ•°å­—çš„å¯†ç 
     public String getRandomPassword(){
         StringBuffer random_pwd = new StringBuffer();
         for (int i = 0 ; i < 6 ; i ++){
@@ -159,13 +165,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //ÃÜÂë¼ÓÃÜ
+    //å¯†ç åŠ å¯†
     public String  encrypt_password(String password){
         String encrypt_password = BCrypt.hashpw(password, BCrypt.gensalt());
 
         return encrypt_password;
     }
-    //½âÃÜ
+    //è§£å¯†
     public boolean judge_password(String db_pwd , String input_pwd){
 
         return  BCrypt.checkpw(input_pwd,db_pwd);

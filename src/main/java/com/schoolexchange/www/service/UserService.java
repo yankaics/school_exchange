@@ -1,5 +1,7 @@
 package com.schoolexchange.www.service;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by shadow on 2015/11/18.
  * UserService
@@ -7,23 +9,30 @@ package com.schoolexchange.www.service;
 public interface UserService {
 
     //检测email
-    public boolean checkEmail(String email);
+    boolean checkEmail(String email);
 
     //检测用户名
-    public boolean checkUserName(String user_name);
+    boolean checkUserName(String user_name);
 
     //注册用户
-    public void registerUser(String user_email , String user_name
-            , String user_password , String belong_university);
+    void registerUser(String user_email, String user_name
+            , String user_password, String belong_university);
+
     //验证登录
-    public boolean checkLogin(String user_name , String user_password);
+    boolean checkLogin(String user_name, String user_password);
 
     //根据用户名或密码得到所属大学
-    public String getUniversityByUserNameOrEmail(String userNameOrEmail);
+    String getUniversityByUserNameOrEmail(String userNameOrEmail);
 
     //重置密码
-    public String resetPassword(String email);
+    String resetPassword(String email);
 
     //发送邮件
-    public void sendMail(String email , String reset_password);
+    void sendMail(String email, String reset_password);
+
+    //通过session获取所属大学
+    String getUserUniversity(HttpSession session);
+
+
+
 }

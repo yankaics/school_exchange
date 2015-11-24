@@ -54,8 +54,8 @@ public class CheckRegisterController {
         String belong_university = null != request.getParameter("belong_university")?request.getParameter("belong_university"):"";
 
         userService.registerUser(user_email , user_name , user_password , belong_university);
-        session.setAttribute("user_name" ,user_name);
-        session.setAttribute("university" ,belong_university);
+        session.setAttribute("sx_user_name" ,user_name);
+        session.setAttribute("sx_university" ,belong_university);
         //设置session存活一个月
         session.setMaxInactiveInterval(60*60*24*30);
     }
