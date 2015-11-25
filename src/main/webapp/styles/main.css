@@ -151,6 +151,7 @@
     background: #F6F6F6;
     padding-left: 0px;
     display: none;
+    width: 100px;
 }
 
 .personal_center li {
@@ -178,4 +179,50 @@
     position: absolute;
     margin-top: 84px;
     display: none;
+}
+
+/*侧边栏样式*/
+#sidebar {
+    padding-top: 40px;
+    width: 60px;
+    position: absolute;
+    left: 0;
+    background-color: #e1e1e1;
+    min-height: 100%;
+    z-index: 100;
+    display: none;
+}
+
+.item {
+    text-align: center;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.item div {
+    font-size: 12px;
+}
+#closeBar {
+    text-align: center;
+    position: absolute;
+    bottom: 110px;
+    width: 35px;
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+.nav-content {
+    position: absolute;
+    min-height: 100%;
+    width: 170px;
+    background-color: #e1e1e1;
+    opacity: 0;
+    z-index: 99;
+    text-align: center;
+}
+
+.nav-content .nav-con-close {
+    float: right;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-right: 5px;
 }

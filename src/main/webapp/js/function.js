@@ -291,9 +291,9 @@ function checkInputEmail() {
     return true;
 }
 
-function selectUniversity(){
+function selectUniversity() {
     var university = document.getElementById("select_university").value;
-    if(university != "切换学校"){
+    if (university != "切换学校") {
         document.getElementById("span_university").innerText = university;
         /*Ajax异步把学校设置到session中,并刷新首页*/
 
@@ -301,28 +301,119 @@ function selectUniversity(){
 
 }
 /*获取焦点获取未读的消息*/
-function get_unread_message(){
+function get_unread_message() {
     $(".message_div").show();
 }
 
 /*失去焦点关闭未读消息*/
-function close_unread_message(){
+function close_unread_message() {
     $(".message_div").hide();
 }
 
 /*展开个人中心*/
-function show_personal_center(){
+function show_personal_center() {
     $(".personal_center").show();
 }
 
-function close_personal_center(){
+function close_personal_center() {
     $(".personal_center").hide();
 }
 
 /*展开发布和求购商品*/
-function show_release_buy_goods(){
+function show_release_buy_goods() {
     $("#release_and_buy").show();
 }
-function close_release_buy_goods(){
+function close_release_buy_goods() {
     $("#release_and_buy").hide();
+}
+
+
+/*侧边栏js*/
+//设置选中的侧边栏选项
+var chooseStatus = 0;
+
+function deepen_div(sideBarName) {
+    $(sideBarName).css({
+        background: "gray"
+    });
+}
+
+function noDeepen_div(sideBarName) {
+    //发布商品
+    if (chooseStatus != 0 && 1 == chooseStatus && "#release_goods" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //发布商品
+    if (chooseStatus != 0 && 2 == chooseStatus && "#buy_goods" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //我的收藏
+    if (chooseStatus != 0 && 3 == chooseStatus && "#my_collection" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //已发布商品
+    if (chooseStatus != 0 && 4 == chooseStatus && "#already_release" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //已求购商品
+    if (chooseStatus != 0 && 5 == chooseStatus && "#already_buy" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //我的消息
+    if (chooseStatus != 0 && 6 == chooseStatus && "#my_message" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //我的足迹
+    if (chooseStatus != 0 && 7 == chooseStatus && "#foot_print" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    }
+    //账号设置
+    if (chooseStatus != 0 && 8 == chooseStatus && "#account_set" == sideBarName) {
+        $(sideBarName).css({
+            background: "gray"
+        });
+        return;
+    } else {
+        $(sideBarName).css({
+            background: "none"
+        });
+    }
+
+
+}
+//修改选中的状态
+function setChooseStatus(status) {
+    chooseStatus = status;
+}
+//显示侧边栏
+function show_sideBar(status, sideBarName) {
+
+    $("#sidebar").show();
+    setChooseStatus(status);
+    deepen_div(sideBarName);
+}
+
+function closeBar() {
+    $("#sidebar").hide("slow");
 }
