@@ -331,7 +331,13 @@ function close_release_buy_goods() {
 /*侧边栏js*/
 //设置选中的侧边栏选项
 var chooseStatus = 0;
-
+chooseStatus = document.getElementById("sp").textContent;
+if(8 == chooseStatus){
+    $("#account_set").css({
+        background:"gray"
+    });
+}
+/*alert("状态:== " + chooseStatus);*/
 function deepen_div(sideBarName) {
     $(sideBarName).css({
         background: "gray"
@@ -408,13 +414,15 @@ function setChooseStatus(status) {
 }
 //显示侧边栏
 function show_sideBar(status, sideBarName) {
-
-    $("#sidebar").show();
+   /* $("#sidebar").show();
     setChooseStatus(status);
-    deepen_div(sideBarName);
+    deepen_div(sideBarName);*/
     location.href="/account"
 }
-
+//侧边栏点击事件
+function redirectAccount(){
+    location.href = "/account";
+}
 function closeBar() {
     $("#sidebar").hide("slow");
 }

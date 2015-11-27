@@ -72,7 +72,7 @@
             </div>
         </div>
         <div id="account_set" class="item" onmouseover="deepen_div('#account_set');"
-             onmouseout="noDeepen_div('#account_set');">
+             onmouseout="noDeepen_div('#account_set');" onclick="redirectAccount()">
                 <span>
                     <i class="glyphicon glyphicon-user"></i>
                 </span>

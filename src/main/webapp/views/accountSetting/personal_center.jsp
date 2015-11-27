@@ -18,7 +18,7 @@
 <body>
 <%@include file="../top.jsp" %>
 <div class="container" style="margin-top: 20px">
-
+    <span id="sp" style="display: none">8</span>
     <%@include file="../sideBar.jsp" %>
     <!--账户-个人中心-->
     <div class="row">
