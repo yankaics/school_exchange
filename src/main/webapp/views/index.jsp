@@ -18,7 +18,7 @@
 <body>
 <%@include file="top.jsp"%>
 <div class="container">
-    <%@include file="sideBar.jsp"%>
+   <%-- <%@include file="sideBar.jsp"%>--%>
 </div>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.js"></script>
