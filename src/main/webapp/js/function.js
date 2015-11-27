@@ -332,9 +332,9 @@ function close_release_buy_goods() {
 //设置选中的侧边栏选项
 var chooseStatus = 0;
 chooseStatus = document.getElementById("sp").textContent;
-if(8 == chooseStatus){
+if (8 == chooseStatus) {
     $("#account_set").css({
-        background:"gray"
+        background: "gray"
     });
 }
 /*alert("状态:== " + chooseStatus);*/
@@ -414,13 +414,13 @@ function setChooseStatus(status) {
 }
 //显示侧边栏
 function show_sideBar(status, sideBarName) {
-   /* $("#sidebar").show();
-    setChooseStatus(status);
-    deepen_div(sideBarName);*/
-    location.href="/account"
+    /* $("#sidebar").show();
+     setChooseStatus(status);
+     deepen_div(sideBarName);*/
+    location.href = "/account"
 }
 //侧边栏点击事件
-function redirectAccount(){
+function redirectAccount() {
     location.href = "/account";
 }
 function closeBar() {
@@ -483,4 +483,84 @@ function clacImgZoomParam(maxWidth, maxHeight, width, height) {
     param.left = Math.round((maxWidth - param.width) / 2);
     param.top = Math.round((maxHeight - param.height) / 2);
     return param;
+}
+
+/*密码设置*/
+
+//判断当前密码是否为空
+function checkCurrentPwd() {
+    var currentPwd = document.getElementById("oldPwd").value;
+    if (0 == currentPwd.length || "" == currentPwd) {
+        document.getElementById("sp_current_pwd").innerHTML = "<font color='red'>当前密码不能空</font>";
+        return false;
+    } else {
+        document.getElementById("sp_current_pwd").innerText = "当前密码";
+        return true;
+    }
+}
+
+//判断新密码是否为空
+function checkNewPwd() {
+    var newPwd = document.getElementById("newPwd").value;
+    if (0 == newPwd.length || "" == newPwd) {
+        document.getElementById("sp_new_pwd").innerHTML = "<font color='red'>新密码不能空</font>";
+        return false;
+    } else {
+        document.getElementById("sp_new_pwd").innerText = "新密码";
+    }
+    if (newPwd.length < 6 || newPwd.length > 15) {
+        document.getElementById("sp_new_pwd").innerHTML = "<font color='red'>密码长度必须在6-15之间</font>";
+        return false;
+    } else {
+        document.getElementById("sp_new_pwd").innerText = "新密码";
+        return true;
+    }
+}
+//判断确认密码是否为空
+function checkConfirmPwd() {
+    var confirmPwd = document.getElementById("confirmPwd").value;
+    if (0 == confirmPwd.length || "" == confirmPwd) {
+        document.getElementById("sp_confirm_pwd").innerHTML = "<font color='red'>新密码不能空</font>";
+        return false;
+    } else {
+        document.getElementById("sp_confirm_pwd").innerText = "确认密码";
+        return true;
+    }
+}
+
+//判断二次密码是否一致
+function matchPassword() {
+    var newPwd = document.getElementById("newPwd").value;
+    var confirmPwd1 = document.getElementById("confirmPwd").value;
+    if (newPwd != confirmPwd1) {
+        document.getElementById("sp_confirm_pwd").innerHTML = "<font color='red'>两次密码不一致</font>";
+        return false;
+    } else {
+        document.getElementById("sp_confirm_pwd").innerText = "确认密码";
+        return true;
+    }
+}
+
+//重置密码
+function pwdSetting() {
+    var newPwd = document.getElementById("newPwd").value;
+    var flag = matchPassword();
+    if (checkCurrentPwd() && checkNewPwd() && checkConfirmPwd() && matchPassword()) {
+        //ajax修改密码
+        $.post(
+            "pwd_setting",
+            {
+                newPwd: newPwd
+            },
+            function (data) {
+                if (data == "success") {
+                    $("#resetPwdSuccessWell").show();
+                }
+            }
+        );
+    }
+}
+//关闭修改密码成功的提醒
+function closeAlert() {
+    $("#resetPwdSuccessWell").hide();
 }

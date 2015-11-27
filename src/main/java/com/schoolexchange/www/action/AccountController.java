@@ -15,4 +15,10 @@ public class AccountController {
 
         return "accountSetting/personal_center";
     }
+
+    @RequestMapping(value = "/account/password_set")
+    public String toResetPwd(){
+
+        return "accountSetting/reset_password";
+    }
 }

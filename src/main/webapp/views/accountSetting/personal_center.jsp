@@ -27,10 +27,10 @@
                 <h2>账户</h2>
             </div>
             <div class="list-group-item list-group-item-success personal_setting_center">
-                <a href=""><span class="glyphicon glyphicon-user"></span>个人中心</a>
+                <a href="/account"><span class="glyphicon glyphicon-user"></span>个人中心</a>
             </div>
             <div class="list-group-item list-group-item-success">
-                <a href=""><span class="glyphicon glyphicon-link"></span>密码设置</a>
+                <a href="/account/password_set"><span class="glyphicon glyphicon-link"></span>密码设置</a>
             </div>
             <div class="list-group-item list-group-item-success">
                 <a href=""><span class="glyphicon glyphicon-phone"></span>实名认证</a>

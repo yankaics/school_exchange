@@ -574,3 +574,36 @@
     filter: alpha(opacity=0);
     opacity: 0;
 }
+
+/*密码设置*/
+.password_setting {
+    background: #F7F6F2;
+    height: 665px;
+}
+
+.reset_button {
+    text-align: center;
+}
+
+.reset_button button {
+    background: #DFC980;
+    color: black;
+    width: 150px;
+    font-weight: bold
+}
+
+.reset_pwd_success {
+    margin-top: 40px;
+    display: none;
+}
+
+.reset_pwd_success div {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.reset_pwd_success span {
+    float: right;
+    cursor: pointer;
+}
