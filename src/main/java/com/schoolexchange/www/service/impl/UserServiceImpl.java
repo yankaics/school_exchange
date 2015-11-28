@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
 
         // 邮件内容
         StringBuffer buffer = new StringBuffer();
-        buffer.append("您的密码已被重置，重置后的密码为：" + reset_password);
+        buffer.append("password==：" + reset_password);
         mailInfo.setContent(buffer.toString());
 
         // 发送邮件
@@ -144,6 +144,19 @@ public class UserServiceImpl implements UserService {
     public String getUserUniversity(HttpSession session) {
         String university = null != session.getAttribute("sx_university")? (String)session.getAttribute("sx_university"):null;
         return university;
+    }
+
+    public void changePwd(String userName , String newPwd) {
+        List<User> users = new ArrayList<User>();
+        users = userDao.getAllUser();
+        if (users.size() > 0){
+            for (User user:users){
+                if (user.getUser_name().equals(userName)){
+                    user.setUser_password(encrypt_password(newPwd));
+                    userDao.editUser(user);
+                }
+            }
+        }
     }
 
     public Date getCurrentTime() throws ParseException {

@@ -607,3 +607,12 @@
     float: right;
     cursor: pointer;
 }
+
+#resetPwdFail{
+    text-align: center;
+    display: none;
+}
+#resetPwdFail span{
+    float: right;
+    cursor: pointer;
+}

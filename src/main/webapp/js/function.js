@@ -33,7 +33,7 @@ function checkLogin() {
 function checkLoginName() {
     var user_name = document.getElementById("user_name").value;
     if (0 == user_name.length || "" == user_name) {
-        document.getElementById("login_name").innerHTML = "<font color='red'>用户名不能为空</font>";
+        document.getElementById("login_name").innerHTML = "<span style='color: red'>用户名不能为空</span>";
         return false;
     } else {
         document.getElementById("login_name").innerText = "用户名";
@@ -46,7 +46,7 @@ function checkLoginName() {
 function checkLoginPassword() {
     var user_password = document.getElementById("user_password").value;
     if (0 == user_password.length || "" == user_password) {
-        document.getElementById("login_password").innerHTML = "<font color='red'>密码不能为空</font>";
+        document.getElementById("login_password").innerHTML = "<span style='color: red'>密码不能为空</span>";
         return false;
     } else {
         document.getElementById("login_password").innerText = "密码";
@@ -54,10 +54,10 @@ function checkLoginPassword() {
     }
 }
 
-function checkLoginSubmit() {
+/*function checkLoginSubmit() {
 
-    return checkLogin();
-}
+ return checkLogin();
+ }*/
 
 /*
  *判断能否submit
@@ -78,12 +78,12 @@ function checkEmail() {
 
     var js_value = document.getElementById("register_email");
     if (0 == js_value.value.length && "" == js_value.value) {
-        document.getElementById("span_email").innerHTML = "<font color='red'>邮箱不能为空</font>";
+        document.getElementById("span_email").innerHTML = "<span style='color: red'>邮箱不能为空</span>";
         return false;
     }
     var pattern = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
     if (!pattern.test(js_value.value)) {
-        document.getElementById("span_email").innerHTML = "<font color='red'>邮箱格式不正确</font>";
+        document.getElementById("span_email").innerHTML = "<span style='color: red'>邮箱格式不正确</span>";
         return false;
     } else {
         document.getElementById("span_email").innerText = "邮箱";
@@ -98,10 +98,10 @@ function checkEmail() {
         },
         function (data) {
             if (data == "yes") {
-                document.getElementById("span_email").innerHTML = "<font color='green'>该邮箱可以注册</font>";
+                document.getElementById("span_email").innerHTML = "<span style='color: red'>该邮箱可以注册</span>";
                 return true;
             } else {
-                document.getElementById("span_email").innerHTML = "<font color='red'>该邮箱已被注册</font>";
+                document.getElementById("span_email").innerHTML = "<span style='color: red'>该邮箱已被注册</span>";
                 return false;
             }
         }
@@ -117,18 +117,18 @@ function checkRegisterName() {
     var js_value = document.getElementById("register_name").value;
 
     if (0 == js_value.length && "" == js_value) {
-        document.getElementById("span_name").innerHTML = "<font color='red'>用户名不能为空</font>";
+        document.getElementById("span_name").innerHTML = "<span style='color: red'>用户名不能为空</span>";
         return false;
     } else {
 
         if (js_value.length < 1 || js_value.length > 8) {
-            document.getElementById("span_name").innerHTML = "<font color='red'>用户名长度必须在1-8之间</font>";
+            document.getElementById("span_name").innerHTML = "<span style='color: red'>用户名长度必须在1-8之间</span>";
             return false;
         }
     }
     var reg = /^(\w|[\u4E00-\u9FA5])*$/;
     if (!reg.test(js_value)) {
-        document.getElementById("span_name").innerHTML = "<font color='red'>用户名格式不合法</font>";
+        document.getElementById("span_name").innerHTML = "<span style='color: red'>用户名格式不合法</span>";
         return false;
     }
 
@@ -140,10 +140,10 @@ function checkRegisterName() {
         },
         function (data) {
             if (data == "yes") {
-                document.getElementById("span_name").innerHTML = "<font color='green'>该用户名可以注册</font>";
+                document.getElementById("span_name").innerHTML = "<span style='color: green'>该用户名可以注册</span>";
                 return true;
             } else {
-                document.getElementById("span_name").innerHTML = "<font color='red'>该用户名已被注册</font>";
+                document.getElementById("span_name").innerHTML = "<span style='color: red'>该用户名已被注册</span>";
                 return false;
             }
         }
@@ -157,12 +157,12 @@ function checkPassword() {
     var js_value = document.getElementById("register_password").value;
 
     if (0 == js_value.length && "" == js_value) {
-        document.getElementById("span_password").innerHTML = "<font color='red'>密码不能为空</font>";
+        document.getElementById("span_password").innerHTML = "<span style='color: red'>密码不能为空</span>";
         return false;
     } else {
 
         if (js_value.length < 6 || js_value.length > 15) {
-            document.getElementById("span_password").innerHTML = "<font color='red'>密码长度必须在6-15之间</font>";
+            document.getElementById("span_password").innerHTML = "<span style='color: red'>密码长度必须在6-15之间</span>";
             return false;
         }
     }
@@ -177,11 +177,11 @@ function checkPasswordsAgreement() {
     var pwd1 = document.getElementById("register_password").value;
     var pwd2 = document.getElementById("re_register_password").value;
     if (0 == pwd2.length && "" == pwd2) {
-        document.getElementById("re_span_password").innerHTML = "<font color='red'>确认密码不能为空</font>";
+        document.getElementById("re_span_password").innerHTML = "<span style='color: red'>确认密码不能为空</span>";
         return false;
     }
     if (!(pwd1 == pwd2)) {
-        document.getElementById("re_span_password").innerHTML = "<font color='red'>两次密码不一致</font>";
+        document.getElementById("re_span_password").innerHTML = "<span style='color: red'>两次密码不一致</span>";
         return false;
     }
     document.getElementById("re_span_password").innerText = "确认密码";
@@ -229,7 +229,7 @@ function forgetPassword() {
     if (checkInputEmail()) {
 
         var fp = document.getElementById("forget_password").value;
-        document.getElementById("reminding").innerHTML = "<font color='red'>重置密码中......</font>";
+        document.getElementById("reminding").innerHTML = "<span style='color: red'>重置密码中......</span>";
         //重置密码
         $.post(
             "reset_password",
@@ -238,14 +238,14 @@ function forgetPassword() {
             },
             function (data) {
                 if (data == "yes") {
-                    document.getElementById("fp").innerHTML = "<font color='red'>邮箱不存在</font>";
-                    document.getElementById("reminding").innerHTML = "<font color='white'>找回密码</font>";
+                    document.getElementById("fp").innerHTML = "<span style='color: red'>邮箱不存在</span>";
+                    document.getElementById("reminding").innerHTML = "<span style='color: white'>找回密码</span>";
                     return false;
                 } else {
                     document.getElementById("fp").innerText = "邮箱";
                     $('#get_password').show().delay(60000).fadeOut("slow");
                     document.getElementById("get_password").innerHTML = judgeEmail(fp);
-                    document.getElementById("reminding").innerHTML = "<font color='white'>找回密码</font>";
+                    document.getElementById("reminding").innerHTML = "<span style='color: white'>找回密码</span>";
                     return false;
                 }
             }
@@ -274,7 +274,7 @@ function judgeEmail(fp) {
 function checkInputEmail() {
     var fp = document.getElementById("forget_password").value;
     if (0 == fp.length || "" == fp) {
-        document.getElementById("fp").innerHTML = "<font color='red'>邮箱不能为空</font>";
+        document.getElementById("fp").innerHTML = "<span style='color: red'>邮箱不能为空</span>";
         return false;
     } else {
         document.getElementById("fp").innerText = "邮箱";
@@ -282,7 +282,7 @@ function checkInputEmail() {
     /*邮件格式*/
     var pattern = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
     if (!pattern.test(fp)) {
-        document.getElementById("fp").innerHTML = "<font color='red'>邮箱格式不正确</font>";
+        document.getElementById("fp").innerHTML = "<span style='color: red'>邮箱格式不正确</span>";
         return false;
     } else {
         document.getElementById("fp").innerText = "邮箱";
@@ -350,56 +350,56 @@ function noDeepen_div(sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //发布商品
     if (chooseStatus != 0 && 2 == chooseStatus && "#buy_goods" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //我的收藏
     if (chooseStatus != 0 && 3 == chooseStatus && "#my_collection" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //已发布商品
     if (chooseStatus != 0 && 4 == chooseStatus && "#already_release" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //已求购商品
     if (chooseStatus != 0 && 5 == chooseStatus && "#already_buy" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //我的消息
     if (chooseStatus != 0 && 6 == chooseStatus && "#my_message" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //我的足迹
     if (chooseStatus != 0 && 7 == chooseStatus && "#foot_print" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     }
     //账号设置
     if (chooseStatus != 0 && 8 == chooseStatus && "#account_set" == sideBarName) {
         $(sideBarName).css({
             background: "gray"
         });
-        return;
+        return true;
     } else {
         $(sideBarName).css({
             background: "none"
@@ -409,9 +409,9 @@ function noDeepen_div(sideBarName) {
 
 }
 //修改选中的状态
-function setChooseStatus(status) {
-    chooseStatus = status;
-}
+/*function setChooseStatus(status) {
+ chooseStatus = status;
+ }*/
 //显示侧边栏
 function show_sideBar(status, sideBarName) {
     /* $("#sidebar").show();
@@ -491,7 +491,7 @@ function clacImgZoomParam(maxWidth, maxHeight, width, height) {
 function checkCurrentPwd() {
     var currentPwd = document.getElementById("oldPwd").value;
     if (0 == currentPwd.length || "" == currentPwd) {
-        document.getElementById("sp_current_pwd").innerHTML = "<font color='red'>当前密码不能空</font>";
+        document.getElementById("sp_current_pwd").innerHTML = "<span style='color: red'>当前密码不能空</span>";
         return false;
     } else {
         document.getElementById("sp_current_pwd").innerText = "当前密码";
@@ -503,13 +503,13 @@ function checkCurrentPwd() {
 function checkNewPwd() {
     var newPwd = document.getElementById("newPwd").value;
     if (0 == newPwd.length || "" == newPwd) {
-        document.getElementById("sp_new_pwd").innerHTML = "<font color='red'>新密码不能空</font>";
+        document.getElementById("sp_new_pwd").innerHTML = "<span style='color: red'>新密码不能空</span>";
         return false;
     } else {
         document.getElementById("sp_new_pwd").innerText = "新密码";
     }
     if (newPwd.length < 6 || newPwd.length > 15) {
-        document.getElementById("sp_new_pwd").innerHTML = "<font color='red'>密码长度必须在6-15之间</font>";
+        document.getElementById("sp_new_pwd").innerHTML = "<span style='color: red'>密码长度必须在6-15之间</span>";
         return false;
     } else {
         document.getElementById("sp_new_pwd").innerText = "新密码";
@@ -520,12 +520,13 @@ function checkNewPwd() {
 function checkConfirmPwd() {
     var confirmPwd = document.getElementById("confirmPwd").value;
     if (0 == confirmPwd.length || "" == confirmPwd) {
-        document.getElementById("sp_confirm_pwd").innerHTML = "<font color='red'>新密码不能空</font>";
+        document.getElementById("sp_confirm_pwd").innerHTML = "<span style='color: red'>新密码不能空</span>";
         return false;
     } else {
         document.getElementById("sp_confirm_pwd").innerText = "确认密码";
-        return true;
     }
+
+    return matchPassword();
 }
 
 //判断二次密码是否一致
@@ -533,7 +534,7 @@ function matchPassword() {
     var newPwd = document.getElementById("newPwd").value;
     var confirmPwd1 = document.getElementById("confirmPwd").value;
     if (newPwd != confirmPwd1) {
-        document.getElementById("sp_confirm_pwd").innerHTML = "<font color='red'>两次密码不一致</font>";
+        document.getElementById("sp_confirm_pwd").innerHTML = "<span style='color: red'>两次密码不一致</span>";
         return false;
     } else {
         document.getElementById("sp_confirm_pwd").innerText = "确认密码";
@@ -543,18 +544,23 @@ function matchPassword() {
 
 //重置密码
 function pwdSetting() {
+    $("#resetPwdSuccessWell").hide();
+    $("#resetPwdFail").hide();
+    var currentPwd = document.getElementById("oldPwd").value;
     var newPwd = document.getElementById("newPwd").value;
-    var flag = matchPassword();
     if (checkCurrentPwd() && checkNewPwd() && checkConfirmPwd() && matchPassword()) {
         //ajax修改密码
         $.post(
-            "pwd_setting",
+            "/pwd_setting",
             {
+                currentPwd:currentPwd,
                 newPwd: newPwd
             },
             function (data) {
                 if (data == "success") {
                     $("#resetPwdSuccessWell").show();
+                } else {
+                    $("#resetPwdFail").show();
                 }
             }
         );
@@ -563,4 +569,5 @@ function pwdSetting() {
 //关闭修改密码成功的提醒
 function closeAlert() {
     $("#resetPwdSuccessWell").hide();
+    $("#resetPwdFail").hide();
 }

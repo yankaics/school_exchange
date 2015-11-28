@@ -35,14 +35,11 @@ public class UserDaoImpl implements UserDao {
 
     public void editUser(User user) {
 
-        String hqlUpdate = "update User u set user_password = :new_password where user_email = :user_email ";
+        String hqlUpdate = "update User u set u.user_password = :new_password where u.user_email = :user_email ";
         sessionFactory.openSession().createQuery(hqlUpdate)
                                     .setString("new_password" , user.getUser_password())
                                     .setString("user_email" , user.getUser_email())
                                     .executeUpdate();
     }
 
-    public void delUser(User user) {
-
-    }
 }

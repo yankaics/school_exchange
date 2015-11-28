@@ -44,6 +44,14 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" id="resetPwdFail">
+                    <span class="glyphicon glyphicon-remove" onclick="closeAlert();"></span>
+                    <div class="alert alert-danger">原始密码不正确!</div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <form method="post" onsubmit="return false">

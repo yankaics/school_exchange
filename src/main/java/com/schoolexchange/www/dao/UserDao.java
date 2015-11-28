@@ -10,11 +10,10 @@ import java.util.List;
  */
 public interface UserDao {
 
-    public List<User> getAllUser();
+    List<User> getAllUser();
 
-    public void saveUser(User user);
+    void saveUser(User user);
 
-    public void editUser(User user);
+    void editUser(User user);
 
-    public void delUser(User user);
 }

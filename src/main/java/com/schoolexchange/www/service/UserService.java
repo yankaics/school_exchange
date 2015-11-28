@@ -33,6 +33,7 @@ public interface UserService {
     //通过session获取所属大学
     String getUserUniversity(HttpSession session);
 
-
+    //修改密码
+    void changePwd(String userName , String newPwd);
 
 }
