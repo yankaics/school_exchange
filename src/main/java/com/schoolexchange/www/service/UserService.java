@@ -1,6 +1,9 @@
 package com.schoolexchange.www.service;
 
+import com.schoolexchange.www.entity.User;
+
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 
 /**
  * Created by shadow on 2015/11/18.
@@ -16,7 +19,7 @@ public interface UserService {
 
     //注册用户
     void registerUser(String user_email, String user_name
-            , String user_password, String belong_university);
+            , String user_password, String belong_university) throws ParseException;
 
     //验证登录
     boolean checkLogin(String user_name, String user_password);
@@ -35,5 +38,8 @@ public interface UserService {
 
     //修改密码
     void changePwd(String userName , String newPwd);
+
+    //获取当前用户
+    User getCurrentUser(HttpSession session);
 
 }

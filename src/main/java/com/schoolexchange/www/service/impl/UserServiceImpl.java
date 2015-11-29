@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public void registerUser(String user_email, String user_name, String user_password, String belong_university) {
+    public void registerUser(String user_email, String user_name, String user_password, String belong_university) throws ParseException {
         User user = new User();
         user.setUser_goods_counts(0);
         user.setUser_state(0);
@@ -66,6 +66,8 @@ public class UserServiceImpl implements UserService {
         user.setUser_university(belong_university);
         user.setUser_sex(1);
         user.setUser_authentication(0);
+        user.setUser_faces("default.jpg");
+        user.setUser_birth(new SimpleDateFormat("yyyy-MM-dd").parse("1950-01-01"));
         userDao.saveUser(user);
     }
 
@@ -159,6 +161,19 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+    }
+
+    public User getCurrentUser(HttpSession session) {
+        String currenrUserName = (String)session.getAttribute("sx_user_name");
+        List<User> users = userDao.getAllUser();
+        if (0 !=users.size() && currenrUserName != null){
+            for (User user:users){
+                if (user.getUser_name().equals(currenrUserName)){
+                    return user;
+                }
+            }
+        }
+        return null;
     }
 
     public Date getCurrentTime() throws ParseException {

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Created by shadow on 2015/11/18.
@@ -53,7 +54,7 @@ public class CheckRegisterController {
     }
 
     @RequestMapping(value = "/register_action")
-    public void registerAction(HttpServletRequest request , HttpSession session){
+    public void registerAction(HttpServletRequest request , HttpSession session) throws ParseException {
         String user_email = null != request.getParameter("user_email")?request.getParameter("user_email"):"";
         String user_name = null != request.getParameter("user_name")?request.getParameter("user_name"):"";
         String user_password = null != request.getParameter("user_password")?request.getParameter("user_password"):"";
