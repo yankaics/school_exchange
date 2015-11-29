@@ -98,7 +98,7 @@ function checkEmail() {
         },
         function (data) {
             if (data == "yes") {
-                document.getElementById("span_email").innerHTML = "<span style='color: red'>该邮箱可以注册</span>";
+                document.getElementById("span_email").innerHTML = "<span style='color: green'>该邮箱可以注册</span>";
                 return true;
             } else {
                 document.getElementById("span_email").innerHTML = "<span style='color: red'>该邮箱已被注册</span>";

@@ -64,6 +64,8 @@ public class UserServiceImpl implements UserService {
         user.setUser_name(user_name);
         user.setUser_password(encrypt_password(user_password));
         user.setUser_university(belong_university);
+        user.setUser_sex(1);
+        user.setUser_authentication(0);
         userDao.saveUser(user);
     }
 
