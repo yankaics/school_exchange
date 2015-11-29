@@ -42,6 +42,22 @@ public class User {
 
     private Date create_time;
 
+    //性别
+    private int user_sex;
+
+    //生日
+    private Date user_birth;
+
+    //座右铭
+    private String user_motto;
+
+    //专业
+    private String user_professional;
+
+    //认证
+    private int user_authentication;
+
+
     public Integer getId() {
         return id;
     }
@@ -128,5 +144,45 @@ public class User {
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+    }
+
+    public int getUser_sex() {
+        return user_sex;
+    }
+
+    public void setUser_sex(int user_sex) {
+        this.user_sex = user_sex;
+    }
+
+    public Date getUser_birth() {
+        return user_birth;
+    }
+
+    public void setUser_birth(Date user_birth) {
+        this.user_birth = user_birth;
+    }
+
+    public String getUser_motto() {
+        return user_motto;
+    }
+
+    public void setUser_motto(String user_motto) {
+        this.user_motto = user_motto;
+    }
+
+    public String getUser_professional() {
+        return user_professional;
+    }
+
+    public void setUser_professional(String user_professional) {
+        this.user_professional = user_professional;
+    }
+
+    public int getUser_authentication() {
+        return user_authentication;
+    }
+
+    public void setUser_authentication(int user_authentication) {
+        this.user_authentication = user_authentication;
     }
 }
