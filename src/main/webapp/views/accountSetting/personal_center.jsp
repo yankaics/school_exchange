@@ -6,6 +6,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE>
 <html>
@@ -42,7 +43,7 @@
                     <img id="imghead" src="../../images/csdn.jpg" class="img-circle">
                 </div>
                 <div>
-                    <img src="../../images/csdn.jpg" id="testPic" class="img-circle"/>
+                    <img src="${user.user_faces}" id="testPic" class="img-circle"/>
                 </div>
                 <a href="javascript:" class="file">更换头像
                     <input type="file" name="user_faces" id="" onchange="previewImage(this)">
@@ -54,30 +55,97 @@
                         <label for="user_email">邮箱</label>
                         <input type="text" class="form-control" id="user_email"
                                disabled="disabled"
-                               name="user_email" value="zhangjiadong0418@qq.com">
+                               name="user_email" value="${user.user_email}">
                     </div>
                     <div class="form-group user_sex">
                         <label>性别</label><br/>
-                        <h4><input type="radio" checked="checked" name="sex" value="1" class="btn btn-primary">
-                            未知
-                        </h4>
-                        <h4><input type="radio" name="sex" value="2" class="btn btn-primary">
-                            男
-                        </h4>
-                        <h4>
-                            <input type="radio" name="sex" value="3" class="btn btn-primary">
-                            女
-                        </h4>
+                        <c:if test="${user.user_sex == 1}">
+                            <h4><input type="radio"  name="sex" checked="checked" value="1" class="btn btn-primary">
+                                未知
+                            </h4>
+                            <h4><input type="radio" name="sex" value="2" class="btn btn-primary">
+                                男
+                            </h4>
+                            <h4>
+                                <input type="radio" name="sex" value="3" class="btn btn-primary">
+                                女
+                            </h4>
+                        </c:if>
+                        <c:if test="${user.user_sex == 2}">
+                            <h4><input type="radio"  name="sex"  value="1" class="btn btn-primary">
+                                未知
+                            </h4>
+                            <h4><input type="radio" name="sex" checked="checked" value="2" class="btn btn-primary">
+                                男
+                            </h4>
+                            <h4>
+                                <input type="radio" name="sex" value="3" class="btn btn-primary">
+                                女
+                            </h4>
+                        </c:if>
+                        <c:if test="${user.user_sex == 3}">
+                            <h4><input type="radio"  name="sex"  value="1" class="btn btn-primary">
+                                未知
+                            </h4>
+                            <h4><input type="radio" name="sex"  value="2" class="btn btn-primary">
+                                男
+                            </h4>
+                            <h4>
+                                <input type="radio" name="sex" checked="checked" value="3" class="btn btn-primary">
+                                女
+                            </h4>
+                        </c:if>
+
                     </div>
                     <div class="form-group university">
                         <label for="university">所属学校 </label>
-                        <select id="university" class="form-control">
-                            <option value="烟台大学文经学院" selected="selected">烟台大学文经学院</option>
-                            <option value="烟台大学">烟台大学</option>
-                            <option value="山东工商学院">山东工商学院</option>
-                            <option value="滨州医学院烟台校区">滨州医学院烟台校区</option>
-                            <option value="鲁东大学">鲁东大学</option>
-                        </select>
+                        <c:choose>
+                            <c:when test="${user.user_university == '烟台大学文经学院'}">
+                                <select id="university" class="form-control">
+                                    <option value="烟台大学文经学院" selected="selected">烟台大学文经学院</option>
+                                    <option value="烟台大学">烟台大学</option>
+                                    <option value="山东工商学院">山东工商学院</option>
+                                    <option value="滨州医学院烟台校区">滨州医学院烟台校区</option>
+                                    <option value="鲁东大学">鲁东大学</option>
+                                </select>
+                            </c:when>
+                            <c:when test="${user.user_university == '烟台大学'}">
+                                <select id="university" class="form-control">
+                                    <option value="烟台大学文经学院">烟台大学文经学院</option>
+                                    <option value="烟台大学" selected="selected">烟台大学</option>
+                                    <option value="山东工商学院">山东工商学院</option>
+                                    <option value="滨州医学院烟台校区">滨州医学院烟台校区</option>
+                                    <option value="鲁东大学">鲁东大学</option>
+                                </select>
+                            </c:when>
+                            <c:when test="${user.user_university == '山东工商学院'}">
+                                <select id="university" class="form-control">
+                                    <option value="烟台大学文经学院">烟台大学文经学院</option>
+                                    <option value="烟台大学" selected="selected">烟台大学</option>
+                                    <option value="山东工商学院" selected="selected">山东工商学院</option>
+                                    <option value="滨州医学院烟台校区">滨州医学院烟台校区</option>
+                                    <option value="鲁东大学">鲁东大学</option>
+                                </select>
+                            </c:when>
+                            <c:when test="${user.user_university == '滨州医学院烟台校区'}">
+                                <select id="university" class="form-control">
+                                    <option value="烟台大学文经学院">烟台大学文经学院</option>
+                                    <option value="烟台大学" selected="selected">烟台大学</option>
+                                    <option value="山东工商学院" >山东工商学院</option>
+                                    <option value="滨州医学院烟台校区" selected="selected">滨州医学院烟台校区</option>
+                                    <option value="鲁东大学">鲁东大学</option>
+                                </select>
+                            </c:when>
+                            <c:when test="${user.user_university == '鲁东大学'}">
+                                <select id="university" class="form-control">
+                                    <option value="烟台大学文经学院">烟台大学文经学院</option>
+                                    <option value="烟台大学" selected="selected">烟台大学</option>
+                                    <option value="山东工商学院" >山东工商学院</option>
+                                    <option value="滨州医学院烟台校区" >滨州医学院烟台校区</option>
+                                    <option value="鲁东大学" selected="selected">鲁东大学</option>
+                                </select>
+                            </c:when>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -85,23 +153,34 @@
                         <label for="user_name">用户名</label>
                         <input type="text" class="form-control" id="user_name"
                                style="width: 100%;min-height: 40px;font-size: 16px"
-                               name="user_name" value="shadow">
+                               name="user_name" value="${user.user_name}">
                     </div>
                     <div class="form-group user_birth">
                         <label for="date_b">生日</label>
-                        <input id="date_b" class="form-control" type="text" name="user_birth" value="1993-04-18"
-                               readonly style="background: #fff">
+                        <c:choose>
+                            <c:when test="${null == user.user_birth}">
+                                <input id="date_b" class="form-control" type="text" name="user_birth" value="1950-1-1"
+                                       readonly style="background: #fff">
+                            </c:when>
+                            <c:otherwise>
+                                <input id="date_b" class="form-control" type="text" name="user_birth"
+                                       value='<fmt:formatDate value="${user.user_birth}" pattern="yyyy-MM-dd" />'
+                                       readonly style="background: #fff">
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                     <div class="form-group user_professional">
                         <label for="user_professional">专业</label>
-                        <input type="text" class="form-control" name="user_professional" id="user_professional"
-                               value="计算机科学与技术">
+                        <input type="text" class="form-control" name="user_professional" id="user_professional" placeholder="请输入您的专业"
+                               value="${user.user_professional}">
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group user_motto">
                         <label for="user_motto">座右铭 <span>(50字以内)</span></label>
-                        <input type="text" name="user_motto" id="user_motto" placeholder="个性签名" class="form-control">
+                        <input type="text" name="user_motto" id="user_motto" placeholder="个性签名" class="form-control"
+                                        value="${user.user_motto}">
                     </div>
                 </div>
                 <div class="col-md-12">
