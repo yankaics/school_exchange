@@ -186,8 +186,8 @@
         <!--七牛云存储-->
         <dependency>
             <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>[7.0.0, 7.0.99]</version>
+            <artifactId>sdk</artifactId>
+            <version>6.1.0</version>
         </dependency>
 
         <!--发送邮件-->
