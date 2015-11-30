@@ -608,11 +608,43 @@
     cursor: pointer;
 }
 
-#resetPwdFail{
+#resetPwdFail {
     text-align: center;
     display: none;
 }
-#resetPwdFail span{
+
+#resetPwdFail span {
     float: right;
     cursor: pointer;
+}
+
+#update_success {
+    min-height: 50px;
+    width: 300px;
+    position: absolute;
+    z-index: 150;
+    display: none;
+}
+
+#personal_close_alert {
+    background: #F4F4F4;
+    min-height: 12px;
+    width: 300px;
+    display: none
+}
+
+#personal_close_alert span {
+    float: right;
+    margin-top: 0;
+    cursor: pointer
+}
+
+#alert_success {
+    background: #DEFCD5;
+    min-height: 42px;
+    width: 300px;
+    text-align: center;
+    padding-top: 10px;
+    color: #52A954;
+    font-weight: bold
 }

@@ -13,8 +13,9 @@ public class Test {
 
     public static void main(String[] args) throws ParseException {
 
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        sf.parse("1993-04-18");
+        int i =1;
+        boolean flag = (i+1 <i);
+        System.out.println(flag);
     }
 
 }

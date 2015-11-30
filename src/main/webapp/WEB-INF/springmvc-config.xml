@@ -10,32 +10,36 @@
        http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-       <!--annotation-driven元素做的事情包括
-       注册用于支持基于注解的控制器的请求处理方法的bean对象-->
-       <mvc:annotation-driven/>
+    <!--annotation-driven元素做的事情包括
+    注册用于支持基于注解的控制器的请求处理方法的bean对象-->
+    <mvc:annotation-driven/>
 
-       <!--如果系统配置了通配符的拦截器，静态资源还是会被拦截器拦截-->
-       <!--resource元素则指定SpringMVC哪些静态资源需要单独处理(不通过Dispatcher servlet)-->
-       <mvc:resources mapping="/styles/**" location="/styles"/>
-       <mvc:resources mapping="/*.html" location="/" />
-       <!-- <mvc:interceptors>
-            <mvc:interceptor>
-                <mvc:mapping path="/*"/>
-                <mvc:exclude-mapping path="/styles/**"/>
-                <bean class=""
-            </mvc:interceptor>
-        </mvc:interceptors>-->
+    <!--如果系统配置了通配符的拦截器，静态资源还是会被拦截器拦截-->
+    <!--resource元素则指定SpringMVC哪些静态资源需要单独处理(不通过Dispatcher servlet)-->
+    <mvc:resources mapping="/styles/**" location="/styles"/>
+    <mvc:resources mapping="/*.html" location="/"/>
+    <!-- <mvc:interceptors>
+         <mvc:interceptor>
+             <mvc:mapping path="/*"/>
+             <mvc:exclude-mapping path="/styles/**"/>
+             <bean class=""
+         </mvc:interceptor>
+     </mvc:interceptors>-->
 
-       <!--注解说明-->
-       <context:annotation-config/>
+    <!--注解说明-->
+    <context:annotation-config/>
 
-       <!--扫描指定使用@Control的控制器类的包-->
-       <context:component-scan base-package="com.schoolexchange.www.action"/>
-       <context:component-scan base-package="com.schoolexchange.www.service"/>
-       <context:component-scan base-package="com.schoolexchange.www.dao"/>
-       <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-              <property name="prefix" value="/views/" />
-              <property name="suffix" value=".jsp" />
-       </bean>
+    <!--扫描指定使用@Control的控制器类的包-->
+    <context:component-scan base-package="com.schoolexchange.www.action"/>
+    <context:component-scan base-package="com.schoolexchange.www.service"/>
+    <context:component-scan base-package="com.schoolexchange.www.dao"/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="200000000000"/>
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
 
 </beans>

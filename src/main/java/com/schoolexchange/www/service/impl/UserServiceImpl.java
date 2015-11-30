@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -174,6 +175,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         return null;
+    }
+
+    public String solveGetMessyCode(String chineseCharacter) {
+        try {
+            chineseCharacter = new String(chineseCharacter.getBytes("iso-8859-1") ,"utf8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            System.out.println("乱码处理失败");
+        }
+        return chineseCharacter ;
     }
 
     public Date getCurrentTime() throws ParseException {

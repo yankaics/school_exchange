@@ -42,4 +42,7 @@ public interface UserService {
     //获取当前用户
     User getCurrentUser(HttpSession session);
 
+    //解决get乱码
+    String solveGetMessyCode(String chineseCharacter);
+
 }
