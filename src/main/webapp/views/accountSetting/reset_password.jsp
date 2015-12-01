@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../styles/bootstrap.css">
     <link rel="stylesheet" href="../../styles/main.css">
 </head>
-<body>
+<body onload="getSideNumber()">
 <%@include file="../top.jsp" %>
 <div class="container" style="margin-top: 20px">
     <span id="sp" style="display: none">8</span>
