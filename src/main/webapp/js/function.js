@@ -331,12 +331,16 @@ function close_release_buy_goods() {
 /*侧边栏js*/
 //设置选中的侧边栏选项
 var chooseStatus = 0;
-chooseStatus = document.getElementById("sp").textContent;
-if (8 == chooseStatus) {
-    $("#account_set").css({
-        background: "gray"
-    });
+function getSideNumber(){
+    chooseStatus = document.getElementById("sp").textContent;
+    if (8 == chooseStatus) {
+        $("#account_set").css({
+            background: "gray"
+        });
+    }
 }
+
+
 /*alert("状态:== " + chooseStatus);*/
 function deepen_div(sideBarName) {
     $(sideBarName).css({
