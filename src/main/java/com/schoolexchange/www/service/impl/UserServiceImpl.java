@@ -187,6 +187,10 @@ public class UserServiceImpl implements UserService {
         return chineseCharacter ;
     }
 
+    public void updateUserInfo(User user) {
+        userDao.updateUser(user);
+    }
+
     public Date getCurrentTime() throws ParseException {
         Date create_time = new Date();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");

@@ -45,4 +45,7 @@ public interface UserService {
     //解决get乱码
     String solveGetMessyCode(String chineseCharacter);
 
+    //更新用户基本信息
+    void updateUserInfo(User user);
+
 }

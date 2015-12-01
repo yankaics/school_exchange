@@ -4,6 +4,7 @@ import com.qiniu.api.auth.AuthException;
 import com.qiniu.api.auth.digest.Mac;
 import org.apache.commons.codec.EncoderException;
 import org.json.JSONException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
@@ -37,4 +38,10 @@ public interface QiniuService {
     String getUpToken() throws AuthException, JSONException;
 
     Mac getMac();
+
+    //判断上传图片的格式
+    boolean judgePicExtension(MultipartFile myPic);
+
+    //判断上传图片大小
+    boolean judgePicSize(MultipartFile myPic);
 }

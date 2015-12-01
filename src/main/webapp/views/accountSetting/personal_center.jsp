@@ -59,7 +59,7 @@
 
             <div class="col-md-3 user_faces">
                 <div id="resetPwdFail">
-                    <div class="alert alert-danger"><span>头像不能超过2M</span></div>
+                    <div class="alert alert-danger resetPwdFailDiv"><span id="span_user_face_error"></span></div>
                 </div>
                 <div id="preview">
                     <img id="imghead" src="../../images/csdn.jpg" class="img-circle">

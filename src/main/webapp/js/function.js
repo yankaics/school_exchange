@@ -553,7 +553,7 @@ function pwdSetting() {
         $.post(
             "/pwd_setting",
             {
-                currentPwd:currentPwd,
+                currentPwd: currentPwd,
                 newPwd: newPwd
             },
             function (data) {
@@ -573,15 +573,15 @@ function closeAlert() {
 }
 
 /*
-*个人中心修改用户名
-*/
-function checkPersonalUser(){
+ *个人中心修改用户名
+ */
+function checkPersonalUser() {
     var spanUserName = document.getElementById("span_personal_user_name");
     var userName = document.getElementById("user_name").value;
-    if(null == userName || 0 == userName.length){
+    if (null == userName || 0 == userName.length) {
         spanUserName.innerHTML = "<span style='color: red'>用户名不能空</span>";
         return false;
-    }else{
+    } else {
         if (userName.length < 1 || userName.length > 8) {
             document.getElementById("span_personal_user_name").innerHTML = "<span style='color: red'>用户名长度必须在1-8之间</span>";
             return false;
@@ -596,7 +596,7 @@ function checkPersonalUser(){
 
     var hideUserName = document.getElementById("hideUserName").value;
     //判断是否发送验证
-    if(hideUserName != userName){
+    if (hideUserName != userName) {
         /*Ajax异步验证用户名是否存在*/
         $.post(
             "check_name",
@@ -619,33 +619,32 @@ function checkPersonalUser(){
 
 }
 /*专业验证*/
-function inputUserProfessional(){
+function inputUserProfessional() {
     var user_professional = document.getElementById("user_professional").value;
-    if(user_professional.length > 20){
+    if (user_professional.length > 20) {
         document.getElementById("span_user_professional").innerHTML = "<span style='color: red'>专业名称不能超过20个字</span>";
         return false;
-    }else{
+    } else {
         document.getElementById("span_user_professional").innerText = "专业";
         return true;
     }
 
-    return true;
 }
 
 /*座右铭验证*/
-function inputUserMotto(){
+function inputUserMotto() {
     var user_motto = document.getElementById("user_motto").value;
-    if(user_motto.length > 50){
+    if (user_motto.length > 50) {
         document.getElementById("span_user_motto").innerHTML = "<span style='color: red'>座右铭不能超过50个字</span>>";
         return false;
-    }else{
+    } else {
         document.getElementById("span_user_motto").innerText = "座右铭(50字以内)";
         return true;
     }
 }
 
 /*更新用户信息*/
-function updateUserInfo(){
+function updateUserInfo() {
     var flag1 = checkPersonalUser();
     var flag2 = inputUserProfessional();
     var flag3 = inputUserMotto();
@@ -661,32 +660,41 @@ function updateUserInfo(){
     var userProfessional = document.getElementById("user_professional").value;
     //获取座右铭
     var userMotto = document.getElementById("user_motto").value;
-    console.log("hello" + userBirth);
-    if(flag1 && flag2 && flag3){
+    if (flag1 && flag2 && flag3) {
         /*$("#update_success").show();*/
-
+        $("#resetPwdFail").hide();
         $.ajaxFileUpload({
             //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
-            url:'/update_user_info?userName=' + userName + '&userSex=' + userSex + '&userBirth=' + userBirth +'&userUniversity=' + userUniversity +'&userProfessional=' + userProfessional +'&userMotto=' + userMotto,
-            secureuri:false,                       //是否启用安全提交,默认为false
-            fileElementId:'user_faces',           //文件选择框的id属性 ,
-            dataType:'text',                       //服务器返回的格式,可以是json或xml等
-            success:function(data){        //服务器响应成功时的处理函数
-               /* $('#result').html('修改头像成功' + data);*/
-            },
-            error:function(data){ //服务器响应失败时的处理函数
-               /* $('#result').html('图片上传失败，请重试！！');*/
+            url: '/update_user_info?userName=' + userName + '&userSex=' + userSex + '&userBirth=' + userBirth + '&userUniversity=' + userUniversity + '&userProfessional=' + userProfessional + '&userMotto=' + userMotto,
+            secureuri: false,                       //是否启用安全提交,默认为false
+            fileElementId: 'user_faces',           //文件选择框的id属性 ,
+            dataType: 'text',                       //服务器返回的格式,可以是json或xml等
+            success: function (data) {        //服务器响应成功时的处理函数
+                //1、图片格式=== <pre style="word-wrap: break-word; white-space: pre-wrap;">1</pre>
+                // 2、图片大小
+                // 3、上传成功
+                if (data == '<pre style="word-wrap: break-word; white-space: pre-wrap;">1</pre>') {
+                    document.getElementById("span_user_face_error").innerHTML = "<span style='color: red'>图片格式只能是.jpg或.png</span>";
+                    $("#resetPwdFail").show();
+                }
+                if (data == '<pre style="word-wrap: break-word; white-space: pre-wrap;">2</pre>') {
+                    document.getElementById("span_user_face_error").innerHTML = "<span style='color: red'>图片大小不能超过1M</span>";
+                    $("#resetPwdFail").show();
+                }
+                if (data == '<pre style="word-wrap: break-word; white-space: pre-wrap;">3</pre>') {
+                    $("#update_success").show();
+                }
             }
         });
     }
 }
 
 //获取性别number
-function getSexNumber(){
+function getSexNumber() {
     var userSexs = document.getElementsByName("sex");
     var userSex = "";
-    for(var i = 0 ; i < userSexs.length ; i++){
-        if(userSexs[i].checked == true){
+    for (var i = 0; i < userSexs.length; i++) {
+        if (userSexs[i].checked == true) {
             userSex = userSexs[i].value;
         }
     }
@@ -694,14 +702,14 @@ function getSexNumber(){
 }
 
 /*鼠标移上展示窗口关闭框*/
-function show_update_info_close(){
+function show_update_info_close() {
     $("#personal_close_alert").show();
 }
 //关闭成功消息框
-function close_update_success_alert(){
+function close_update_success_alert() {
     $("#update_success").hide();
 }
 
-function hide_update_info_close(){
+function hide_update_info_close() {
     $("#personal_close_alert").hide();
 }

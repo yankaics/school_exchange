@@ -612,10 +612,11 @@
     text-align: center;
     display: none;
 }
-
-#resetPwdFail span {
-    float: right;
-    cursor: pointer;
+.resetPwdFailDiv{
+    text-align: center;
+}
+.resetPwdFailDiv  span {
+    font-weight: bold;
 }
 
 #update_success {

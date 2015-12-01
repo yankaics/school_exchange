@@ -14,6 +14,9 @@ public interface UserDao {
 
     void saveUser(User user);
 
+    //修改密码
     void editUser(User user);
 
+    //更新用户信息
+    void updateUser(User user);
 }

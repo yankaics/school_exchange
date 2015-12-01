@@ -14,12 +14,12 @@ import com.schoolexchange.www.service.QiniuService;
 import org.apache.commons.codec.EncoderException;
 import org.json.JSONException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
 /**
  * Created by shadow on 2015/11/29.
- *
  */
 @Service
 public class QiniuServiceImpl implements QiniuService {
@@ -83,5 +83,23 @@ public class QiniuServiceImpl implements QiniuService {
     public Mac getMac() {
         Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
         return mac;
+    }
+
+    public boolean judgePicExtension(MultipartFile picName) {
+        boolean flag = false;
+        if (picName.getContentType().equals("image/jpeg") || picName.getContentType().equals("image/png")) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    public boolean judgePicSize(MultipartFile myPic) {
+        boolean flag = false;
+        //上限1M
+        long maxUpload = 1048576;
+        if (myPic.getSize() > maxUpload) {
+            flag = true;
+        }
+        return flag;
     }
 }
