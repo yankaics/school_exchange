@@ -24,8 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by shadow on 2015/11/27.
- * AccountController类：账户管理
+ * Created by shadow
+ * on 2015/11/27.
  */
 @Controller
 public class AccountController {
@@ -36,6 +36,13 @@ public class AccountController {
     @Autowired
     private QiniuService qiniuService;
 
+    /**
+     * 跳转到个人信息中心
+     *
+     * @param model   存储用户信息
+     * @param session 通过session获取当前用户User
+     * @return 返回个人信息的页面路径
+     */
     @RequestMapping(value = "/account")
     public String toPersonalCenter(Model model, HttpSession session) {
         User user = userService.getCurrentUser(session);
@@ -58,12 +65,21 @@ public class AccountController {
         return "accountSetting/personal_center";
     }
 
+    /**
+     * 跳转到修改密码的页面
+     */
     @RequestMapping(value = "/account/password_set")
     public String toResetPwd() {
 
         return "accountSetting/reset_password";
     }
 
+    /**
+     * 修改密码
+     *
+     * @param currentPwd 当前密码
+     * @param newPwd     新密码
+     */
     @RequestMapping(value = "/pwd_setting")
     public void resetPwd(String currentPwd, String newPwd, HttpServletResponse response, HttpSession session)
             throws IOException {
@@ -78,7 +94,17 @@ public class AccountController {
 
     }
 
-    //user_faces为input的name名字
+    /**
+     * 更新用户信息到数据库
+     *
+     * @param userName         用户名
+     * @param userSex          性别
+     * @param userBirth        生日
+     * @param userUniversity   所属大学
+     * @param userProfessional 专业
+     * @param userMotto        座右铭
+     * @param user_faces       用户头像名(注:user_faces为input的name名字)
+     */
     @RequestMapping(value = "/update_user_info")
     public void UpdateUserInfo(@RequestParam("userName") String userName, @RequestParam("userSex") String userSex,
                                @RequestParam("userBirth") String userBirth, @RequestParam("userUniversity") String userUniversity,
@@ -91,8 +117,8 @@ public class AccountController {
         userProfessional = userService.solveGetMessyCode(userProfessional);
         userMotto = userService.solveGetMessyCode(userMotto);
         User user = userService.getCurrentUser(session);
-        session.setAttribute("sx_user_name" , userName);
-        session.setAttribute("sx_university" , userUniversity);
+        session.setAttribute("sx_user_name", userName);
+        session.setAttribute("sx_university", userUniversity);
         user.setUser_name(userName);
         user.setUser_sex(Integer.parseInt(userSex));
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -113,11 +139,11 @@ public class AccountController {
                 out.write("3");
                 return;
             } else {
-                if (!qiniuService.judgePicExtension(my_face)){
+                if (!qiniuService.judgePicExtension(my_face)) {
                     out.write("1");
                     return;
                 }
-                if (qiniuService.judgePicSize(my_face)){
+                if (qiniuService.judgePicSize(my_face)) {
                     out.write("2");
                     return;
                 }
@@ -133,7 +159,7 @@ public class AccountController {
                 qiniuService.setDomain("7xo7z2.com1.z0.glb.clouddn.com");
                 qiniuService.setBucketName("schoolexchange");
                 qiniuService.uploadFile(file);
-                if (file.exists()){
+                if (file.exists()) {
                     file.delete();
                 }
                 //更新数据库
@@ -143,5 +169,18 @@ public class AccountController {
                 return;
             }
         }
+    }
+
+    /**
+     * 跳转到认证页面
+     *
+     * @param status 认证状态 success或fail
+     * @return 认证页面
+     */
+
+    @RequestMapping(value = "/account/to_certification")
+    public String toCertification(String status) {
+
+        return "accountSetting/certification";
     }
 }

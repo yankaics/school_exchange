@@ -9,11 +9,17 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * Created by shadow on 2015/11/20.
- *
+ * Created by shadow
+ * on 2015/11/20.
  */
 public class SimpleMailSender {
 
+    /**
+     * 发送文本email
+     *
+     * @param mailInfo 邮箱属性
+     * @return 发送成功返回true , 否则返回false
+     */
     public boolean sendTextMail(MailSenderInfo mailInfo) {
         // 判断是否需要身份认证
         MyAuthenticator authenticator = null;
@@ -50,6 +56,12 @@ public class SimpleMailSender {
         return false;
     }
 
+    /**
+     * 发送文本email
+     *
+     * @param mailInfo 邮箱属性
+     * @return 发送成功返回true , 否则返回false
+     */
     public static boolean sendHtmlMail(MailSenderInfo mailInfo) {
         // 判断是否需要身份认证
         MyAuthenticator authenticator = null;

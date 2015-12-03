@@ -3,8 +3,8 @@ package com.schoolexchange.www.tools;
 import java.util.Properties;
 
 /**
- * Created by shadow on 2015/11/20.
- *
+ * Created by shadow
+ * on 2015/11/20.
  */
 public class MailSenderInfo {
 

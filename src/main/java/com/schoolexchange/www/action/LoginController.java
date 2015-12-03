@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by shadow on 2015/11/19.
- * LoginController:登录控制
+ * Created by shadow
+ * on 2015/11/19
  */
 @Controller
 public class LoginController {
@@ -21,24 +21,36 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 跳转到登录界面
+     */
     @RequestMapping(value = "to_login")
-    public String login(){
+    public String login() {
 
         return "login";
     }
 
+    /**
+     * 网站首页
+     *
+     * @param model 存放大学
+     * @return
+     */
     @RequestMapping(value = "/")
     public String index(HttpSession session, Model model) {
         String sx_university = userService.getUserUniversity(session);
-        if (sx_university == null){
-            session.setAttribute("sx_university" , "烟台大学文经学院");
-            model.addAttribute("sx_university" , "烟台大学文经学院");
-        }else {
-            model.addAttribute("sx_university" , sx_university);
+        if (sx_university == null) {
+            session.setAttribute("sx_university", "烟台大学文经学院");
+            model.addAttribute("sx_university", "烟台大学文经学院");
+        } else {
+            model.addAttribute("sx_university", sx_university);
         }
         return "index";
     }
 
+    /**
+     * Ajax验证登录
+     */
     @RequestMapping(value = "/login")
     public void ajax_login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 

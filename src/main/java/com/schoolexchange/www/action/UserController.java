@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by shadow on 2015/11/20.
- * UserController类
+ * Created by shadow
+ * on 2015/11/20.
  */
 @Controller
 public class UserController {
@@ -20,12 +20,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 跳转到找回密码的页面
+     */
     @RequestMapping(value = "/to_get_password")
     public String to_forget_password() {
 
         return "forget_password";
     }
 
+    /**
+     * 重置密码并发送邮件通知用户
+     */
     @RequestMapping(value = "/reset_password")
     public void reset_password(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter("email");
@@ -40,9 +46,11 @@ public class UserController {
         }
     }
 
-    //退出
+    /**
+     * 退出操作，销毁session
+     */
     @RequestMapping(value = "/logout")
-    public String logou_login(HttpSession session){
+    public String logou_login(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
