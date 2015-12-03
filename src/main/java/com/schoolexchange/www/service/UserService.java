@@ -4,6 +4,7 @@ import com.schoolexchange.www.entity.User;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
+import java.util.Date;
 
 /**
  * Created by shadow
@@ -126,4 +127,30 @@ public interface UserService {
      * @return 认证成功返回true，否则返回false
      */
     boolean authenticationStatus(User user);
+
+    /**
+     * 检测手机号是否已被认证
+     *
+     * @param auth_tel 要认证的手机号
+     * @return 已被认证返回true, 否则返回false
+     * @see com.schoolexchange.www.action.AccountController
+     */
+    boolean authTel(String auth_tel);
+
+    /**
+     * 最新日期与原始日期差值是否超过1分钟
+     *
+     * @param oldDate 原始日期
+     * @param newDate 最新日期
+     * @return 返回true表示超过，否则不超过
+     * @see com.schoolexchange.www.action.AccountController
+     */
+    boolean dateDifference(Date oldDate, Date newDate);
+
+    /**
+     * 随机生成6位数字的密码
+     *
+     * @return 返回6位数字密码
+     */
+    String getRandomPassword();
 }
