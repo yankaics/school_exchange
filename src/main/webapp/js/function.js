@@ -331,7 +331,7 @@ function close_release_buy_goods() {
 /*侧边栏js*/
 //设置选中的侧边栏选项
 var chooseStatus = 0;
-function getSideNumber(){
+function getSideNumber() {
     chooseStatus = document.getElementById("sp").textContent;
     if (8 == chooseStatus) {
         $("#account_set").css({
@@ -574,6 +574,10 @@ function pwdSetting() {
 function closeAlert() {
     $("#resetPwdSuccessWell").hide();
     $("#resetPwdFail").hide();
+    //滑块失败
+    $("#captcha_fail").hide();
+    //频繁发送手机验证码
+    $("#often_check").hide();
 }
 
 /*
@@ -717,3 +721,104 @@ function close_update_success_alert() {
 function hide_update_info_close() {
     $("#personal_close_alert").hide();
 }
+
+/*
+ *重新发送验证码(60秒)
+ */
+var wait = 60;
+
+document.getElementById("get_captcha").onclick = function () {
+    if(checkAuthTel('2')){
+        //ajax执行免费获取手机验证码
+        $.ajax({
+            url: "/get_free_captcha",
+            type: "get",
+            data: {auth_tel: document.getElementById("se_user_tel").value},
+            dataType: "text",
+            success: function (data) {
+                if (data == "no") {
+                    $("#often_check").show();
+                }
+            }
+        });
+    }else{
+        return false;
+    }
+    time(this);
+}
+function time(o) {
+    var sp_get_captcha = document.getElementById("sp_get_captcha");
+    if (wait == 0) {
+        o.removeAttribute("disabled");
+        sp_get_captcha.innerText = "免费获取验证码";
+        wait = 60;
+    } else {
+        o.setAttribute("disabled", true);
+        sp_get_captcha.innerText = "重新发送(" + wait + ")";
+        wait--;
+        setTimeout(function () {
+                time(o)
+            },
+            1000)
+    }
+}
+
+/**
+ * 验证手机号
+ * status为1执行ajax验证、status为2、不执行
+ */
+function checkAuthTel(status) {
+    var auth_tel = document.getElementById("se_user_tel").value;
+    var sp_auth_tel = document.getElementById("sp_auth_tel");
+    if (0 == auth_tel.length || null == auth_tel) {
+        sp_auth_tel.innerHTML = "<span style='color: red'>手机号不能为空</span>";
+        return false;
+    } else {
+        var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        if (!reg.test(auth_tel)) {
+            sp_auth_tel.innerHTML = "<span style='color: red'>手机号格式不对</span>";
+            return false;
+        } else {
+            sp_auth_tel.innerText = "手机号";
+        }
+    }
+
+    /**
+     *   ajax验证手机号是否能
+     *   return  没有被注册返回true,否则返回false
+     */
+    if (status == 1) {
+        $.ajax({
+            url: "/ajax_auth_tel",
+            type: "get",
+            data: {auth_tel: auth_tel},
+            dataType: "text",
+            success: function (data) {
+                if (data == "yes") {
+                    sp_auth_tel.innerText = "手机号";
+                    return true;
+                } else {
+                    sp_auth_tel.innerHTML = "<span style='color: red'>手机号已被认证</span>";
+                    return false;
+                }
+            }
+        });
+    }
+    return true;
+}
+
+/**
+ * 验证判空
+ */
+function msgCaptcha(){
+    var msg_captcha = document.getElementById("tel_captcha").value;
+    var sp_msg_captcha = document.getElementById("sp_msg_captcha");
+    if(msg_captcha == "" || msg_captcha.length == 0){
+        sp_msg_captcha.innerHTML = "<span style='color: red'>验证码不能为空</span>";
+        return false;
+    }else{
+        sp_msg_captcha.innerText = "验证码";
+        return true;
+    }
+}
+
