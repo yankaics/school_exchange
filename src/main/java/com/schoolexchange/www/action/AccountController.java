@@ -4,6 +4,8 @@ import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.UserService;
+import com.schoolexchange.www.tools.GeetestConfig;
+import com.schoolexchange.www.tools.GeetestLib;
 import org.apache.commons.codec.EncoderException;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,8 +181,138 @@ public class AccountController {
      */
 
     @RequestMapping(value = "/account/to_certification")
-    public String toCertification(String status) {
-
+    public String toCertification(HttpSession session, Model model, String status) {
+        User user = userService.getCurrentUser(session);
+        boolean flag = userService.authenticationStatus(user);
+        if (flag) {
+            model.addAttribute("se_db_auth_status", "1");
+            model.addAttribute("user", user);
+        } else {
+            if (null == status) {
+                model.addAttribute("se_db_auth_status", "0");
+            } else {
+                model.addAttribute("se_db_auth_status", "0");
+                model.addAttribute("status", status);
+            }
+        }
         return "accountSetting/certification";
     }
+
+    /**
+     * ajax创建验证码
+     */
+    @RequestMapping("/StartCaptchaServlet")
+    public void createCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Conifg the parameter of the geetest object
+        GeetestLib gtSdk = new GeetestLib();
+        gtSdk.setCaptchaId(GeetestConfig.getCaptcha_id());
+        gtSdk.setPrivateKey(GeetestConfig.getPrivate_key());
+
+        gtSdk.setGtSession(request);//如果是同一会话多实例，可以使用此函数的另一重载实现式，设置不同的key即可
+
+        String resStr = "{}";
+
+        if (gtSdk.preProcess() == 1) {
+            // gt server is in use
+            resStr = gtSdk.getSuccessPreProcessRes();
+            gtSdk.setGtServerStatusSession(request, 1);
+        } else {
+            // gt server is down
+            resStr = gtSdk.getFailPreProcessRes();
+            gtSdk.setGtServerStatusSession(request, 0);
+        }
+        PrintWriter out = response.getWriter();
+        out.println(resStr);
+
+    }
+
+
+    @RequestMapping(value = "/auth_user")
+    public String AuthUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // get session to share the object
+        GeetestLib geetest = GeetestLib.getGtSession(request);
+        int gt_server_status_code = GeetestLib
+                .getGtServerStatusSession(request);
+        String gtResult = "fail";
+        if (gt_server_status_code == 1) {
+            gtResult = geetest.enhencedValidateRequest(request);
+
+        } else {
+            /*System.out.println("failback:use your own server captcha validate");*/
+            gtResult = "fail";
+
+            gtResult = geetest.failbackValidateRequest(request);
+
+
+        }
+
+        if (gtResult.equals(GeetestLib.success_res)) {
+            PrintWriter out = response.getWriter();
+            out.println(GeetestLib.success_res + ":" + geetest.getVersionInfo());
+
+        } else if (gtResult.equals(GeetestLib.forbidden_res)) {
+            PrintWriter out = response.getWriter();
+            out.println(GeetestLib.forbidden_res + ":"
+                    + geetest.getVersionInfo());
+        } else {
+            PrintWriter out = response.getWriter();
+            out.println(GeetestLib.fail_res + ":" + geetest.getVersionInfo());
+        }
+
+        return "redirect:account/to_certification?status=" + gtResult;
+    }
+
+    /**
+     * 验证手机号是否已被认证
+     *
+     * @param auth_tel 验证手机号
+     */
+    @RequestMapping(value = "/ajax_auth_tel")
+    public void ajaxAuthTel(String auth_tel, HttpServletResponse response) throws IOException {
+
+        if (!userService.authTel(auth_tel)) {
+            response.getWriter().write("yes");
+        } else {
+            response.getWriter().write("no");
+        }
+    }
+
+    /**
+     * 获取免费的验证码，存储在session并发送到手机
+     *
+     * @param session  通过session设置验证码、时间和获取上一次发送验证码时间
+     * @param response ajax响应
+     * @param auth_tel 要发送給验证码的手机
+     */
+    @RequestMapping(value = "/get_free_captcha")
+    public void getFreeCaptcha(HttpSession session, HttpServletResponse response , String auth_tel) {
+        Date newDate = new Date();
+        if (null != session.getAttribute("se_free_captcha_date")) {
+            Date oldDate = (Date) session.getAttribute("se_free_captcha_date");
+            if (!userService.dateDifference(oldDate, newDate)) {
+                try {
+                    response.getWriter().write("no");
+                    return;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                session.setAttribute("se_free_captcha_date", newDate);
+                String randomPwd = userService.getRandomPassword();
+                session.setAttribute("se_msg_captcha", randomPwd);
+                System.out.println("======随机验证码为==== " + randomPwd);
+                //发送随机6为数到手机
+                System.out.println("发送验证码: " + randomPwd +"到手机: " + auth_tel);
+            }
+        } else {
+            session.setAttribute("se_free_captcha_date", newDate);
+            String randomPwd = userService.getRandomPassword();
+            session.setAttribute("se_msg_captcha", randomPwd);
+            System.out.println("随机验证码为==== " + randomPwd);
+            //发送随机6为数到手机
+            System.out.println("发送验证码: " + randomPwd +"到手机: " + auth_tel);
+        }
+    }
+
+
 }
