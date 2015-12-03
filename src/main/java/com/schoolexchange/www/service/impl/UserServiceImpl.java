@@ -292,6 +292,44 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 检测手机号是否已被认证
+     *
+     * @param auth_tel 要认证的手机号
+     * @return 已被认证返回true, 否则返回false
+     * @see com.schoolexchange.www.action.AccountController
+     */
+    public boolean authTel(String auth_tel) {
+        boolean flag = false;
+        List<User> users = userDao.getAllUser();
+        if (0 != users.size()) {
+            for (User u : users) {
+                if (u.getUser_tel().equals(auth_tel)) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 最新日期与原始日期差值是否超过1分钟
+     *
+     * @param oldDate 原始日期
+     * @param newDate 最新日期
+     * @return 返回true表示超过，否则不超过
+     * @see  com.schoolexchange.www.action.AccountController
+     */
+    public boolean dateDifference(Date oldDate, Date newDate) {
+        boolean flag = false;
+        long diff = newDate.getTime() - oldDate.getTime();
+        if (diff > 60000){
+            flag = true;
+        }
+        return flag;
+    }
+
+    /**
      * 获取系统当前时间
      *
      * @return 返回系统当前时间
