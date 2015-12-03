@@ -2,9 +2,7 @@ package com.schoolexchange.www.dao.impl;
 
 import com.schoolexchange.www.dao.UserDao;
 import com.schoolexchange.www.entity.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
