@@ -31,7 +31,7 @@
                 <a href="/account/password_set"><span class="glyphicon glyphicon-link"></span>密码设置</a>
             </div>
             <div class="list-group-item list-group-item-success">
-                <a href=""><span class="glyphicon glyphicon-phone"></span>实名认证</a>
+                <a href="/account/to_certification"><span class="glyphicon glyphicon-phone"></span>实名认证</a>
             </div>
         </div>
         <div class="col-md-10 password_setting">
