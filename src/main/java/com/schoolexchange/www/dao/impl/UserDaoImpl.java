@@ -52,12 +52,7 @@ public class UserDaoImpl implements UserDao {
                 .executeUpdate();
     }
 
-    /**
-     * 更新用户信息
-     *
-     * @param user 用户信息
-     * @see com.schoolexchange.www.service.impl.UserServiceImpl
-     */
+
     public void updateUser(User user) {
         String hql = "update User u set u.user_name = ? , u.user_sex = ? " +
                 ", u.user_birth = ? , u.user_university = ? ," +
