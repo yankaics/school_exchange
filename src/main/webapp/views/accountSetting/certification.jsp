@@ -93,14 +93,23 @@
 
                         <div class="alert alert-success" role="alert">请等一分钟后再次发送验证码</div>
                     </div>
-                    <form method="post" action="/auth_user">
+                    <c:if test="${authStatus == 'error'}">
+                        <div id="cpatcha_error">
+                         <span class="glyphicon glyphicon-remove" style="float: right;cursor: pointer"
+                               onclick="closeAlert();"></span>
+
+                            <div class="alert alert-success" role="alert">验证码错误!!!</div>
+                        </div>
+                    </c:if>
+
+                    <form method="post" action="/auth_user" onsubmit="return auth_captcha()">
                         <div class="form-group" style="margin-top: 50px">
                             <label for="se_user_tel"><span id="sp_auth_tel">手机号</span></label>
 
                             <div class="input-group">
                                 <div class="input-group-addon">+86</div>
                                 <input type="text" class="form-control" id="se_user_tel" placeholder="请输入手机号"
-                                       name="se_auth_tel" onblur="checkAuthTel('1')">
+                                       name="se_auth_tel" onblur="checkAuthTel('1')" value="${se_auth_tel}">
                             </div>
                         </div>
                         <div class="form-group" style="margin-top: 20px">

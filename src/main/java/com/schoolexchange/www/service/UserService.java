@@ -163,4 +163,31 @@ public interface UserService {
      * @return
      */
     String sendSms(String tel, String verificatinCode) throws IOException;
+
+    /**
+     * 对字符串加密
+     *
+     * @param password 要加密的字符串
+     * @return 返回hash加密后的字符串
+     */
+    String encrypt_password(String password);
+
+
+    /**
+     * 解密
+     *
+     * @param db_pwd    数据库的密码
+     * @param input_pwd 当前输入的密码
+     * @return 返回密码的比对状态，true表示匹配成功,否则返回false失败
+     */
+    boolean judge_password(String db_pwd, String input_pwd);
+
+    /**
+     * 认证用户
+     *
+     * @param user    用户信息
+     * @param authTel 认证手机号
+     * @see com.schoolexchange.www.action.AccountController
+     */
+    void authUser(User user, String authTel);
 }

@@ -395,8 +395,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 对密码加密
      *
-     * @param password 要加密的密码
-     * @return 返回hash加密后的密码
+     * @param password 要加密的字符串
+     * @return 返回hash加密后的字符串
      */
     public String encrypt_password(String password) {
         String encrypt_password = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -414,5 +414,18 @@ public class UserServiceImpl implements UserService {
     public boolean judge_password(String db_pwd, String input_pwd) {
 
         return BCrypt.checkpw(input_pwd, db_pwd);
+    }
+
+    /**
+     * 认证用户
+     *
+     * @param user    用户信息
+     * @param authTel 认证手机号
+     * @see com.schoolexchange.www.action.AccountController
+     */
+    public void authUser(User user, String authTel) {
+        user.setUser_tel(authTel);
+        user.setUser_authentication(1);
+        userDao.updateUserTel(user);
     }
 }

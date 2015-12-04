@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -176,24 +177,40 @@ public class AccountController {
     /**
      * 跳转到认证页面
      *
-     * @param status 认证状态 success或fail
+     * @param status     滑块状态 success或fail
+     * @param authStatus 验证码状态
      * @return 认证页面
      */
 
     @RequestMapping(value = "/account/to_certification")
-    public String toCertification(HttpSession session, Model model, String status) {
+    public String toCertification(HttpSession session, Model model, String status,
+                                  @RequestParam(value = "flag", required = false) String authStatus) {
         User user = userService.getCurrentUser(session);
         boolean flag = userService.authenticationStatus(user);
         if (flag) {
             model.addAttribute("se_db_auth_status", "1");
             model.addAttribute("user", user);
         } else {
-            if (null == status) {
-                model.addAttribute("se_db_auth_status", "0");
+            //还没认证成功
+            model.addAttribute("se_db_auth_status", "0");
+            //判断是不是直接跳转
+            if (null == status || null == authStatus) {
+                return "accountSetting/certification";
             } else {
-                model.addAttribute("se_db_auth_status", "0");
-                model.addAttribute("status", status);
+                //判断滑块是否验证正确
+                if (userService.judge_password(status, "fail"))
+                    model.addAttribute("status", "fail");
+                //手机验证码
+                if (userService.judge_password(authStatus, "false")) {
+                    model.addAttribute("authStatus", "error");
+                    //验证失败显示失败手机号
+                    if (null != session.getAttribute("se_auth_tel")) {
+                        model.addAttribute("se_auth_tel", session.getAttribute("se_auth_tel").toString());
+                    }
+
+                }
             }
+
         }
         return "accountSetting/certification";
     }
@@ -228,7 +245,13 @@ public class AccountController {
 
 
     @RequestMapping(value = "/auth_user")
-    public String AuthUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String AuthUser(HttpServletRequest request, HttpServletResponse response, @RequestParam("se_auth_tel") String authTel,
+                           @RequestParam("se_msg_captcha") String inputCaptcha, HttpSession session) throws IOException {
+        //判断手机验证码匹配是否成功
+        boolean flag = false;
+        if (inputCaptcha.equals(session.getAttribute("se_msg_captcha")) && authTel.equals(session.getAttribute("se_auth_tel"))) {
+            flag = true;
+        }
         // get session to share the object
         GeetestLib geetest = GeetestLib.getGtSession(request);
         int gt_server_status_code = GeetestLib
@@ -239,14 +262,13 @@ public class AccountController {
 
         } else {
             /*System.out.println("failback:use your own server captcha validate");*/
-            gtResult = "fail";
+           /* gtResult = "fail";*/
 
             gtResult = geetest.failbackValidateRequest(request);
 
 
         }
-
-        if (gtResult.equals(GeetestLib.success_res)) {
+       /* if (gtResult.equals(GeetestLib.success_res)) {
             PrintWriter out = response.getWriter();
             out.println(GeetestLib.success_res + ":" + geetest.getVersionInfo());
 
@@ -257,9 +279,14 @@ public class AccountController {
         } else {
             PrintWriter out = response.getWriter();
             out.println(GeetestLib.fail_res + ":" + geetest.getVersionInfo());
+        }*/
+        if (gtResult.equals("success") && flag) {
+            //保存手机到数据库
+            User user = userService.getCurrentUser(session);
+            userService.authUser(user, authTel);
         }
-
-        return "redirect:account/to_certification?status=" + gtResult;
+        return "redirect:account/to_certification?status=" + userService.encrypt_password(gtResult) + "&flag="
+                + userService.encrypt_password(Boolean.toString(flag));
     }
 
     /**
@@ -278,14 +305,14 @@ public class AccountController {
     }
 
     /**
-     * 获取免费的验证码，存储在session并发送到手机
+     * 获取免费的验证码，存储在session中并发送到手机
      *
      * @param session  通过session设置验证码、时间和获取上一次发送验证码时间
      * @param response ajax响应
      * @param auth_tel 要发送給验证码的手机
      */
     @RequestMapping(value = "/get_free_captcha")
-    public void getFreeCaptcha(HttpSession session, HttpServletResponse response , String auth_tel) {
+    public void getFreeCaptcha(HttpSession session, HttpServletResponse response, String auth_tel) {
         Date newDate = new Date();
         if (null != session.getAttribute("se_free_captcha_date")) {
             Date oldDate = (Date) session.getAttribute("se_free_captcha_date");
@@ -300,19 +327,55 @@ public class AccountController {
                 session.setAttribute("se_free_captcha_date", newDate);
                 String randomPwd = userService.getRandomPassword();
                 session.setAttribute("se_msg_captcha", randomPwd);
-                System.out.println("======随机验证码为==== " + randomPwd);
+                session.setAttribute("se_auth_tel", auth_tel);
+                //5分钟过期
+                session.setMaxInactiveInterval(60 * 5);
                 //发送随机6为数到手机
-                System.out.println("发送验证码: " + randomPwd +"到手机: " + auth_tel);
+                try {
+                    userService.sendSms(auth_tel , randomPwd);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             session.setAttribute("se_free_captcha_date", newDate);
             String randomPwd = userService.getRandomPassword();
             session.setAttribute("se_msg_captcha", randomPwd);
-            System.out.println("随机验证码为==== " + randomPwd);
+            session.setAttribute("se_auth_tel", auth_tel);
+            //5分钟过期
+            session.setMaxInactiveInterval(60 * 5);
             //发送随机6为数到手机
-            System.out.println("发送验证码: " + randomPwd +"到手机: " + auth_tel);
+            try {
+                userService.sendSms(auth_tel , randomPwd);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    /**
+     * ajax验证验证码
+     *
+     * @param inputCaptcha 输入的验证码
+     * @param authTel      验证的手机号
+     * @param session      session
+     * @param response     response
+     * @throws IOException
+     */
+   /* @RequestMapping(value = "/auth_input_captcha")
+    public void authInputTel(String inputCaptcha, String authTel, HttpSession session, HttpServletResponse response) throws IOException {
+        System.out.println("session手机号=== " + session.getAttribute("se_auth_tel"));
+        System.out.println("session的验证码=== " + session.getAttribute("se_msg_captcha"));
+        if (null == session.getAttribute("se_msg_captcha") || null == session.getAttribute("se_auth_tel")) {
+            response.getWriter().write("error");
+            return;
+        }
+        if (inputCaptcha.equals(session.getAttribute("se_msg_captcha")) && authTel.equals(session.getAttribute("se_auth_tel"))) {
+            response.getWriter().write("success");
+        } else {
+            response.getWriter().write("error");
+        }
+    }*/
 
 
 }

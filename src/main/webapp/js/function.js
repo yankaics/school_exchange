@@ -578,6 +578,8 @@ function closeAlert() {
     $("#captcha_fail").hide();
     //频繁发送手机验证码
     $("#often_check").hide();
+    //验证码失败
+    $("#cpatcha_error").hide();
 }
 
 /*
@@ -728,7 +730,7 @@ function hide_update_info_close() {
 var wait = 60;
 
 document.getElementById("get_captcha").onclick = function () {
-    if(checkAuthTel('2')){
+    if (checkAuthTel('2')) {
         //ajax执行免费获取手机验证码
         $.ajax({
             url: "/get_free_captcha",
@@ -741,7 +743,7 @@ document.getElementById("get_captcha").onclick = function () {
                 }
             }
         });
-    }else{
+    } else {
         return false;
     }
     time(this);
@@ -810,15 +812,31 @@ function checkAuthTel(status) {
 /**
  * 验证判空
  */
-function msgCaptcha(){
+function msgCaptcha() {
     var msg_captcha = document.getElementById("tel_captcha").value;
     var sp_msg_captcha = document.getElementById("sp_msg_captcha");
-    if(msg_captcha == "" || msg_captcha.length == 0){
+    if (msg_captcha == "" || msg_captcha.length == 0) {
         sp_msg_captcha.innerHTML = "<span style='color: red'>验证码不能为空</span>";
         return false;
-    }else{
+    } else {
         sp_msg_captcha.innerText = "验证码";
         return true;
     }
+}
+
+/**
+ * onsubmit提交验证
+ *
+ */
+function auth_captcha() {
+    $("#cpatcha_error").hide();
+    var mc = msgCaptcha();
+    var ca = checkAuthTel('2');
+    var flag = false;
+    var status = 0;
+    if (mc && ca) {
+       flag = true;
+    }
+    return flag;
 }
 

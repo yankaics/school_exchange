@@ -38,4 +38,12 @@ public interface UserDao {
      * @see com.schoolexchange.www.service.impl.UserServiceImpl
      */
     void updateUser(User user);
+
+    /**
+     * 更新用户手机号
+     *
+     * @param user 用户信息
+     * @see com.schoolexchange.www.service.UserService
+     */
+    void updateUserTel(User user);
 }
