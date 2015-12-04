@@ -371,7 +371,7 @@ public class UserServiceImpl implements UserService {
      */
     public String sendSms(String tel, String verificatinCode) throws IOException {
         HttpClient client = new HttpClient();
-        String content = "您本次操作的验证码为:" + verificatinCode + ",请勿透露给他人";
+        String content = "您本次操作的验证码为:" + verificatinCode + ",请勿透露给他人(验证码有效时间为20分钟)";
         PostMethod post = new PostMethod("http://utf8.sms.webchinese.cn");
         post.addRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf8");//在头文件中设置转码
         NameValuePair[] data = {new NameValuePair("Uid", "zjd0418"), new NameValuePair("Key", "53ae2199b371b1390c5c"), new NameValuePair("smsMob", tel), new NameValuePair("smsText", content)};
