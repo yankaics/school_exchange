@@ -243,9 +243,17 @@ public class AccountController {
 
     }
 
-
+    /**
+     * 表单提交验证验证码、滑块、手机号是否匹配
+     *
+     * @param request      request
+     * @param authTel      验证的手机
+     * @param inputCaptcha 输入的验证码
+     * @param session      session
+     * @return
+     */
     @RequestMapping(value = "/auth_user")
-    public String AuthUser(HttpServletRequest request, HttpServletResponse response, @RequestParam("se_auth_tel") String authTel,
+    public String AuthUser(HttpServletRequest request, @RequestParam("se_auth_tel") String authTel,
                            @RequestParam("se_msg_captcha") String inputCaptcha, HttpSession session) throws IOException {
         //判断手机验证码匹配是否成功
         boolean flag = false;
@@ -331,11 +339,12 @@ public class AccountController {
                 //5分钟过期
                 session.setMaxInactiveInterval(60 * 5);
                 //发送随机6为数到手机
-                try {
+                System.out.println("发送验证码: " + randomPwd + "到手机: " + auth_tel);
+               /* try {
                     userService.sendSms(auth_tel , randomPwd);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         } else {
             session.setAttribute("se_free_captcha_date", newDate);
@@ -345,11 +354,12 @@ public class AccountController {
             //5分钟过期
             session.setMaxInactiveInterval(60 * 5);
             //发送随机6为数到手机
-            try {
+            System.out.println("发送验证码: " + randomPwd + "到手机: " + auth_tel);
+           /* try {
                 userService.sendSms(auth_tel , randomPwd);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
