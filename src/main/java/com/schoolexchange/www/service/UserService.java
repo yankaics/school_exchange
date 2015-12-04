@@ -3,6 +3,7 @@ package com.schoolexchange.www.service;
 import com.schoolexchange.www.entity.User;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -153,4 +154,13 @@ public interface UserService {
      * @return 返回6位数字密码
      */
     String getRandomPassword();
+
+    /**
+     * 发送手机验证码
+     *
+     * @param tel             接受验证码的手机号
+     * @param verificatinCode 验证码
+     * @return
+     */
+    String sendSms(String tel, String verificatinCode) throws IOException;
 }

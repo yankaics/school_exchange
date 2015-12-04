@@ -6,10 +6,15 @@ import com.schoolexchange.www.service.UserService;
 import com.schoolexchange.www.tools.BCrypt;
 import com.schoolexchange.www.tools.MailSenderInfo;
 import com.schoolexchange.www.tools.SimpleMailSender;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -318,12 +323,12 @@ public class UserServiceImpl implements UserService {
      * @param oldDate 原始日期
      * @param newDate 最新日期
      * @return 返回true表示超过，否则不超过
-     * @see  com.schoolexchange.www.action.AccountController
+     * @see com.schoolexchange.www.action.AccountController
      */
     public boolean dateDifference(Date oldDate, Date newDate) {
         boolean flag = false;
         long diff = newDate.getTime() - oldDate.getTime();
-        if (diff > 60000){
+        if (diff > 60000) {
             flag = true;
         }
         return flag;
@@ -355,6 +360,36 @@ public class UserServiceImpl implements UserService {
 
         return random_pwd.toString();
 
+    }
+
+    /**
+     * 发送手机验证码
+     *
+     * @param tel             接受验证码的手机号
+     * @param verificatinCode 验证码
+     * @return
+     */
+    public String sendSms(String tel, String verificatinCode) throws IOException {
+        HttpClient client = new HttpClient();
+        String content = "您本次操作的验证码为:" + verificatinCode + ",请勿透露给他人";
+        PostMethod post = new PostMethod("http://utf8.sms.webchinese.cn");
+        post.addRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf8");//在头文件中设置转码
+        NameValuePair[] data = {new NameValuePair("Uid", "zjd0418"), new NameValuePair("Key", "53ae2199b371b1390c5c"), new NameValuePair("smsMob", tel), new NameValuePair("smsText", content)};
+        post.setRequestBody(data);
+
+        client.executeMethod(post);
+        Header[] headers = post.getResponseHeaders();
+        int statusCode = post.getStatusCode();
+        System.out.println("statusCode:" + statusCode);
+        for (Header h : headers) {
+            System.out.println(h.toString());
+        }
+        String result = new String(post.getResponseBodyAsString().getBytes("utf8"));
+        System.out.println(result); //打印返回消息状态
+
+        post.releaseConnection();
+
+        return result;
     }
 
     /**
