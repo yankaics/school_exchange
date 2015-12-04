@@ -833,7 +833,6 @@ function auth_captcha() {
     var mc = msgCaptcha();
     var ca = checkAuthTel('2');
     var flag = false;
-    var status = 0;
     if (mc && ca) {
        flag = true;
     }
