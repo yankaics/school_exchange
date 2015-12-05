@@ -42,4 +42,23 @@
         <property name="maxInMemorySize" value="4096"/>
     </bean>
 
+    <bean id="requestUrlSecurity" class="com.schoolexchange.www.service.impl.RequestUrlSecurityImpl">
+        <constructor-arg>
+            <!--密钥:shadow-->
+            <value>shadow</value>
+        </constructor-arg>
+    </bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- <mvc:mapping path="/"/>-->
+            <mvc:mapping path="/update_user_info"/>
+            <mvc:mapping path="pwd_setting"/>
+            <mvc:mapping path="auth_user"/>
+            <mvc:mapping path="/account/**"/>
+            <bean class="com.schoolexchange.www.interceptor.CommonInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>
