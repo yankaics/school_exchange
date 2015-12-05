@@ -580,6 +580,8 @@ function closeAlert() {
     $("#often_check").hide();
     //验证码失败
     $("#cpatcha_error").hide();
+    //手机号已被注册提醒
+    $("#tel_beused").hide();
 }
 
 /*

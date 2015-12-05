@@ -185,6 +185,7 @@ public class AccountController {
     @RequestMapping(value = "/account/to_certification")
     public String toCertification(HttpSession session, Model model, String status,
                                   @RequestParam(value = "flag", required = false) String authStatus) {
+
         User user = userService.getCurrentUser(session);
         boolean flag = userService.authenticationStatus(user);
         if (flag) {
@@ -200,15 +201,35 @@ public class AccountController {
                 //判断滑块是否验证正确
                 if (userService.judge_password(status, "fail"))
                     model.addAttribute("status", "fail");
-                //手机验证码
-                if (userService.judge_password(authStatus, "false")) {
+                //手机验证码及手机号是否被注册状态
+                if (userService.judge_password(authStatus, "false$true")) {
                     model.addAttribute("authStatus", "error");
                     //验证失败显示失败手机号
                     if (null != session.getAttribute("se_auth_tel")) {
                         model.addAttribute("se_auth_tel", session.getAttribute("se_auth_tel").toString());
                     }
-
+                    model.addAttribute("beUsed", "true");
                 }
+                if (userService.judge_password(authStatus, "false$false")) {
+                    model.addAttribute("authStatus", "error");
+                    //验证失败显示失败手机号
+                    if (null != session.getAttribute("se_auth_tel")) {
+                        model.addAttribute("se_auth_tel", session.getAttribute("se_auth_tel").toString());
+                    }
+                }
+                if (userService.judge_password(authStatus, "true$true")) {
+                    //验证失败显示失败手机号
+                    if (null != session.getAttribute("se_auth_tel")) {
+                        model.addAttribute("se_auth_tel", session.getAttribute("se_auth_tel").toString());
+                    }
+                    model.addAttribute("beUsed", "true");
+                }
+                //判断手机号是否已被注册
+               /* if (null != aa){
+                    if (aa.equals("true")) {
+                        model.addAttribute("beUsed", "true");
+                    }
+                }*/
             }
 
         }
@@ -288,13 +309,15 @@ public class AccountController {
             PrintWriter out = response.getWriter();
             out.println(GeetestLib.fail_res + ":" + geetest.getVersionInfo());
         }*/
-        if (gtResult.equals("success") && flag) {
+        boolean beUsed = userService.authTel(authTel);
+        if (gtResult.equals("success") && flag && !beUsed) {
             //保存手机到数据库
             User user = userService.getCurrentUser(session);
             userService.authUser(user, authTel);
         }
+        String flag_url = userService.encrypt_password(Boolean.toString(flag) + "$" + Boolean.toString(beUsed));
         return "redirect:account/to_certification?status=" + userService.encrypt_password(gtResult) + "&flag="
-                + userService.encrypt_password(Boolean.toString(flag));
+                + flag_url;
     }
 
     /**

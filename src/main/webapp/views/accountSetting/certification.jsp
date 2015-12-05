@@ -101,7 +101,14 @@
                             <div class="alert alert-success" role="alert">验证码错误!!!</div>
                         </div>
                     </c:if>
+                    <c:if test="${beUsed == 'true'}">
+                        <div id="tel_beused">
+                         <span class="glyphicon glyphicon-remove" style="float: right;cursor: pointer"
+                               onclick="closeAlert();"></span>
 
+                            <div class="alert alert-success" role="alert">你是不是啥,已经提醒你手机号已被注册,你还注册!</div>
+                        </div>
+                    </c:if>
                     <form method="post" action="/auth_user" onsubmit="return auth_captcha()">
                         <div class="form-group" style="margin-top: 50px">
                             <label for="se_user_tel"><span id="sp_auth_tel">手机号</span></label>
