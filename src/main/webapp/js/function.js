@@ -16,13 +16,25 @@ function checkLogin() {
                 user_password: user_password
             },
             function (data) {
-                if (data == "yes") {
-                    location.href = "/";
-                } else {
+                var obj = eval(data);
+                if ("yes" == obj.result) {
+                    if (null == obj.url) {
+                        location.href = "/";
+                    }else{
+                        location.href = obj.url;
+                    }
+                }else{
                     $('#login_fail').show().delay(2000).fadeOut();
                     return false;
                 }
-            }
+                /*if (data == "yes") {
+                 location.href = "/";
+                 } else {
+                 $('#login_fail').show().delay(2000).fadeOut();
+                 return false;
+                 }*/
+            },
+            "json"
         );
 
     }
@@ -836,7 +848,7 @@ function auth_captcha() {
     var ca = checkAuthTel('2');
     var flag = false;
     if (mc && ca) {
-       flag = true;
+        flag = true;
     }
     return flag;
 }

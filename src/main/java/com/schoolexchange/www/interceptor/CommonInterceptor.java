@@ -20,13 +20,10 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String test = "/account";
-        System.out.println("加密前的字符：" + test);
-        System.out.println("加密后的字符：" + requestUrlSecurity.encrypt(test));
-        System.out.println("解密后的字符：" + requestUrlSecurity.decrypt(requestUrlSecurity.encrypt(test)));
+        String requestUrl = request.getRequestURI();
         HttpSession session = request.getSession();
         if (null == session.getAttribute("sx_user_name")) {
-            response.sendRedirect("/to_login?requestUrl=" + request.getRequestURI());
+            response.sendRedirect("/to_login?requestUrl=" + requestUrlSecurity.encrypt(requestUrl));
             return false;
         }
         return true;
