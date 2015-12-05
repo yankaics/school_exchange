@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,8 +26,10 @@ public class LoginController {
      * 跳转到登录界面
      */
     @RequestMapping(value = "to_login")
-    public String login() {
-
+    public String login(@RequestParam(value = "requestUrl", required = false) String requestUrl) {
+        if (null != requestUrl){
+            System.out.println("请求的路径" + requestUrl);
+        }
         return "login";
     }
 
