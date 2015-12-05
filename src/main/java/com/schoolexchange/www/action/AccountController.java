@@ -178,7 +178,7 @@ public class AccountController {
      * 跳转到认证页面
      *
      * @param status     滑块状态 success或fail
-     * @param authStatus 验证码状态
+     * @param authStatus 验证码状态及手机是否已被被注册
      * @return 认证页面
      */
 
