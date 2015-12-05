@@ -101,7 +101,6 @@ public class LoginController {
                         response.addCookie(cookie);
                         map.put("url", requestUrl);
                         response.getWriter().write(gson.toJson(map));
-                        System.out.println("跳转requestUrl=====" + requestUrl);
                         return;
                     }
                 }
