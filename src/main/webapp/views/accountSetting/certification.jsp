@@ -244,6 +244,31 @@
             gtcallback(result)
         }
     })
+
+    /*
+     *重新发送验证码(60秒)
+     */
+    var wait = 60;
+
+    document.getElementById("get_captcha").onclick = function () {
+        if (checkAuthTel('2')) {
+            //ajax执行免费获取手机验证码
+            $.ajax({
+                url: "/get_free_captcha",
+                type: "get",
+                data: {auth_tel: document.getElementById("se_user_tel").value},
+                dataType: "text",
+                success: function (data) {
+                    if (data == "no") {
+                        $("#often_check").show();
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+        time(this);
+    }
 </script>
 </body>
 </html>
