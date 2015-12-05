@@ -46,7 +46,7 @@ public interface UserService {
     /**
      * 登录验证
      *
-     * @param user_name     用户名
+     * @param user_name     用户名或email或手机号
      * @param user_password 用户密码
      * @return 用户名和密码正确返回true，否则返回false
      * @see com.schoolexchange.www.action.LoginController
@@ -56,7 +56,7 @@ public interface UserService {
     /**
      * 根据用户名或密码得到所属大学
      *
-     * @param userNameOrEmail 用户名或密码
+     * @param userNameOrEmail 用户名或email或手机号
      * @return 返回用户所属的大学，找不到则返回null
      * @see com.schoolexchange.www.action.UserController
      */

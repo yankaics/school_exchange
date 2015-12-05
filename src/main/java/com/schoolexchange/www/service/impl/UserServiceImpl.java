@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 登录验证
      *
-     * @param user_name     用户名
+     * @param user_name     用户名或email或手机号
      * @param user_password 用户密码
      * @return 用户名和密码正确返回true，否则返回false
      * @see com.schoolexchange.www.action.LoginController
@@ -113,7 +113,8 @@ public class UserServiceImpl implements UserService {
         users = userDao.getAllUser();
         if (users.size() > 0) {
             for (User user : users) {
-                if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name))
+                if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name)
+                        || user.getUser_tel().equals(user_name))
                         && judge_password(user.getUser_password(), user_password))
                     return true;
             }
@@ -124,8 +125,8 @@ public class UserServiceImpl implements UserService {
     /**
      * 根据用户名或密码得到所属大学
      *
-     * @param userNameOrEmail 用户名或密码
-     * @return 返回用户所属的大学，找不到则返回null
+     * @param userNameOrEmail 用户名或email或手机号
+     * @return 返回用户所属的大学和用户名，找不到则返回null
      * @see com.schoolexchange.www.action.UserController
      */
     public String getUniversityByUserNameOrEmail(String userNameOrEmail) {
@@ -133,7 +134,8 @@ public class UserServiceImpl implements UserService {
         users = userDao.getAllUser();
         if (users.size() > 0) {
             for (User user : users) {
-                if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)))
+                if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)
+                                                                 || user.getUser_tel().equals(userNameOrEmail)))
                     return user.getUser_university() + "$" + user.getUser_name();
             }
         }
