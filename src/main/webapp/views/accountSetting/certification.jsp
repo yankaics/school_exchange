@@ -160,7 +160,7 @@
 <script src="../../js/bootstrap.js"></script>
 <script src="../../js/function.js"></script>
 <script>
-
+    <c:if test="${se_db_auth_status == 0}">
     /**
      * 弹出框文字支持html
      * */
@@ -269,6 +269,8 @@
         }
         time(this);
     }
+    </c:if>
+
 </script>
 </body>
 </html>
