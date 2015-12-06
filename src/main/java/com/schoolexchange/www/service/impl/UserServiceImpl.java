@@ -160,8 +160,8 @@ public class UserServiceImpl implements UserService {
      * @return 返回重置后的密码(6位数字)
      * @see com.schoolexchange.www.action.UserController
      */
-    public String resetPassword(String email) {
-        String new_pwd = getRandomPassword();
+    public String resetPassword(String email, String new_pwd) {
+       /* String new_pwd = getRandomPassword();*/
         List<User> users = new ArrayList<User>();
         users = userDao.getAllUser();
         if (users.size() > 0) {

@@ -35,7 +35,7 @@ public class LoginController {
      */
     @RequestMapping(value = "to_login")
     public String login(@RequestParam(value = "requestUrl", required = false) String requestUrl,
-                        HttpServletResponse response, String activate_status, Model model) {
+                        HttpServletResponse response, String activate_status, Model model, String reset_pwd_status) {
         String decryptUrl = null;
         if (null != requestUrl) {
             try {
@@ -54,6 +54,9 @@ public class LoginController {
             model.addAttribute("activate_status", activate_status);
         }
 
+        if (null != reset_pwd_status){
+            model.addAttribute("reset_pwd_status",reset_pwd_status);
+        }
         return "login";
     }
 

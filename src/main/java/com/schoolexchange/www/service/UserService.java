@@ -66,10 +66,11 @@ public interface UserService {
      * 重置密码
      *
      * @param email 用户email
-     * @return 返回重置后的密码(6位数字)
+     * @param new_pwd 新密码
+     * @return 返回重置后的密码
      * @see com.schoolexchange.www.action.UserController
      */
-    String resetPassword(String email);
+    String resetPassword(String email, String new_pwd);
 
     /**
      * 发送邮件

@@ -36,6 +36,11 @@
                     没有激活用户
                 </div>
             </c:if>
+            <c:if test="${reset_pwd_status == '1'}">
+                <div class="login_fail" style="display: block;width: 150px">
+                    恭喜,成功修改密码!
+                </div>
+            </c:if>
             <div class="login_fail" id="login_fail">
                 用户登录失败,请检查用户名,密码是否正确
             </div>

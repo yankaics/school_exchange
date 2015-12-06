@@ -20,10 +20,10 @@ function checkLogin() {
                 if ("yes" == obj.result) {
                     if (null == obj.url) {
                         location.href = "/";
-                    }else{
+                    } else {
                         location.href = obj.url;
                     }
-                }else{
+                } else {
                     $('#login_fail').show().delay(2000).fadeOut();
                     return false;
                 }
@@ -79,10 +79,10 @@ function checkRegister() {
     if (checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()) {
         saveUser();
         var remind = judgeEmail(register_email);
-        remind = remind.replace('密码已被重置，','激活连接已');
+        remind = remind.replace('密码已被重置，', '激活连接已');
         document.getElementById("jumpTo").innerHTML = remind;
         $('#register_success').show();
-       /* autoJump(5, '/');*/
+        /* autoJump(5, '/');*/
     }
     return false;
 }
@@ -260,7 +260,7 @@ function forgetPassword() {
                 } else {
                     document.getElementById("fp").innerText = "邮箱";
                     $('#get_password').show().delay(60000).fadeOut("slow");
-                    document.getElementById("get_password").innerHTML = judgeEmail(fp);
+                    document.getElementById("get_password").innerHTML = judgeEmail(fp).replace('密码已被重置，', '重置连接已');
                     document.getElementById("reminding").innerHTML = "<span style='color: white'>找回密码</span>";
                     return false;
                 }
@@ -832,5 +832,71 @@ function auth_captcha() {
         flag = true;
     }
     return flag;
+}
+
+/**
+ * 检测新密码
+ */
+function toResetPwd() {
+    var new_pwd = document.getElementById("to_new_pwd").value;
+    if (null == new_pwd || "" == new_pwd) {
+        document.getElementById("to_span_new_pwd").innerHTML = "<span style='color: red'>新密码不能为空</span>";
+        return false;
+    } else {
+        if (new_pwd.length < 6 || new_pwd.length > 15) {
+            document.getElementById("to_span_new_pwd").innerHTML = "<span style='color: red'>密码长度必须在6-15之间</span>";
+            return false;
+        } else {
+            document.getElementById("to_span_new_pwd").innerText = "新密码";
+        }
+    }
+    return true;
+}
+
+/**
+ * 检测重复密码
+ */
+function toAgainResetPwd() {
+    var to_again_new_pwd = document.getElementById("to_again_new_pwd").value;
+    var new_pwd = document.getElementById("to_new_pwd").value;
+    if (null == to_again_new_pwd || "" == to_again_new_pwd) {
+        document.getElementById("to_span_again_new_pwd").innerHTML = "<span style='color: red'>重复密码不能为空</span>";
+        return false;
+    } else {
+        if (new_pwd != to_again_new_pwd) {
+            document.getElementById("to_span_again_new_pwd").innerHTML = "<span style='color: red'>两次密码不一致</span>";
+            return false;
+        }
+        document.getElementById("to_span_again_new_pwd").innerText = "新密码";
+    }
+
+    return true;
+}
+
+/**
+ * 重置密码
+ */
+function executeResetPwd() {
+    var flag1 = toResetPwd();
+    var flag2 = toAgainResetPwd();
+    var resetEmail = document.getElementById("hide_email").innerHTML;
+    var new_pwd = document.getElementById("to_new_pwd").value;
+    if (flag1 && flag2) {
+        //Ajax重置密码
+        $.ajax({
+            url: "/execute_reset_pwd",
+            type: "post",
+            data: {
+                resetEmail: resetEmail,
+                new_pwd: new_pwd
+            },
+            dataType: "text",
+            success: function (data) {
+                if (data == "yes") {
+                   location.href = "/to_login?reset_pwd_status=1";
+                }
+            }
+        });
+    }
 }
 
