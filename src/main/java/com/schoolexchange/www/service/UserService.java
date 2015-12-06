@@ -74,10 +74,10 @@ public interface UserService {
     /**
      * 发送邮件
      *
-     * @param email          接受信息的email
-     * @param reset_password 发送重置的密码
+     * @param email       接受信息的email
+     * @param mailContent 邮件内容
      */
-    void sendMail(String email, String reset_password);
+    void sendMail(String email, String mailContent);
 
     /**
      * 通过session获取所属大学
@@ -190,4 +190,11 @@ public interface UserService {
      * @see com.schoolexchange.www.action.AccountController
      */
     void authUser(User user, String authTel);
+
+    /**
+     * 激活邮箱
+     *
+     * @param userEmail 邮箱
+     */
+    void activateUser(String userEmail);
 }

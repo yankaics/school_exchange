@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-4">
             <div class="register_success" id="register_success">
-                恭喜，注册成功!! <span id="jumpTo">5</span>秒后自动跳转到校内交易首页
+                <span id="jumpTo"></span>(激活后才能登陆)
             </div>
         </div>
         <div class="col-md-4"></div>

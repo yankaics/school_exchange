@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +26,16 @@
             </div>
         </div>
         <div class="col-md-4">
+            <c:if test="${activate_status == 'yes'}">
+                <div class="login_fail" style="display: block;width: 150px">
+                    恭喜,成功激活用户!
+                </div>
+            </c:if>
+            <c:if test="${activate_status == 'no'}">
+                <div class="login_fail" style="display: block;width: 100px">
+                    没有激活用户
+                </div>
+            </c:if>
             <div class="login_fail" id="login_fail">
                 用户登录失败,请检查用户名,密码是否正确
             </div>

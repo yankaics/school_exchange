@@ -75,10 +75,14 @@ function checkLoginPassword() {
  *判断能否submit
  */
 function checkRegister() {
+    var register_email = document.getElementById("register_email").value;
     if (checkEmail() && checkRegisterName() && checkPassword() && checkPasswordsAgreement()) {
         saveUser();
-        $('#register_success').show().delay(60000).fadeOut("slow");
-        autoJump(5, '/');
+        var remind = judgeEmail(register_email);
+        remind = remind.replace('密码已被重置，','激活连接已');
+        document.getElementById("jumpTo").innerHTML = remind;
+        $('#register_success').show();
+       /* autoJump(5, '/');*/
     }
     return false;
 }
@@ -269,16 +273,16 @@ function forgetPassword() {
  */
 function judgeEmail(fp) {
     if (-1 != fp.lastIndexOf('@qq.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: green' target='_blank'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.qq.com/' style='color: white' target='_blank'>" + fp + "</a>";
     }
     if (-1 != fp.lastIndexOf('@163.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: green' target='_blank'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='http://email.163.com/' style='color: white' target='_blank'>" + fp + "</a>";
     }
     if (-1 != fp.lastIndexOf('@126.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: green' target='_blank'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='http://mail.126.com/' style='color: white' target='_blank'>" + fp + "</a>";
     }
     if (-1 != fp.lastIndexOf('@gmail.com')) {
-        return "密码已被重置，发送至您的邮箱: <a href='https://mail.google.com/' style='color: green'>" + fp + "</a>";
+        return "密码已被重置，发送至您的邮箱: <a href='https://mail.google.com/' style='color: white'>" + fp + "</a>";
     }
     return "密码已被重置，发送至您的邮箱: " + fp;
 }

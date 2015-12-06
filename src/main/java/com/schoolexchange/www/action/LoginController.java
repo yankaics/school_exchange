@@ -35,7 +35,7 @@ public class LoginController {
      */
     @RequestMapping(value = "to_login")
     public String login(@RequestParam(value = "requestUrl", required = false) String requestUrl,
-                        HttpServletResponse response) {
+                        HttpServletResponse response, String activate_status, Model model) {
         String decryptUrl = null;
         if (null != requestUrl) {
             try {
@@ -48,6 +48,10 @@ public class LoginController {
             } catch (Exception e) {
                 System.out.println("url错误无法解密" + decryptUrl);
             }
+        }
+
+        if (null != activate_status){
+            model.addAttribute("activate_status", activate_status);
         }
 
         return "login";

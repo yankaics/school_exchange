@@ -46,4 +46,11 @@ public interface UserDao {
      * @see com.schoolexchange.www.service.UserService
      */
     void updateUserTel(User user);
+
+    /**
+     * 更新用户状态(0或1)
+     *
+     * @param user 用户信息
+     */
+    void updateUserStatus(User user);
 }

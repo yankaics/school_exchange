@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     public void registerUser(String user_email, String user_name, String user_password, String belong_university) throws ParseException {
         User user = new User();
         user.setUser_goods_counts(0);
-        user.setUser_state(0);
+        user.setUser_state(1);
         user.setMessage_count(0);
         try {
             user.setCreate_time(getCurrentTime());
@@ -113,10 +113,16 @@ public class UserServiceImpl implements UserService {
         users = userDao.getAllUser();
         if (users.size() > 0) {
             for (User user : users) {
-                if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name)
-                        || user.getUser_tel().equals(user_name))
-                        && judge_password(user.getUser_password(), user_password))
-                    return true;
+                if (null != user.getUser_tel()){
+                    if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name)
+                            || user.getUser_tel().equals(user_name))
+                            && judge_password(user.getUser_password(), user_password) && 0 == user.getUser_state())
+                        return true;
+                }else {
+                    if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name))
+                            && judge_password(user.getUser_password(), user_password) && 0 == user.getUser_state())
+                        return true;
+                }
             }
         }
         return false;
@@ -134,9 +140,14 @@ public class UserServiceImpl implements UserService {
         users = userDao.getAllUser();
         if (users.size() > 0) {
             for (User user : users) {
-                if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)
-                                                                 || user.getUser_tel().equals(userNameOrEmail)))
-                    return user.getUser_university() + "$" + user.getUser_name();
+                if (null != user.getUser_tel()){
+                    if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)
+                            || user.getUser_tel().equals(userNameOrEmail)))
+                        return user.getUser_university() + "$" + user.getUser_name();
+                }else {
+                    if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)))
+                        return user.getUser_university() + "$" + user.getUser_name();
+                }
             }
         }
         return null;
@@ -168,10 +179,10 @@ public class UserServiceImpl implements UserService {
     /**
      * 发送邮件
      *
-     * @param email          接受信息的email
-     * @param reset_password 发送重置的密码
+     * @param email       接受信息的email
+     * @param mailContent 邮件内容
      */
-    public void sendMail(String email, String reset_password) {
+    public void sendMail(String email, String mailContent) {
         // 设置邮件服务器信息
         MailSenderInfo mailInfo = new MailSenderInfo();
         mailInfo.setMailServerHost("smtp.163.com");
@@ -191,7 +202,7 @@ public class UserServiceImpl implements UserService {
 
         // 邮件内容
         StringBuffer buffer = new StringBuffer();
-        buffer.append("password==：" + reset_password);
+        buffer.append(mailContent);
         mailInfo.setContent(buffer.toString());
 
         // 发送邮件
@@ -429,5 +440,22 @@ public class UserServiceImpl implements UserService {
         user.setUser_tel(authTel);
         user.setUser_authentication(1);
         userDao.updateUserTel(user);
+    }
+
+    /**
+     * 激活邮箱
+     *
+     * @param userEmail 邮箱
+     */
+    public void activateUser(String userEmail) {
+        List<User> users = userDao.getAllUser();
+        if (0 != users.size()){
+            for (User u: users){
+                if (u.getUser_email().equals(userEmail)){
+                    u.setUser_state(0);
+                    userDao.updateUserStatus(u);
+                }
+            }
+        }
     }
 }
