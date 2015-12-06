@@ -319,11 +319,15 @@ public class UserServiceImpl implements UserService {
     public boolean authTel(String auth_tel) {
         boolean flag = false;
         List<User> users = userDao.getAllUser();
-        if (0 != users.size()) {
-            for (User u : users) {
-                if (u.getUser_tel().equals(auth_tel)) {
-                    flag = true;
-                    break;
+        if (null != auth_tel){
+            if (0 != users.size()) {
+                for (User u : users) {
+                    if (null != u.getUser_tel()){
+                        if (u.getUser_tel().equals(auth_tel)) {
+                            flag = true;
+                            break;
+                        }
+                    }
                 }
             }
         }
