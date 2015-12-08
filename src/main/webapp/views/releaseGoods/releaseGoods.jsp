@@ -45,26 +45,26 @@
                 <br/>
 
                 <div class="form-group">
-                    <label for="release_goods_name" class="div_space">
+                    <label for="release_goods_name" class="div_space" id="error_goods_name">
                         商品名(<span class="required_color">*</span>):
                     </label>
 
                     <div class="div_input_width">
                         <input type="text" name="release_goods_name" id="release_goods_name"
-                               class="form-control" value="java核心技术">
+                               class="form-control" value="java核心技术" onblur="checkGoodsName('release_goods_name')">
                     </div>
                 </div>
                 <div class="clear_float"></div>
                 <br/>
 
                 <div class="form-group">
-                    <label for="release_goods_price" class="div_space">
+                    <label for="release_goods_price" class="div_space" id="error_goods_price">
                         价格(<span class="required_color">*</span>):
                     </label>
 
                     <div class="div_space">
                         <input type="text" class="form-control" name="release_goods_price"
-                               id="release_goods_price">
+                               id="release_goods_price" onblur="checkGoodsPrice('release_goods_price')">
                     </div>
                     <span class="unit">元</span>
                 </div>
@@ -72,13 +72,13 @@
                 <br/>
 
                 <div class="form-group">
-                    <label for="release_goods_count" class="div_space">
+                    <label for="release_goods_count" class="div_space" id="error_goods_count">
                         数量(<span class="required_color">*</span>):
                     </label>
 
                     <div class="div_space">
                         <input type="text" name="release_goods_count" id="release_goods_count"
-                               class="form-control">
+                               class="form-control" onblur="checkGoodsCount('release_goods_count')">
                     </div>
                     <span class="unit">个</span>
                 </div>
@@ -86,14 +86,14 @@
                 <br/>
 
                 <div class="form-group">
-                    <label for="release_goods_summary" class="div_space">
+                    <label for="release_goods_summary" class="div_space" id="error_goods_summary">
                         商品简介:
                     </label>
 
                     <div class="div_input_width">
                                 <textarea class="form-control" name="release_goods_summary"
-                                          id="release_goods_summary" rows="4" cols="37">商品简介,50字以内
-
+                                          id="release_goods_summary" rows="4" cols="37"
+                                          onblur="checkGoodsSummary('release_goods_summary',79)">商品简介,50字以内
                             </textarea>
                     </div>
                 </div>
@@ -101,34 +101,40 @@
                 <br/>
 
                 <div class="form-group">
-                    <label for="release_goods_type" class="div_space">
+                    <label for="release_goods_type" class="div_space" id="error_goods_type">
                         标签:
                     </label>
 
                     <div class="div_input_width">
                         <input type="text" class="form-control" name="release_goods_type"
-                               id="release_goods_type">
+                               id="release_goods_type" onblur="checkGoodsType('release_goods_type',10)">
                     </div>
                 </div>
                 <div class="clear_float"></div>
                 <div class="form-group dmt">
-                    <label for="release_goods_pic1" class="div_space">
+                    <label for="release_goods_pic1" class="div_space" id="error_upload">
                         上传图片:
                     </label>
 
                     <div class="display_images">
-                        <a href="" class="file" style="margin-left: 0">第一张
-                            <input type="file" name="release_goods_pic1" id="release_goods_pic1"
-                                   onchange="previewImageGoods(this,'preview1','one','<img id=one>')">
-                        </a>
-                        <a href="javascript:" class="file">第二张
-                            <input type="file" name="release_goods_pic1" id="release_goods_pic2"
-                                   onchange="previewImageGoods(this,'preview2','two','<img id=two>')">
-                        </a>
-                        <a href="javascript:" class="file">第三张
-                            <input type="file" name="release_goods_pic1" id="release_goods_pic3"
-                                   onchange="previewImageGoods(this,'preview3','three','<img id=three>')">
-                        </a>
+                        <span id="firstPic">
+                            <a href="javascript:" class="file" style="margin-left: 0">第一张
+                                <input type="file" name="release_goods_pic1" id="release_goods_pic1"
+                                       onchange="previewImageGoods(this,'preview1','one','<img id=one>')">
+                            </a>
+                        </span>
+                        <span id="secondPic">
+                            <a href="javascript:" class="file">第二张
+                                <input type="file" name="release_goods_pic1" id="release_goods_pic2"
+                                       onchange="previewImageGoods(this,'preview2','two','<img id=two>')">
+                            </a>
+                        </span>
+                        <span id="thirdPic">
+                            <a href="javascript:" class="file">第三张
+                                <input type="file" name="release_goods_pic1" id="release_goods_pic3"
+                                       onchange="previewImageGoods(this,'preview3','three','<img id=three>')">
+                            </a>
+                        </span>
                     </div>
                 </div>
                 <div class="clear_float"></div>
@@ -160,7 +166,7 @@
                 </div>
                 <div class="clear_float"></div>
                 <div class="form-group dmt">
-                    <label for="goods_address" class="div_space">
+                    <label for="goods_address" class="div_space" id="error_goods_address">
                         地址(<span class="required_color">*</span>):
                     </label>
 
@@ -209,7 +215,7 @@
 <script src="../../editor/TQEditor.js?skin=yellow"></script>
 <script src="../../js/bootstrap.js"></script>
 <script src="../../js/function.js"></script>
-<script src="../../js/js_release_goods.js"></script>
+<script src="../../js/js_goods.js"></script>
 <script src="../../js/jquery.cxcalendar.min.js"></script>
 <script>
     //HTML在线编辑器
