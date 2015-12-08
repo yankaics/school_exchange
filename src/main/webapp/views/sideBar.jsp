@@ -2,7 +2,7 @@
 <div id="sidebar">
     <div id="wrap">
         <div id="release_goods" class="item" onmouseover="deepen_div('#release_goods');"
-             onmouseout="noDeepen_div('#release_goods');">
+             onmouseout="noDeepen_div('#release_goods');" onclick="redirectReleaseGoods()">
                 <span>
                     <i class="glyphicon glyphicon-send"></i>
                 </span>

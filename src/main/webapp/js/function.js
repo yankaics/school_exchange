@@ -349,6 +349,11 @@ function close_release_buy_goods() {
 var chooseStatus = 0;
 function getSideNumber() {
     chooseStatus = document.getElementById("sp").textContent;
+    if (1 == chooseStatus) {
+        $("#release_goods").css({
+            background: "gray"
+        });
+    }
     if (8 == chooseStatus) {
         $("#account_set").css({
             background: "gray"
@@ -898,5 +903,10 @@ function executeResetPwd() {
             }
         });
     }
+}
+
+/*侧边栏点击事件*/
+function redirectReleaseGoods(){
+    location.href = "/to_release_goods";
 }
 
