@@ -59,6 +59,7 @@ function checkUploadPic() {
         if (one.type != 'image/jpeg' && one.type != 'image/png') {
             clearPreviewPic(1);
             document.getElementById("error_upload").innerHTML = "<span style='color: red'>只能上传jpg和png图片</span>";
+            //清空input type='file'
             document.getElementById("firstPic").innerHTML =
                 '<a href="javascript:" class="file" style="margin-left: 0">第一张' +
                 '<input type="file" name="release_goods_pic1" id="release_goods_pic1" onchange="previewImageGoods(this,\'preview1\',\'one\',\'<img id=one>\')" </a>';
@@ -127,18 +128,18 @@ function checkUploadPic() {
 /**
  * 清空预览的图片
  */
-function clearPreviewPic(number){
-    if(1 == number){
+function clearPreviewPic(number) {
+    if (1 == number) {
         document.getElementById("preview1").innerHTML =
-            '<img id="one" src="../../images/nopic.jpg" class="img-rounded image_width_height">';
+            '<img id="one" src="../../images/school_exchange_no_upload_pic.jpg" class="img-rounded image_width_height">';
     }
-    if(2 == number){
+    if (2 == number) {
         document.getElementById("preview2").innerHTML =
-            '<img id="two" src="../../images/nopic.jpg" class="img-rounded image_width_height">';
+            '<img id="two" src="../../images/school_exchange_no_upload_pic.jpg" class="img-rounded image_width_height">';
     }
-    if(3 == number){
+    if (3 == number) {
         document.getElementById("preview3").innerHTML =
-            '<img id="three" src="../../images/nopic.jpg" class="img-rounded image_width_height">';
+            '<img id="three" src="../../images/school_exchange_no_upload_pic.jpg" class="img-rounded image_width_height">';
     }
 }
 /*商品名、价格、数量、地址判空*/
@@ -273,3 +274,66 @@ function checkGoodsType(id, limit_num) {
         return true;
     }
 }
+
+/*鼠标移上显示删除按钮*/
+function show_delete_button(id, img_id) {
+    var img_path = $(img_id)[0].src;
+    var flag = img_path.indexOf('school_exchange_no_upload_pic.jpg');
+    if (-1 == flag) {
+        if (img_id == '#one') {
+            $('#preview1').prepend(
+                '<div id="delete_pic"> <button class="btn btn-danger btn-sm" onclick="return deleteImage(\'#one\')" onmouseover="show_delete_button(\'#delete_pic\',\'#one\')">删除</button></div>'
+            );
+        }
+        if (img_id == '#two') {
+            $('#preview2').prepend(
+                '<div id="delete_pic"> <button class="btn btn-danger btn-sm" onclick="return deleteImage(\'#two\')" onmouseover="show_delete_button(\'#delete_pic\',\'#two\')">删除</button></div>'
+            );
+        }
+        if (img_id == '#three') {
+            $('#preview3').prepend(
+                '<div id="delete_pic"> <button class="btn btn-danger btn-sm" onclick="return deleteImage(\'#three\')" onmouseover="show_delete_button(\'#delete_pic\',\'#three\')">删除</button></div>'
+            );
+        }
+    }
+    $(id).show();
+}
+
+/*鼠标离开隐藏删除按钮*/
+function hide_delete_button(id) {
+    $(id).hide();
+}
+
+/*删除上传的图片*/
+function deleteImage(img_id) {
+    var img_path = $(img_id)[0].src;
+    console.log("图片全路径=== " + img_path);
+    var flag = img_path.indexOf('school_exchange_no_upload_pic.jpg');
+    if (-1 == flag) {
+        if (img_id == '#one') {
+            clearPreviewPic(1);
+            document.getElementById("firstPic").innerHTML =
+                '<a href="javascript:" class="file" style="margin-left: 0">第一张' +
+                '<input type="file" name="release_goods_pic1" id="release_goods_pic1" onchange="previewImageGoods(this,\'preview1\',\'one\',\'<img id=one>\')" </a>';
+        }
+        if (img_id == '#two') {
+            clearPreviewPic(2);
+            document.getElementById("secondPic").innerHTML =
+                '<a href="javascript:" class="file" style="margin-left: 0">第二张' +
+                '<input type="file" name="release_goods_pic1" id="release_goods_pic2" onchange="previewImageGoods(this,\'preview2\',\'two\',\'<img id=two>\')" </a>';
+        }
+        if (img_id == '#three') {
+            clearPreviewPic(3);
+            document.getElementById("thirdPic").innerHTML =
+                '<a href="javascript:" class="file" style="margin-left: 0">第三张' +
+                '<input type="file" name="release_goods_pic1" id="release_goods_pic2" onchange="previewImageGoods(this,\'preview3\',\'three\',\'<img id=three>\')" </a>';
+        }
+    }
+}
+
+//日期加减
+function DateAdd(number, date) {
+    date.setMonth(date.getMonth() + number);
+    return date;
+}
+

@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <form method="post">
+            <form method="post" onsubmit="return false">
                 <div class="form-group">
                     <label for="release_university" class="div_space">
                         学校:
@@ -143,14 +143,20 @@
                         预览:
                     </label>
 
-                    <div id="preview1" class="display_images">
-                        <img id="one" src="../../images/nopic.jpg" class="img-rounded image_width_height">
+                    <div id="preview1" class="display_images" onmouseover="show_delete_button('#delete_pic','#one')"
+                         onmouseout="hide_delete_button('#delete_pic','#one')">
+                        <img id="one" src="../../images/school_exchange_no_upload_pic.jpg"
+                             class="img-rounded image_width_height">
                     </div>
-                    <div id="preview2" class="display_images">
-                        <img id="two" src="../../images/nopic.jpg" class="img-rounded image_width_height">
+                    <div id="preview2" class="display_images" onmouseover="show_delete_button('#delete_pic','#two')"
+                         onmouseout="hide_delete_button('#delete_pic','#two')">
+                        <img id="two" src="../../images/school_exchange_no_upload_pic.jpg"
+                             class="img-rounded image_width_height">
                     </div>
-                    <div id="preview3" class="display_images">
-                        <img id="three" src="../../images/nopic.jpg" class="img-rounded image_width_height">
+                    <div id="preview3" class="display_images" onmouseover="show_delete_button('#delete_pic','#three')"
+                         onmouseout="hide_delete_button('#delete_pic','#two')">
+                        <img id="three" src="../../images/school_exchange_no_upload_pic.jpg"
+                             class="img-rounded image_width_height">
                     </div>
                 </div>
                 <div class="clear_float"></div>
@@ -161,7 +167,7 @@
 
                     <div class="display_images">
                         <input type="text" class="form-control" id="goods_deadline" name="goods_deadline"
-                               readonly style="background: #fff" value="2016-01-01">
+                               readonly style="background: #fff">
                     </div>
                 </div>
                 <div class="clear_float"></div>
@@ -221,8 +227,19 @@
     //HTML在线编辑器
     new TQEditor('content', {advToolbarMode: true});
 
-    // 日期选择器
+
+    //日期开始时间
+    var now = new Date();
+    $.cxCalendar.defaults.startDate = now;
+    //日期选择器结束时间
+    var newNow = new Date();
+    var end = DateAdd(6, newNow);
+    var endStr = end.getFullYear() + '-' + end.getMonth() + '-' + end.getDay();
+    $.cxCalendar.defaults.endDate = new Date(endStr);
+    // 初始化日期选择器
     $('#goods_deadline').cxCalendar();
+    //设置默认日期
+    document.getElementById('goods_deadline').value = endStr;
 </script>
 </body>
 </html>

@@ -612,10 +612,12 @@
     text-align: center;
     display: none;
 }
-.resetPwdFailDiv{
+
+.resetPwdFailDiv {
     text-align: center;
 }
-.resetPwdFailDiv  span {
+
+.resetPwdFailDiv span {
     font-weight: bold;
 }
 
@@ -738,4 +740,15 @@
 .release_btn div {
     float: left;
     width: 200px
+}
+
+/*删除图片修饰*/
+#delete_pic {
+    position: absolute;
+    width: 102px;
+    display: none;
+}
+
+#delete_pic button {
+    width: 102px;
 }
