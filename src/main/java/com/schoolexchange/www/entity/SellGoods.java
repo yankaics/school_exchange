@@ -46,6 +46,17 @@ public class SellGoods {
     //商品创建时间
     private Date create_time;
 
+    //联系方式
+    private String contact;
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public Integer getId() {
         return id;
     }
