@@ -337,3 +337,110 @@ function DateAdd(number, date) {
     return date;
 }
 
+/**
+ * 检测地址
+ */
+function checkGoodsAddress(id) {
+    var flag = sentencedEmpty(id);
+    if (!flag) {
+        return false;
+    }
+    var goods_address = document.getElementById(id).value;
+    if (goods_address.length > 30) {
+        document.getElementById('error_goods_address').innerHTML = "<span style='color:red'>地址不能太长</span>";
+        return false;
+    } else {
+        document.getElementById('error_goods_address').innerHTML = '地址(<span class="required_color">*</span>):';
+        return true;
+    }
+}
+
+/**
+ * 检测联系方式
+ */
+function checkContact() {
+    var contact = document.getElementById("goods_contact").value;
+    if (contact.length > 50) {
+        document.getElementById('error_contact').innerHTML = "<span style='color:red'>联系方式不能太长</span>";
+    } else {
+        document.getElementById('error_contact').innerText = "联系方式:";
+    }
+}
+
+/**
+ * 鼠标移上清空商品简短提醒
+ */
+function clearRemind() {
+    document.getElementById("release_goods_summary").innerText = "";
+}
+
+/**
+ * 检测商品详情
+ */
+function checkGoodsInfo() {
+    var content = document.getElementById("goods_content").value;
+    /* console.log("长度=== " + content.length);*/
+    if (content.length > 10000) {
+        document.getElementById("error_goods_info").innerHTML = "<span style='color: red'>商品详情太长</span>";
+        return false;
+    } else {
+        document.getElementById("error_goods_info").innerText = "商品详情:";
+        return true;
+    }
+}
+
+/**
+ *保存发布的商品
+ */
+function saveReleaseGoods() {
+    //商品名
+    var flag1 = checkGoodsName('release_goods_name');
+    //商品价格
+    var flag2 = checkGoodsPrice('release_goods_price');
+    //商品数量
+    var flag3 = checkGoodsCount('release_goods_count');
+    //商品地址
+    var flag4 = checkGoodsAddress('goods_address');
+    if (flag1 && flag2 && flag3 && flag4) {
+        //获取商品的所有的信息
+        var goods_name = document.getElementById("release_goods_name").value;
+        var goods_price = document.getElementById("release_goods_price").value;
+        var goods_count = document.getElementById("release_goods_count").value;
+        var goods_desc = document.getElementById("release_goods_summary").value;
+        var goods_tag = document.getElementById("release_goods_type").value;
+        var imageArr = ['release_goods_pic1', 'release_goods_pic2', 'release_goods_pic3'];
+        var goods_deadline = document.getElementById("goods_deadline").value;
+        var goods_address = document.getElementById("goods_address").value;
+        var goods_contact = document.getElementById("goods_contact").value;
+        var goods_info = document.getElementById("goods_content").value;
+        $.ajaxFileUpload({
+            url: '/to_release_goods/update_goods?goods_info=' + goods_info,
+            secureuri: false,                       //是否启用安全提交,默认为false
+            fileElementId: ['release_goods_pic1'],           //文件选择框的id属性
+            dataType: 'text',                       //服务器返回的格式,可以是json或xml等
+            success: function (data) {        //服务器响应成功时的处理函数
+
+                console.log("返回的数据== " + data);
+                /* data = data.replace("<PRE>", '');  //ajaxFileUpload会对服务器响应回来的text内容加上<pre>text</pre>前后缀
+                 data = data.replace("</PRE>", '');
+                 data = data.replace("<pre>", '');
+                 data = data.replace("</pre>", ''); //本例中设定上传文件完毕后,服务端会返回给前台[0`filepath]
+                 if(data.substring(0, 1) == 0){     //0表示上传成功(后跟上传后的文件路径),1表示失败(后跟失败描述)
+                 $("img[id='uploadImage']").attr("src", data.substring(2));
+                 $('#result').html("图片上传成功<br/>");
+                 }else{
+                 $('#result').html('图片上传失败，请重试！！');
+                 }*/
+                $('#result').html('修改头像成功' + data);
+            },
+            error: function (data, status, e) { //服务器响应失败时的处理函数
+                $('#result').html('图片上传失败，请重试！！');
+            }
+        });
+        return true;
+    } else {
+        console.log("error。。。。。");
+        return false;
+    }
+}
+

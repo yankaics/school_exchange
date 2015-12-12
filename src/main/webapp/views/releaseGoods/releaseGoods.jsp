@@ -51,7 +51,7 @@
 
                     <div class="div_input_width">
                         <input type="text" name="release_goods_name" id="release_goods_name"
-                               class="form-control" value="java核心技术" onblur="checkGoodsName('release_goods_name')">
+                               class="form-control"  onblur="checkGoodsName('release_goods_name')">
                     </div>
                 </div>
                 <div class="clear_float"></div>
@@ -93,7 +93,7 @@
                     <div class="div_input_width">
                                 <textarea class="form-control" name="release_goods_summary"
                                           id="release_goods_summary" rows="4" cols="37"
-                                          onblur="checkGoodsSummary('release_goods_summary',79)">商品简介,50字以内
+                                          onblur="checkGoodsSummary('release_goods_summary',79)" onfocus="clearRemind()">商品简介,50字以内
                             </textarea>
                     </div>
                 </div>
@@ -177,28 +177,28 @@
                     </label>
 
                     <div class="div_input_width">
-                        <input type="text" class="form-control" name="goods_address" id="goods_address">
+                        <input type="text" class="form-control" name="goods_address" id="goods_address" onblur="checkGoodsAddress('goods_address')">
                     </div>
                 </div>
                 <div class="clear_float"></div>
                 <div class="form-group dmt">
-                    <label for="goods_contact" class="div_space">
+                    <label for="goods_contact" class="div_space" id="error_contact">
                         联系方式:
                     </label>
 
                     <div class="display_images">
-                        <input type="text" id="goods_contact" name=goods_contact class="form-control"
-                               value="电话/QQ/微信">
+                        <input type="text" id="goods_contact" name='goods_contact' class="form-control"
+                               placeholder="电话/QQ/微信" onblur="checkContact()">
                     </div>
                 </div>
                 <div class="clear_float"></div>
                 <div class="form-group dmt">
-                    <label for="content" class="div_space">
+                    <label for="goods_content" class="div_space" id="error_goods_info">
                         商品详情:
                     </label>
 
                     <div class="div_space">
-                                <textarea name="content" cols="80" rows="16" id="content">
+                                <textarea name="goods_content" cols="80" rows="16" id="goods_content" onblur="checkGoodsInfo()">
 
                                 </textarea>
                     </div>
@@ -208,7 +208,7 @@
                     <label class="div_input_width"></label>
 
                     <div>
-                        <button class="btn btn-primary form-control">
+                        <button class="btn btn-primary form-control" onclick="saveReleaseGoods()">
                             发布
                         </button>
                     </div>
@@ -220,12 +220,13 @@
 <script src="../../js/jquery-1.11.3.min.js"></script>
 <script src="../../editor/TQEditor.js?skin=yellow"></script>
 <script src="../../js/bootstrap.js"></script>
+<script src="../../js/ajaxfileupload.js"></script>
 <script src="../../js/function.js"></script>
 <script src="../../js/js_goods.js"></script>
 <script src="../../js/jquery.cxcalendar.min.js"></script>
 <script>
     //HTML在线编辑器
-    new TQEditor('content', {advToolbarMode: true});
+    new TQEditor('goods_content', {advToolbarMode: true});
 
 
     //日期开始时间
@@ -234,12 +235,13 @@
     //日期选择器结束时间
     var newNow = new Date();
     var end = DateAdd(6, newNow);
-    var endStr = end.getFullYear() + '-' + end.getMonth() + '-' + end.getDay();
-    $.cxCalendar.defaults.endDate = new Date(endStr);
+   /* var endStr = end.getFullYear() + '-' + end.getMonth() + '-' + end.getDay();
+    console.log("endStr=== " + end.toLocaleDateString());*/
+    $.cxCalendar.defaults.endDate = new Date(end.toLocaleDateString());
     // 初始化日期选择器
     $('#goods_deadline').cxCalendar();
     //设置默认日期
-    document.getElementById('goods_deadline').value = endStr;
+    document.getElementById('goods_deadline').value = end.toLocaleDateString();
 </script>
 </body>
 </html>
