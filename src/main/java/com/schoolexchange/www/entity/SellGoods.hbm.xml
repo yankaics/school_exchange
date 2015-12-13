@@ -25,7 +25,7 @@
                   not-null="false"/>
         <property name="goods_count" column="goods_count" type="java.lang.Integer"
                   not-null="true"/>
-        <property name="goods_info" column="goods_info" type="java.lang.String"
+        <property name="goods_info" column="goods_info" type="text"
                   not-null="false"/>
         <property name="goods_state" column="goods_state" type="java.lang.Integer"
                   not-null="true"/>
