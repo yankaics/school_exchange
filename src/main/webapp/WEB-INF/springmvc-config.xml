@@ -57,6 +57,7 @@
             <mvc:mapping path="pwd_setting"/>
             <mvc:mapping path="auth_user"/>
             <mvc:mapping path="/account/**"/>
+            <mvc:mapping path="/to_release_goods/**"/>
             <bean class="com.schoolexchange.www.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
