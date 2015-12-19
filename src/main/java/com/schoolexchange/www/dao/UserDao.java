@@ -53,4 +53,11 @@ public interface UserDao {
      * @param user 用户信息
      */
     void updateUserStatus(User user);
+
+    /**
+     * 更新用户表的user_goods_counts字段
+     *
+     * @param user 用户信息
+     */
+    void updateUserGoodsCount(User user);
 }

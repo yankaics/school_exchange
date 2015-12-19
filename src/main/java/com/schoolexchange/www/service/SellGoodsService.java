@@ -1,8 +1,13 @@
 package com.schoolexchange.www.service;
 
+import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
+import org.json.JSONException;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 /**
  * Created by Administrator
@@ -33,5 +38,14 @@ public interface SellGoodsService {
      * @return 返回上传图片的名字
      * @see com.schoolexchange.www.action.SellGoodsController
      */
-    String uploadGoodsPic(MultipartFile[] pics);
+    String uploadGoodsPic(MultipartFile[] pics, HttpServletRequest request) throws Exception;
+
+    /**
+     * 修改用户发布商品的数量
+     *
+     * @param user 用户
+     * @param num  修改用户发布商品数量的值
+     * @see com.schoolexchange.www.action.SellGoodsController
+     */
+    void alterGoodsCounts(User user, int num);
 }

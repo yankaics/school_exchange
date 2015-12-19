@@ -116,4 +116,17 @@ public class UserDaoImpl implements UserDao {
                 .executeUpdate();
     }
 
+    /**
+     * 更新用户表的user_goods_counts字段
+     *
+     * @param user 用户信息
+     */
+    public void updateUserGoodsCount(User user) {
+        String hql = "update User u set u.user_goods_counts = ?0 where u.user_email=?1";
+        sessionFactory.openSession().createQuery(hql)
+                .setParameter("0", user.getUser_goods_counts())
+                .setParameter("1", user.getUser_email())
+                .executeUpdate();
+    }
+
 }

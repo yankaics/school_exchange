@@ -362,8 +362,10 @@ function checkContact() {
     var contact = document.getElementById("goods_contact").value;
     if (contact.length > 50) {
         document.getElementById('error_contact').innerHTML = "<span style='color:red'>联系方式不能太长</span>";
+        return false;
     } else {
         document.getElementById('error_contact').innerText = "联系方式:";
+        return true;
     }
 }
 
@@ -401,26 +403,52 @@ function saveReleaseGoods() {
     var flag3 = checkGoodsCount('release_goods_count');
     //商品地址
     var flag4 = checkGoodsAddress('goods_address');
-    if (flag1 && flag2 && flag3 && flag4) {
+    //商品简介
+    var flag5 = checkGoodsSummary('release_goods_summary', 79);
+    //标签
+    var flag6 = checkGoodsType('release_goods_type', 10);
+    //联系方式
+    var flag7 = checkContact();
+    //商品详情
+    var flag8 = checkGoodsInfo();
+    if (flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8) {
         //获取商品的所有的信息
         var goods_name = document.getElementById("release_goods_name").value;
         var goods_price = document.getElementById("release_goods_price").value;
         var goods_count = document.getElementById("release_goods_count").value;
         var goods_desc = document.getElementById("release_goods_summary").value;
         var goods_tag = document.getElementById("release_goods_type").value;
-        var imageArr = ['release_goods_pic1', 'release_goods_pic2', 'release_goods_pic3'];
+       /* var imageArr = ['release_goods_pic1', 'release_goods_pic2', 'release_goods_pic3'];*/
+        var imageArr = ['release_goods_pic1'];
         var goods_deadline = document.getElementById("goods_deadline").value;
         var goods_address = document.getElementById("goods_address").value;
         var goods_contact = document.getElementById("goods_contact").value;
         var goods_info = document.getElementById("goods_content").value;
+        var encode_goods_info = encodeURI(goods_info);
+        //状态,判断是更新还是插入,goods_status=1表示插入，2更新
+        var status = document.getElementById("goods_status").innerText;
         $.ajaxFileUpload({
-            url: '/to_release_goods/update_goods?goods_info=' + goods_info,
+            url: '/to_release_goods/update_goods?status=' + encodeURI(status),
             secureuri: false,                       //是否启用安全提交,默认为false
-            fileElementId: ['release_goods_pic1'],           //文件选择框的id属性
+            fileElementId: imageArr,        //文件选择框的id属性
+            data: {
+                goods_name: goods_name,
+                goods_price: goods_price,
+                goods_count: goods_count,
+                goods_desc: goods_desc,
+                goods_tag: goods_tag,
+                goods_deadline: goods_deadline,
+                goods_address: goods_address,
+                goods_contact: goods_contact,
+                goods_info: encode_goods_info
+            },
             dataType: 'text',                       //服务器返回的格式,可以是json或xml等
             success: function (data) {        //服务器响应成功时的处理函数
 
                 console.log("返回的数据== " + data);
+                if(data == '<pre style="word-wrap: break-word; white-space: pre-wrap;">0</pre>'){
+                    alert("您发布的商品数量已达上限!!!");
+                }
                 /* data = data.replace("<PRE>", '');  //ajaxFileUpload会对服务器响应回来的text内容加上<pre>text</pre>前后缀
                  data = data.replace("</PRE>", '');
                  data = data.replace("<pre>", '');
@@ -431,7 +459,6 @@ function saveReleaseGoods() {
                  }else{
                  $('#result').html('图片上传失败，请重试！！');
                  }*/
-                $('#result').html('修改头像成功' + data);
             },
             error: function (data, status, e) { //服务器响应失败时的处理函数
                 $('#result').html('图片上传失败，请重试！！');

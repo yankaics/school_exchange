@@ -898,7 +898,7 @@ function executeResetPwd() {
             dataType: "text",
             success: function (data) {
                 if (data == "yes") {
-                   location.href = "/to_login?reset_pwd_status=1";
+                    location.href = "/to_login?reset_pwd_status=1";
                 }
             }
         });
@@ -906,7 +906,7 @@ function executeResetPwd() {
 }
 
 /*侧边栏点击事件*/
-function redirectReleaseGoods(){
+function redirectReleaseGoods() {
     location.href = "/to_release_goods";
 }
 
