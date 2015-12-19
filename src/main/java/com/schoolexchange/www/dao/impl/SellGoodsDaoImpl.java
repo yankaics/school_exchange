@@ -1,6 +1,6 @@
 package com.schoolexchange.www.dao.impl;
 
-import com.schoolexchange.www.dao.SellGodsDao;
+import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.entity.SellGoods;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
  * on 2015/12/13
  */
 @Repository
-public class SellGoodsDaoImpl implements SellGodsDao {
+public class SellGoodsDaoImpl implements SellGoodsDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -36,8 +36,10 @@ public class SellGoodsDaoImpl implements SellGodsDao {
      * 保存商品信息
      *
      * @param sellGoods 商品信息
+     * @return 返回商品生成的主键id
      */
-    public void saveSellGoods(SellGoods sellGoods) {
-        sessionFactory.openSession().save(sellGoods);
+    public Integer saveSellGoods(SellGoods sellGoods) {
+
+        return (Integer)sessionFactory.openSession().save(sellGoods);
     }
 }

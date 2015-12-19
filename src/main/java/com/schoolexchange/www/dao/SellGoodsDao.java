@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Administrator
  * on 2015/12/13
  */
-public interface SellGodsDao {
+public interface SellGoodsDao {
 
     /**
      * 查询所有的商品
@@ -21,6 +21,7 @@ public interface SellGodsDao {
      * 保存商品信息
      *
      * @param sellGoods 商品信息
+     * @return 返回商品生成的主键id
      */
-    void saveSellGoods(SellGoods sellGoods);
+    Integer saveSellGoods(SellGoods sellGoods);
 }

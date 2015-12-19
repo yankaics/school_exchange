@@ -18,6 +18,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by shadow
@@ -39,12 +41,17 @@ public class SellGoodsController {
      * @param session 当前session
      */
     @RequestMapping(value = "/to_release_goods")
-    public String toReleaseGoods(String status, Model model, HttpSession session) throws Exception {
-        if (null == status){
+    public String toReleaseGoods(String status, Model model, HttpSession session,
+                                 @RequestParam(value = "id", required = false) String goods_id) throws Exception {
+
+        if (null == status) {
             status = "1";
         }
         if (!("1".equals(status) || "2".equals(status) || "3".equals(status))) {
             return "error";
+        }
+        if ("3".equals(status)) {
+            model.addAttribute("goods_id", goods_id);
         }
         //获取当前用户
         User user = userService.getCurrentUser(session);
@@ -80,20 +87,32 @@ public class SellGoodsController {
         sellGoods.setGoods_state(0);
         sellGoods.setCreate_time(new Date());
         sellGoods.setContact(goods_contact);
+
+        //返回xml数据
+        String xmlInfo = "<?xml version='1.0' encoding='UTF-8'?>";
+        xmlInfo += "<infos>";
         //1插入、else更新
         if ("1".equals(URLDecoder.decode(status, "utf8"))) {
-            System.out.println("状态=== " + sellGoodsService.validateSaveSellGoods(user));
             if (sellGoodsService.validateSaveSellGoods(user)) {
                 sellGoods.setGoods_images(sellGoodsService.uploadGoodsPic(release_goods_pic1, request));
                 //保存商品信息到数据库
-                sellGoodsService.releaseGoods(sellGoods);
+                int goods_id = sellGoodsService.releaseGoods(sellGoods);
                 //用户发布商品数量统计加1
                 sellGoodsService.alterGoodsCounts(user, 1);
+                xmlInfo += "<info>";
+                xmlInfo += "<result>1</result>";
+                xmlInfo += "<id>" + goods_id + "</id>";
+                xmlInfo += "</info>";
+                xmlInfo += "</infos>";
                 //发布商品信息成功
-                response.getWriter().write("1");
+                response.getWriter().write(xmlInfo);
             } else {
+                xmlInfo += "<info>";
+                xmlInfo += "<result>0</result>";
+                xmlInfo += "</info>";
+                xmlInfo += "</infos>";
                 //用户发布商品数量已达上限
-                response.getWriter().write("0");
+                response.getWriter().write(xmlInfo);
             }
 
 

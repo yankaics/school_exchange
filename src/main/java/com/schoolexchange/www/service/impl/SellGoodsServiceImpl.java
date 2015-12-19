@@ -1,6 +1,6 @@
 package com.schoolexchange.www.service.impl;
 
-import com.schoolexchange.www.dao.SellGodsDao;
+import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.dao.UserDao;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
@@ -22,7 +22,7 @@ import java.util.UUID;
 public class SellGoodsServiceImpl implements SellGoodsService {
 
     @Autowired
-    private SellGodsDao sellGodsDao;
+    private SellGoodsDao saveSellGoods;
 
     @Autowired
     private QiniuService qiniuService;
@@ -49,8 +49,9 @@ public class SellGoodsServiceImpl implements SellGoodsService {
      *
      * @param sellGoods 商品信息
      */
-    public void releaseGoods(SellGoods sellGoods) {
-        sellGodsDao.saveSellGoods(sellGoods);
+    public Integer releaseGoods(SellGoods sellGoods) {
+
+        return saveSellGoods.saveSellGoods(sellGoods);
     }
 
     /**

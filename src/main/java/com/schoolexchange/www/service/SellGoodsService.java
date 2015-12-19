@@ -29,7 +29,7 @@ public interface SellGoodsService {
      *
      * @param sellGoods 商品信息
      */
-    void releaseGoods(SellGoods sellGoods);
+    Integer releaseGoods(SellGoods sellGoods);
 
     /**
      * 上传商品图片(一张图片)

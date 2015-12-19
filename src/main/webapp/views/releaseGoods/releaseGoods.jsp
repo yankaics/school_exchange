@@ -40,7 +40,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <c:if test="${status == '3'}">
-                <h2>操作成功!!!</h2>
+                <h2>操作成功!!!预览商品===${goods_id}</h2>
             </c:if>
             <c:if test="${status != '3'}">
                 <form method="post" onsubmit="return false">
