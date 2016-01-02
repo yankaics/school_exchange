@@ -752,3 +752,80 @@
 #delete_pic button {
     width: 102px;
 }
+
+/*
+    首页商品展示样式
+*/
+
+/*所有商品样式*/
+.nav_top_all {
+    position: relative;
+    margin-top: 20px;
+    background: #00947F;
+    width: 92px;
+    float: left;
+}
+
+.nav_top_all a {
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/*求购商品样式*/
+.nav_top_want {
+    position: relative;
+    margin-top: 20px;
+    background: #4BC0A5;
+    width: 92px;
+    float: right;
+}
+
+.nav_top_want a {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/*
+    返回顶部样式
+*/
+#back-to-top {
+    position: fixed;
+    bottom: 5%;
+    left: 95%;
+}
+
+#back-to-top a {
+    text-align: center;
+    text-decoration: none;
+    color: #d1d1d1;
+    display: block;
+    width: 50px;
+    -moz-transition: color 1s;
+    -webkit-transition: color 1s;
+    -o-transition: color 1s;
+}
+
+#back-to-top a:hover {
+    color: #979797;
+}
+
+#back-to-top a span {
+    display: block;
+    height: 50px;
+    width: 50px;
+    background: url(../images/top.png) no-repeat center center;
+    margin-bottom: 5px;
+    -moz-transition: background 1s;
+    -webkit-transition: background 1s;
+    -o-transition: background 1s;
+}
+
+#back-to-top a:hover span {
+    background: url(../images/top.png) no-repeat center center;
+}
