@@ -57,6 +57,21 @@ public class SellGoodsController {
         return "releaseGoods/releaseGoods";
     }
 
+    /**
+     * 更新或插入商品
+     *
+     * @param status             插入或更新状态
+     * @param goods_name         商品名
+     * @param str_goods_price    价格
+     * @param str_goods_count    商品数量
+     * @param goods_desc         商品简介
+     * @param goods_tag          商品标签
+     * @param str_goods_deadline 商品过期时间
+     * @param goods_address      商品地址
+     * @param goods_contact      联系方式
+     * @param encode_goods_info  商品详情
+     * @param release_goods_pic1 商品图片
+     */
     @RequestMapping(value = "/to_release_goods/update_goods")
     public void updateReleaseGoodsInfo(String status, String goods_name, @RequestParam("goods_price") String str_goods_price,
                                        @RequestParam("goods_count") String str_goods_count, String goods_desc,
