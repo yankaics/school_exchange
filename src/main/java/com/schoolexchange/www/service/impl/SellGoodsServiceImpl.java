@@ -22,7 +22,7 @@ import java.util.UUID;
 public class SellGoodsServiceImpl implements SellGoodsService {
 
     @Autowired
-    private SellGoodsDao saveSellGoods;
+    private SellGoodsDao sellGoodsDao;
 
     @Autowired
     private QiniuService qiniuService;
@@ -51,7 +51,7 @@ public class SellGoodsServiceImpl implements SellGoodsService {
      */
     public Integer releaseGoods(SellGoods sellGoods) {
 
-        return saveSellGoods.saveSellGoods(sellGoods);
+        return sellGoodsDao.saveSellGoods(sellGoods);
     }
 
     /**
@@ -98,5 +98,24 @@ public class SellGoodsServiceImpl implements SellGoodsService {
     public void alterGoodsCounts(User user, int num) {
         user.setUser_goods_counts(user.getUser_goods_counts() + num);
         userDao.updateUserGoodsCount(user);
+    }
+
+    /**
+     * 获取大学的商品统计
+     *
+     * @param type       商品类型 0表示出售的商品,1表示求购的商品
+     * @param university 大学名称
+     * @return 总的商品数量
+     */
+    public Integer getUniversityGoodsCount(int type, String university) {
+        Integer goodsCount = 0;
+        String hql = null;
+        if (0 == type) {
+            hql = "select count(*) from SellGoods as sg, User as u where  sg.id=u.id and u.user_university=? and sg.goods_deadline >?";
+        } else {
+            hql = "select count(*) from BuyGoods as bg, User as u where  bg.id=u.id and u.user_university=? and bg.goods_deadline >?";
+        }
+        goodsCount = sellGoodsDao.getGoodsCount(hql, university);
+        return goodsCount;
     }
 }

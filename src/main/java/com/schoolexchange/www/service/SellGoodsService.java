@@ -1,13 +1,10 @@
 package com.schoolexchange.www.service;
 
-import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
-import org.json.JSONException;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 /**
  * Created by Administrator
@@ -48,4 +45,13 @@ public interface SellGoodsService {
      * @see com.schoolexchange.www.action.SellGoodsController
      */
     void alterGoodsCounts(User user, int num);
+
+    /**
+     * 获取大学的商品统计
+     *
+     * @param type       商品类型 0表示出售的商品,1表示求购的商品
+     * @param university 大学名称
+     * @return 总的商品数量
+     */
+    Integer getUniversityGoodsCount(int type, String university);
 }

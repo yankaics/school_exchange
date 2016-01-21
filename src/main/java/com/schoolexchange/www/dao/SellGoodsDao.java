@@ -24,4 +24,13 @@ public interface SellGoodsDao {
      * @return 返回商品生成的主键id
      */
     Integer saveSellGoods(SellGoods sellGoods);
+
+    /**
+     * 商品统计
+     *
+     * @param hql        查询特定商品的语句
+     * @param university 查询条件
+     * @return 总的商品数量
+     */
+    Integer getGoodsCount(String hql, String university);
 }

@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +41,23 @@ public class SellGoodsDaoImpl implements SellGoodsDao {
      */
     public Integer saveSellGoods(SellGoods sellGoods) {
 
-        return (Integer)sessionFactory.openSession().save(sellGoods);
+        return (Integer) sessionFactory.openSession().save(sellGoods);
     }
+
+    /**
+     * 商品统计
+     *
+     * @param hql        查询特定商品的语句
+     * @param university 查询条件
+     * @return 总的商品数量
+     */
+    public Integer getGoodsCount(String hql, String university) {
+
+        return (Integer) sessionFactory.openSession().createQuery(hql)
+                .setString(0, university)
+                .setDate(1, new Date())
+                .uniqueResult();
+    }
+
+
 }

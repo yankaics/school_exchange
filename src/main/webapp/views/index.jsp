@@ -257,12 +257,12 @@
 
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8" style="text-align: center">
+        <div class="col-md-7" style="text-align: center">
             <nav>
                 <ul class="pagination pagination-lg">
                     <li>
                         <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">上一页</span>
+                            <span aria-hidden="true">&lt;上一页</span>
                         </a>
                     </li>
                     <li class="active"><a href="#">1</a></li>
@@ -270,14 +270,20 @@
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li class="disabled"><a href="">....</a></li>
+                    <li class="disabled"><a href="#">....</a></li>
                     <li>
                         <a href="#" aria-label="Next">
-                            <span aria-hidden="true">下一页</span>
+                            <span aria-hidden="true">下一页&gt;</span>
                         </a>
                     </li>
                 </ul>
+
             </nav>
+        </div>
+        <div class="col-md-1">
+            <div style="margin-top: 35px;float: left">
+                共<span style="color: green">100</span>页
+            </div>
         </div>
         <div class="col-md-2"></div>
     </div>

@@ -2,6 +2,7 @@ package com.schoolexchange.www.action;
 
 import com.google.gson.Gson;
 import com.schoolexchange.www.service.RequestUrlSecurity;
+import com.schoolexchange.www.service.SellGoodsService;
 import com.schoolexchange.www.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class LoginController {
 
     @Autowired
     private RequestUrlSecurity requestUrlSecurity;
+
+    @Autowired
+    private SellGoodsService sellGoodsService;
 
     /**
      * 跳转到登录界面
@@ -64,7 +68,6 @@ public class LoginController {
      * 网站首页
      *
      * @param model 存放大学
-     * @return
      */
     @RequestMapping(value = "/")
     public String index(HttpSession session, Model model) {
@@ -75,6 +78,8 @@ public class LoginController {
         } else {
             model.addAttribute("sx_university", sx_university);
         }
+        System.out.println("==index执行====");
+       /* System.out.println("结果=====" + sellGoodsService.getUniversityGoodsCount(0, "烟台大学文经学院"));*/
         return "index";
     }
 
