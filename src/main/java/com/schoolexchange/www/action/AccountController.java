@@ -114,10 +114,10 @@ public class AccountController {
                                @RequestParam MultipartFile[] user_faces, HttpServletRequest request, HttpServletResponse response,
                                HttpSession session) throws IOException, AuthException, JSONException {
 
-        userName = userService.solveGetMessyCode(userName);
+       /* userName = userService.solveGetMessyCode(userName);
         userUniversity = userService.solveGetMessyCode(userUniversity);
         userProfessional = userService.solveGetMessyCode(userProfessional);
-        userMotto = userService.solveGetMessyCode(userMotto);
+        userMotto = userService.solveGetMessyCode(userMotto);*/
         User user = userService.getCurrentUser(session);
         session.setAttribute("sx_user_name", userName);
         session.setAttribute("sx_university", userUniversity);
