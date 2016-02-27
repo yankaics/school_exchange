@@ -66,12 +66,12 @@ public class SellGoodsServiceImpl implements SellGoodsService {
         if (null != pics) {
             for (MultipartFile pic : pics) {
                 if (!pic.isEmpty()) {
-                    String tmpPath = request.getServletContext().getRealPath("views") + "\\";
+                    String tmpPath = request.getServletContext().getRealPath("views");
                     //System.out.println("根路径" + request.getServletContext().getRealPath("tmp") );
                     String resetName = UUID.randomUUID().toString();
                     String newPicName = resetName + pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf('.'));
                     picName = newPicName;
-                    String path = tmpPath + newPicName;
+                    String path = tmpPath + File.separator + newPicName;
                     pic.transferTo(new File(path));
                     File file = new File(path);
                     qiniuService.setAccessKey("Zm0x_pMEfrKAWYlzSAnMXvdEXuOP3kaCFhBebuf4");
