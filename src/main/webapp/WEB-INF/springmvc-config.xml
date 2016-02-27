@@ -16,8 +16,11 @@
 
     <!--如果系统配置了通配符的拦截器，静态资源还是会被拦截器拦截-->
     <!--resource元素则指定SpringMVC哪些静态资源需要单独处理(不通过Dispatcher servlet)-->
-    <mvc:resources mapping="/styles/**" location="/styles"/>
-    <mvc:resources mapping="/*.html" location="/"/>
+    <mvc:resources mapping="/styles/**" location="/styles/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/editor/**" location="/editor/" />
+    <mvc:resources mapping="/fonts/**" location="/fonts/" />
    <!-- <mvc:resources mapping="/views/**" location="/"/>-->
     <!-- <mvc:interceptors>
          <mvc:interceptor>

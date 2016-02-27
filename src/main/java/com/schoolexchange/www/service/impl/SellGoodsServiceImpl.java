@@ -78,7 +78,7 @@ public class SellGoodsServiceImpl implements SellGoodsService {
                     qiniuService.setSecretKey("Ypu9e__2WJxsL-MoUTGqUR4EyexVMdXd_DT-4Olx");
                     qiniuService.setDomain("7xo7z2.com1.z0.glb.clouddn.com");
                     qiniuService.setBucketName("schoolexchange");
-                    /*qiniuService.uploadFile(file);*/
+                    qiniuService.uploadFile(file);
                     if (file.exists()) {
                         file.delete();
                     }
