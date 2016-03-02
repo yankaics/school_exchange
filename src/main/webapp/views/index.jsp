@@ -33,227 +33,69 @@
     </div>
     <div class="clear_float"></div>
     <div style="margin-top: 30px"></div>
-    <div class="row">
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术java核心技术核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test02.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test03.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test02.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test03.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test03.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-    </div>
+    <%--//首页商品展示--%>
+    <c:if test="${null != indexGoods}">
+        <c:forEach items="${indexGoods}" var="goods" varStatus="status" step="5">
+            <%--${status.count}:${indexGoods.get(status.count-1).goods_name}--%>
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="${indexGoods.get(status.index).goods_images}" class="img-thumbnail image_style">
+                    <em style="color: red">
+                        <b>¥</b>${indexGoods.get(status.index).goods_price}
+                    </em><br/>
+                    <h5>${indexGoods.get(status.index).goods_name}</h5>
+                </div>
+                <c:if test="${indexGoods.size() > (status.index + 1 )}">
+                    <div class="col-md-2">
+                        <img src="${indexGoods.get(status.index + 1 ).goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${indexGoods.get(status.index + 1 ).goods_price}
+                        </em><br/>
+                        <h5>${indexGoods.get(status.index + 1 ).goods_name}</h5>
+                    </div>
+                </c:if>
 
-    <div class="row">
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术java核心技术核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test02.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test03.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test02.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test03.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/csdn.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-        <div class="col-md-2">
-            <img src="../images/test01.jpg" class="img-thumbnail">
-            <em style="color: red">
-                <b>¥</b>268.00
-            </em><br/>
-            <h5>java核心技术</h5>
-        </div>
-    </div>
+                <c:if test="${indexGoods.size() > (status.index + 2)}">
+                    <div class="col-md-2">
+                        <img src="${indexGoods.get(status.index + 2 ).goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${indexGoods.get(status.index + 2 ).goods_price}
+                        </em><br/>
+                        <h5>${indexGoods.get(status.index + 2 ).goods_name}</h5>
+                    </div>
+                </c:if>
+                <c:if test="${indexGoods.size() > (status.index + 3)}">
+                    <div class="col-md-2">
+                        <img src="${indexGoods.get(status.index + 3 ).goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${indexGoods.get(status.index + 3 ).goods_price}
+                        </em><br/>
+                        <h5>${indexGoods.get(status.index + 3 ).goods_name}</h5>
+                    </div>
+                </c:if>
+                <c:if test="${indexGoods.size() > (status.index + 4)}">
+                    <div class="col-md-2">
+                        <img src="${indexGoods.get(status.index + 4 ).goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${indexGoods.get(status.index + 4 ).goods_price}
+                        </em><br/>
+                        <h5>${indexGoods.get(status.index + 4 ).goods_name}</h5>
+                    </div>
+                </c:if>
+                <c:if test="${indexGoods.size() > (status.index + 5)}">
+                    <div class="col-md-2">
+                        <img src="${indexGoods.get(status.index + 5 ).goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${indexGoods.get(status.index + 5 ).goods_price}
+                        </em><br/>
+                        <h5>${indexGoods.get(status.index + 5 ).goods_name}</h5>
+                    </div>
+                </c:if>
+
+            </div>
+        </c:forEach>
+    </c:if>
+
 
     <div class="row">
         <div class="col-md-2"></div>

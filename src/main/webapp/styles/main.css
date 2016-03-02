@@ -829,3 +829,9 @@
 #back-to-top a:hover span {
     background: url(../images/top.png) no-repeat center center;
 }
+
+/*首页图片style*/
+.image_style {
+    height: 165px;
+    width: 165px
+}

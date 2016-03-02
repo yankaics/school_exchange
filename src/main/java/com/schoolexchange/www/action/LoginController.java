@@ -1,9 +1,14 @@
 package com.schoolexchange.www.action;
 
 import com.google.gson.Gson;
+import com.qiniu.api.auth.AuthException;
+import com.schoolexchange.www.entity.SellGoods;
+import com.schoolexchange.www.entity.SellGoodsToUser;
+import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.RequestUrlSecurity;
 import com.schoolexchange.www.service.SellGoodsService;
 import com.schoolexchange.www.service.UserService;
+import org.apache.commons.codec.EncoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +39,9 @@ public class LoginController {
 
     @Autowired
     private SellGoodsService sellGoodsService;
+
+    @Autowired
+    private QiniuService qiniuService;
 
     /**
      * 跳转到登录界面
@@ -54,12 +63,12 @@ public class LoginController {
             }
         }
 
-        if (null != activate_status){
+        if (null != activate_status) {
             model.addAttribute("activate_status", activate_status);
         }
 
-        if (null != reset_pwd_status){
-            model.addAttribute("reset_pwd_status",reset_pwd_status);
+        if (null != reset_pwd_status) {
+            model.addAttribute("reset_pwd_status", reset_pwd_status);
         }
         return "login";
     }
@@ -70,7 +79,7 @@ public class LoginController {
      * @param model 存放大学
      */
     @RequestMapping(value = "/")
-    public String index(HttpSession session, Model model) {
+    public String index(HttpSession session, Model model) throws AuthException, EncoderException {
         String sx_university = userService.getUserUniversity(session);
         if (sx_university == null) {
             session.setAttribute("sx_university", "烟台大学文经学院");
@@ -78,7 +87,17 @@ public class LoginController {
         } else {
             model.addAttribute("sx_university", sx_university);
         }
-        System.out.println("==index执行====");
+        List<SellGoodsToUser> list = sellGoodsService.getPageContent(1, 30, (String) session.getAttribute("sx_university"));
+        for (SellGoodsToUser sellGoodsToUser : list) {
+            qiniuService.setAccessKey("Zm0x_pMEfrKAWYlzSAnMXvdEXuOP3kaCFhBebuf4");
+            qiniuService.setSecretKey("Ypu9e__2WJxsL-MoUTGqUR4EyexVMdXd_DT-4Olx");
+            qiniuService.setDomain("7xo7z2.com1.z0.glb.clouddn.com");
+            qiniuService.setBucketName("schoolexchange");
+            String goodsUrl = qiniuService.getDownloadFileUrl(sellGoodsToUser.getGoods_images());
+            sellGoodsToUser.setGoods_images(goodsUrl);
+        }
+
+        model.addAttribute("indexGoods", list);
        /* System.out.println("结果=====" + sellGoodsService.getUniversityGoodsCount(0, "烟台大学文经学院"));*/
         return "index";
     }

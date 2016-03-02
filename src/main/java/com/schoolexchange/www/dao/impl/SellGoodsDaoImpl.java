@@ -2,6 +2,7 @@ package com.schoolexchange.www.dao.impl;
 
 import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.entity.SellGoods;
+import com.schoolexchange.www.entity.SellGoodsToUser;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,6 +58,17 @@ public class SellGoodsDaoImpl implements SellGoodsDao {
                 .setString(0, university)
                 .setDate(1, new Date())
                 .uniqueResult();
+    }
+
+    /**
+     * 查询商品 (sell_goods表)
+     *
+     * @param hql 查询语句
+     * @return 返回查询SellGoods的集合
+     */
+    public List<SellGoodsToUser> sellGoodsQuery(String hql) {
+
+        return (List<SellGoodsToUser>) sessionFactory.openSession().createQuery(hql).list();
     }
 
 

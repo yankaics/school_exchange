@@ -1,10 +1,12 @@
 package com.schoolexchange.www.service;
 
 import com.schoolexchange.www.entity.SellGoods;
+import com.schoolexchange.www.entity.SellGoodsToUser;
 import com.schoolexchange.www.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by Administrator
@@ -54,4 +56,14 @@ public interface SellGoodsService {
      * @return 总的商品数量
      */
     Integer getUniversityGoodsCount(int type, String university);
+
+    /**
+     * 分页查询商品
+     *
+     * @param pageNo     第几页
+     * @param maxResult  每页查询的数据量
+     * @param university 所属大学
+     * @return 返回分页查询的结果集SellGoods
+     */
+    List<SellGoodsToUser> getPageContent(int pageNo, int maxResult, String university);
 }

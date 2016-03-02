@@ -3,6 +3,7 @@ package com.schoolexchange.www.service.impl;
 import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.dao.UserDao;
 import com.schoolexchange.www.entity.SellGoods;
+import com.schoolexchange.www.entity.SellGoodsToUser;
 import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.SellGoodsService;
@@ -12,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -118,4 +121,28 @@ public class SellGoodsServiceImpl implements SellGoodsService {
         goodsCount = sellGoodsDao.getGoodsCount(hql, university);
         return goodsCount;
     }
+
+    /**
+     * 分页查询商品
+     *
+     * @param pageNo     第几页
+     * @param maxResult  每页查询的数据量
+     * @param university 所属大学
+     * @return 返回分页查询的结果集SellGoods
+     */
+    public List<SellGoodsToUser> getPageContent(int pageNo, int maxResult, String university) {
+        String hql = "select new com.schoolexchange.www.entity.SellGoodsToUser(sg.id,sg.goods_name,sg.goods_price,sg.goods_images) from SellGoods sg, User u where sg.user_id=u.id and u.user_university= '" + university + "' order by sg.create_time desc";
+        List<SellGoodsToUser> list = sellGoodsDao.sellGoodsQuery(hql);
+        int start = (pageNo - 1) * 30;
+        int end = (start + maxResult - 1) <= list.size() - 1 ? (start + maxResult - 1) : (list.size() - 1);
+        List<SellGoodsToUser> sellGoodsToUsers = new ArrayList<SellGoodsToUser>();
+        if (0 != list.size()) {
+            for (int i = start; i <= end; i++) {
+                sellGoodsToUsers.add(list.get(i));
+            }
+        }
+        return sellGoodsToUsers;
+    }
+
+
 }

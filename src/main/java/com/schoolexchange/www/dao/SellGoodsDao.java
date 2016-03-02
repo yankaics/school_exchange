@@ -1,6 +1,7 @@
 package com.schoolexchange.www.dao;
 
 import com.schoolexchange.www.entity.SellGoods;
+import com.schoolexchange.www.entity.SellGoodsToUser;
 
 import java.util.List;
 
@@ -33,4 +34,12 @@ public interface SellGoodsDao {
      * @return 总的商品数量
      */
     Integer getGoodsCount(String hql, String university);
+
+    /**
+     * 查询商品 (sell_goods表)
+     *
+     * @param hql 查询语句
+     * @return 返回查询SellGoods的集合
+     */
+    List<SellGoodsToUser> sellGoodsQuery(String hql);
 }
