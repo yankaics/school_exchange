@@ -240,24 +240,24 @@ public class AccountController {
      */
     @RequestMapping("/StartCaptchaServlet")
     public void createCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Conifg the parameter of the geetest object
-        GeetestLib gtSdk = new GeetestLib();
-        gtSdk.setCaptchaId(GeetestConfig.getCaptcha_id());
-        gtSdk.setPrivateKey(GeetestConfig.getPrivate_key());
 
-        gtSdk.setGtSession(request);//如果是同一会话多实例，可以使用此函数的另一重载实现式，设置不同的key即可
+        GeetestLib gtSdk = new GeetestLib(GeetestConfig.getCaptcha_id(), GeetestConfig.getPrivate_key());
 
         String resStr = "{}";
 
-        if (gtSdk.preProcess() == 1) {
-            // gt server is in use
-            resStr = gtSdk.getSuccessPreProcessRes();
-            gtSdk.setGtServerStatusSession(request, 1);
-        } else {
-            // gt server is down
-            resStr = gtSdk.getFailPreProcessRes();
-            gtSdk.setGtServerStatusSession(request, 0);
-        }
+        //自定义userid
+        String userid = "test";
+
+        //进行验证预处理
+        int gtServerStatus = gtSdk.preProcess(userid);
+
+        //将服务器状态设置到session中
+        request.getSession().setAttribute(gtSdk.gtServerStatusSessionKey, gtServerStatus);
+        //将userid设置到session中
+        request.getSession().setAttribute("userid", userid);
+
+        resStr = gtSdk.getResponseStr();
+
         PrintWriter out = response.getWriter();
         out.println(resStr);
 
@@ -280,42 +280,49 @@ public class AccountController {
         if (inputCaptcha.equals(session.getAttribute("se_msg_captcha")) && authTel.equals(session.getAttribute("se_auth_tel"))) {
             flag = true;
         }
-        // get session to share the object
-        GeetestLib geetest = GeetestLib.getGtSession(request);
-        int gt_server_status_code = GeetestLib
-                .getGtServerStatusSession(request);
-        String gtResult = "fail";
+        //验证滑块
+        String veResult = "fail";
+        GeetestLib gtSdk = new GeetestLib(GeetestConfig.getCaptcha_id(), GeetestConfig.getPrivate_key());
+
+        String challenge = request.getParameter(GeetestLib.fn_geetest_challenge);
+        String validate = request.getParameter(GeetestLib.fn_geetest_validate);
+        String seccode = request.getParameter(GeetestLib.fn_geetest_seccode);
+
+        //从session中获取gt-server状态
+        int gt_server_status_code = (Integer) request.getSession().getAttribute(gtSdk.gtServerStatusSessionKey);
+
+        //从session中获取userid
+        String userid = (String) request.getSession().getAttribute("userid");
+
+        int gtResult = 0;
+
         if (gt_server_status_code == 1) {
-            gtResult = geetest.enhencedValidateRequest(request);
+            //gt-server正常，向gt-server进行二次验证
 
+            gtResult = gtSdk.enhencedValidateRequest(challenge, validate, seccode, userid);
+            System.out.println(gtResult);
         } else {
-            /*System.out.println("failback:use your own server captcha validate");*/
-           /* gtResult = "fail";*/
+            // gt-server非正常情况下，进行failback模式验证
 
-            gtResult = geetest.failbackValidateRequest(request);
-
-
+            System.out.println("failback:use your own server captcha validate");
+            gtResult = gtSdk.failbackValidateRequest(challenge, validate, seccode);
+            System.out.println(gtResult);
         }
-       /* if (gtResult.equals(GeetestLib.success_res)) {
-            PrintWriter out = response.getWriter();
-            out.println(GeetestLib.success_res + ":" + geetest.getVersionInfo());
 
-        } else if (gtResult.equals(GeetestLib.forbidden_res)) {
-            PrintWriter out = response.getWriter();
-            out.println(GeetestLib.forbidden_res + ":"
-                    + geetest.getVersionInfo());
-        } else {
-            PrintWriter out = response.getWriter();
-            out.println(GeetestLib.fail_res + ":" + geetest.getVersionInfo());
-        }*/
+
+        if (gtResult == 1) {
+            // 验证成功
+            veResult = "success";
+        }
+
         boolean beUsed = userService.authTel(authTel);
-        if (gtResult.equals("success") && flag && !beUsed) {
+        if (veResult.equals("success") && flag && !beUsed) {
             //保存手机到数据库
             User user = userService.getCurrentUser(session);
             userService.authUser(user, authTel);
         }
         String flag_url = userService.encrypt_password(Boolean.toString(flag) + "$" + Boolean.toString(beUsed));
-        return "redirect:account/to_certification?status=" + userService.encrypt_password(gtResult) + "&flag="
+        return "redirect:account/to_certification?status=" + userService.encrypt_password(veResult) + "&flag="
                 + flag_url;
     }
 

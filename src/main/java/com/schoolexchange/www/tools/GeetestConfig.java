@@ -8,8 +8,8 @@ package com.schoolexchange.www.tools;
  */
 public class GeetestConfig {
 
-	private static final String captcha_id = "b46d1900d0a894591916ea94ea91bd2c";
-	private static final String private_key = "36fc3fe98530eea08dfc6ce76e3d24c4";
+	private static final String captcha_id = "740445bfbd0b8735bd9b722261984ba6";
+	private static final String private_key = "e3067fdb9ac1a6ad989878739b777a0d";
 
 	public static final String getCaptcha_id() {
 		return captcha_id;

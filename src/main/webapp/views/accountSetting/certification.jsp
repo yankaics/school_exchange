@@ -140,8 +140,8 @@
                             </div>
                         </div>
                         <div>
-                            <div id="div_geetest_lib"></div>
-                            <div id="div_id_embed"></div>
+                            <div id="captcha"></div>
+                            <%--<div id="div_id_embed"></div>--%>
                         </div>
                         <div class="form-group" style="margin-top: 20px">
                             <input type="submit" value="确认认证" class="form-control btn-primary">
@@ -159,6 +159,7 @@
 <script src="../../js/jquery-1.11.3.min.js"></script>
 <script src="../../js/bootstrap.js"></script>
 <script src="../../js/function.js"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
 <script>
     <c:if test="${se_db_auth_status == 0}">
     /**
@@ -171,10 +172,10 @@
     /**
      *  验证码
      **/
-    var gtFailbackFrontInitial = function (result) {
+   /* var gtFailbackFrontInitial = function (result) {
         var s = document.createElement('script');
         s.id = 'gt_lib';
-        s.src = 'http://static.geetest.com/static/js/geetest.0.0.0.js';
+        s.src = 'http://static.geetest.com/static/tools/gt.js';
         s.charset = 'UTF-8';
         s.type = 'text/javascript';
         document.getElementsByTagName('head')[0].appendChild(s);
@@ -189,11 +190,11 @@
             }
         };
     }
-
+*/
     /**
      * 载入验证码
      * */
-    var loadGeetest = function (config) {
+   /* var loadGeetest = function (config) {
 
         //1. 使用geetst验证码
         window.gt_captcha_obj = new window.Geetest({
@@ -231,19 +232,41 @@
                 loadGeetest(result);
             }
         }
-    })()
+    })()*/
 
     /**
      *   ajax请求生成验证码，并写入session
      **/
-    $.ajax({
+   /* $.ajax({
         url: "/StartCaptchaServlet",
         type: "get",
         dataType: 'JSON',
         success: function (result) {
             gtcallback(result)
         }
-    })
+    });
+*/
+    var handler = function (captchaObj) {
+        // 将验证码加到id为captcha的元素里
+        captchaObj.appendTo("#captcha");
+    };
+    $.ajax({
+        // 获取id，challenge，success（是否启用failback）
+        url: "/StartCaptchaServlet",
+        type: "get",
+        dataType: "json", // 使用jsonp格式
+        success: function (data) {
+            // 使用initGeetest接口
+            // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+            initGeetest({
+                gt: data.gt,
+                challenge: data.challenge,
+                product: "embed", // 产品形式
+                offline: !data.success
+            }, handler);
+        }
+    });
 
     /*
      *重新发送验证码(60秒)
