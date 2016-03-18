@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserService {
         // 邮箱用户名
         mailInfo.setUserName("18353507779@163.com");
         // 邮箱密码
-        mailInfo.setPassword("zhangjiadong0418");
+        mailInfo.setPassword("shadow0418");
         // 发件人邮箱
         mailInfo.setFromAddress("18353507779@163.com");
         // 收件人邮箱
