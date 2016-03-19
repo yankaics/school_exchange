@@ -2,7 +2,6 @@ package com.schoolexchange.www.action;
 
 import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
-import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.SellGoodsToUser;
 import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.RequestUrlSecurity;
