@@ -65,7 +65,7 @@ public interface UserService {
     /**
      * 重置密码
      *
-     * @param email 用户email
+     * @param email   用户email
      * @param new_pwd 新密码
      * @return 返回重置后的密码
      * @see com.schoolexchange.www.action.UserController
@@ -198,4 +198,12 @@ public interface UserService {
      * @param userEmail 邮箱
      */
     void activateUser(String userEmail);
+
+    /**
+     * 通过用户id获取用户的所有信息
+     *
+     * @param user_id 用户id
+     * @return 成功返回用户的的所有信息，否则返回NULL
+     */
+    User getUserByUserId(Integer user_id);
 }

@@ -39,11 +39,13 @@
             <%--${status.count}:${indexGoods.get(status.count-1).goods_name}--%>
             <div class="row">
                 <div class="col-md-2">
-                    <img src="${indexGoods.get(status.index).goods_images}" class="img-thumbnail image_style">
-                    <em style="color: red">
-                        <b>¥</b>${indexGoods.get(status.index).goods_price}
-                    </em><br/>
-                    <h5>${indexGoods.get(status.index).goods_name}</h5>
+                    <a href="/sell_goods?detail=${indexGoods.get(status.index).id}" style="text-decoration: none;">
+                        <img src="${indexGoods.get(status.index).goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${indexGoods.get(status.index).goods_price}
+                        </em><br/>
+                        <h5 style="color: black">${indexGoods.get(status.index).goods_name}</h5>
+                    </a>
                 </div>
                 <c:if test="${indexGoods.size() > (status.index + 1 )}">
                     <div class="col-md-2">

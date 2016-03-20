@@ -1,9 +1,12 @@
 package com.schoolexchange.www.action;
 
+import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
+import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.SellGoodsService;
 import com.schoolexchange.www.service.UserService;
+import org.apache.commons.codec.EncoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +33,9 @@ public class SellGoodsController {
 
     @Autowired
     private SellGoodsService sellGoodsService;
+
+    @Autowired
+    private QiniuService qiniuService;
 
     /**
      * 跳转到发布或编辑商品界面
@@ -132,6 +138,36 @@ public class SellGoodsController {
 
         }
 
+
+    }
+
+    /**
+     * 显示商品详细信息
+     *
+     * @param sell_goods_id_str 出售商品id
+     */
+    @RequestMapping(value = "/sell_goods")
+    public String checkSellGoodsDetail(@RequestParam("detail") String sell_goods_id_str, Model model) throws AuthException, EncoderException {
+        Integer sell_goods_id;
+        //判断是否是字符
+        try {
+            sell_goods_id = Integer.parseInt(sell_goods_id_str);
+        } catch (Exception e) {
+            model.addAttribute("parseIntFail", "error");
+            return "error";
+        }
+        //判断是否存在此商品
+        SellGoods sellGoods = sellGoodsService.getSellGoodsDetailed(sell_goods_id);
+        if (null == sellGoods) {
+            model.addAttribute("notFoundGoods", "error");
+            return "error";
+        }
+        //设置图片的全路径
+        sellGoods.setGoods_images(qiniuService.getDownloadFileUrl(sellGoods.getGoods_images()));
+        User user = userService.getUserByUserId(sellGoods.getUser_id());
+        model.addAttribute("sell_goods", sellGoods);
+        model.addAttribute("user", user);
+        return "sell_goods_detailed";
 
     }
 }

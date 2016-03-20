@@ -66,4 +66,13 @@ public interface SellGoodsService {
      * @return 返回分页查询的结果集SellGoods
      */
     List<SellGoodsToUser> getPageContent(int pageNo, int maxResult, String university);
+
+    /**
+     * 通过商品id获取商品信息
+     *
+     * @param sell_goods_id 商品id
+     * @return 成功则返回商品信息 ,查找失败则返回null
+     * @see com.schoolexchange.www.action.SellGoodsController
+     */
+    SellGoods getSellGoodsDetailed(Integer sell_goods_id);
 }

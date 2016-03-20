@@ -144,5 +144,23 @@ public class SellGoodsServiceImpl implements SellGoodsService {
         return sellGoodsToUsers;
     }
 
+    /**
+     * 通过商品id获取商品信息
+     *
+     * @param sell_goods_id 商品id
+     * @return 成功则返回商品信息 ,查找失败则返回null
+     * @see com.schoolexchange.www.action.SellGoodsController
+     */
+    public SellGoods getSellGoodsDetailed(Integer sell_goods_id) {
+        List<SellGoods> list = sellGoodsDao.getAllGoods();
+        if (null != list){
+            for (SellGoods goods : list) {
+                if (sell_goods_id.equals(goods.getId()))
+                    return goods;
+            }
+        }
+        return null;
+    }
+
 
 }

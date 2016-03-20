@@ -113,12 +113,12 @@ public class UserServiceImpl implements UserService {
         users = userDao.getAllUser();
         if (users.size() > 0) {
             for (User user : users) {
-                if (null != user.getUser_tel()){
+                if (null != user.getUser_tel()) {
                     if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name)
                             || user.getUser_tel().equals(user_name))
                             && judge_password(user.getUser_password(), user_password) && 0 == user.getUser_state())
                         return true;
-                }else {
+                } else {
                     if ((user.getUser_name().equals(user_name) || user.getUser_email().equals(user_name))
                             && judge_password(user.getUser_password(), user_password) && 0 == user.getUser_state())
                         return true;
@@ -140,11 +140,11 @@ public class UserServiceImpl implements UserService {
         users = userDao.getAllUser();
         if (users.size() > 0) {
             for (User user : users) {
-                if (null != user.getUser_tel()){
+                if (null != user.getUser_tel()) {
                     if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)
                             || user.getUser_tel().equals(userNameOrEmail)))
                         return user.getUser_university() + "$" + user.getUser_name();
-                }else {
+                } else {
                     if ((user.getUser_name().equals(userNameOrEmail) || user.getUser_email().equals(userNameOrEmail)))
                         return user.getUser_university() + "$" + user.getUser_name();
                 }
@@ -319,10 +319,10 @@ public class UserServiceImpl implements UserService {
     public boolean authTel(String auth_tel) {
         boolean flag = false;
         List<User> users = userDao.getAllUser();
-        if (null != auth_tel){
+        if (null != auth_tel) {
             if (0 != users.size()) {
                 for (User u : users) {
-                    if (null != u.getUser_tel()){
+                    if (null != u.getUser_tel()) {
                         if (u.getUser_tel().equals(auth_tel)) {
                             flag = true;
                             break;
@@ -453,13 +453,30 @@ public class UserServiceImpl implements UserService {
      */
     public void activateUser(String userEmail) {
         List<User> users = userDao.getAllUser();
-        if (0 != users.size()){
-            for (User u: users){
-                if (u.getUser_email().equals(userEmail)){
+        if (0 != users.size()) {
+            for (User u : users) {
+                if (u.getUser_email().equals(userEmail)) {
                     u.setUser_state(0);
                     userDao.updateUserStatus(u);
                 }
             }
         }
+    }
+
+    /**
+     * 通过用户id获取用户的所有信息
+     *
+     * @param user_id 用户id
+     * @return 成功返回用户的的所有信息，否则返回NULL
+     */
+    public User getUserByUserId(Integer user_id) {
+        List<User> users = userDao.getAllUser();
+        if (null != users){
+            for (User u : users) {
+                if (u.getId().equals(user_id))
+                    return u;
+            }
+        }
+        return null;
     }
 }
