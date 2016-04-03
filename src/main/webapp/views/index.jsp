@@ -39,7 +39,7 @@
             <%--${status.count}:${indexGoods.get(status.count-1).goods_name}--%>
             <div class="row">
                 <div class="col-md-2">
-                    <a href="/sell_goods?detail=${indexGoods.get(status.index).id}" style="text-decoration: none;">
+                    <a href="/sell_goods?detail=${indexGoods.get(status.index).id}" target="_blank" style="text-decoration: none;">
                         <img src="${indexGoods.get(status.index).goods_images}" class="img-thumbnail image_style">
                         <em style="color: red">
                             <b>¥</b>${indexGoods.get(status.index).goods_price}
@@ -49,48 +49,63 @@
                 </div>
                 <c:if test="${indexGoods.size() > (status.index + 1 )}">
                     <div class="col-md-2">
-                        <img src="${indexGoods.get(status.index + 1 ).goods_images}" class="img-thumbnail image_style">
-                        <em style="color: red">
-                            <b>¥</b>${indexGoods.get(status.index + 1 ).goods_price}
-                        </em><br/>
-                        <h5>${indexGoods.get(status.index + 1 ).goods_name}</h5>
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 1).id}" target="_blank" style="text-decoration: none;">
+                            <img src="${indexGoods.get(status.index + 1 ).goods_images}"
+                                 class="img-thumbnail image_style">
+                            <em style="color: red">
+                                <b>¥</b>${indexGoods.get(status.index + 1 ).goods_price}
+                            </em><br/>
+                            <h5>${indexGoods.get(status.index + 1 ).goods_name}</h5>
+                        </a>
                     </div>
                 </c:if>
 
                 <c:if test="${indexGoods.size() > (status.index + 2)}">
                     <div class="col-md-2">
-                        <img src="${indexGoods.get(status.index + 2 ).goods_images}" class="img-thumbnail image_style">
-                        <em style="color: red">
-                            <b>¥</b>${indexGoods.get(status.index + 2 ).goods_price}
-                        </em><br/>
-                        <h5>${indexGoods.get(status.index + 2 ).goods_name}</h5>
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 2).id}" target="_blank" style="text-decoration: none;">
+                            <img src="${indexGoods.get(status.index + 2 ).goods_images}"
+                                 class="img-thumbnail image_style">
+                            <em style="color: red">
+                                <b>¥</b>${indexGoods.get(status.index + 2 ).goods_price}
+                            </em><br/>
+                            <h5>${indexGoods.get(status.index + 2 ).goods_name}</h5>
+                        </a>
                     </div>
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 3)}">
                     <div class="col-md-2">
-                        <img src="${indexGoods.get(status.index + 3 ).goods_images}" class="img-thumbnail image_style">
-                        <em style="color: red">
-                            <b>¥</b>${indexGoods.get(status.index + 3 ).goods_price}
-                        </em><br/>
-                        <h5>${indexGoods.get(status.index + 3 ).goods_name}</h5>
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank" style="text-decoration: none;">
+                            <img src="${indexGoods.get(status.index + 3 ).goods_images}"
+                                 class="img-thumbnail image_style">
+                            <em style="color: red">
+                                <b>¥</b>${indexGoods.get(status.index + 3 ).goods_price}
+                            </em><br/>
+                            <h5>${indexGoods.get(status.index + 3 ).goods_name}</h5>
+                        </a>
                     </div>
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 4)}">
                     <div class="col-md-2">
-                        <img src="${indexGoods.get(status.index + 4 ).goods_images}" class="img-thumbnail image_style">
-                        <em style="color: red">
-                            <b>¥</b>${indexGoods.get(status.index + 4 ).goods_price}
-                        </em><br/>
-                        <h5>${indexGoods.get(status.index + 4 ).goods_name}</h5>
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank" style="text-decoration: none;">
+                            <img src="${indexGoods.get(status.index + 4 ).goods_images}"
+                                 class="img-thumbnail image_style">
+                            <em style="color: red">
+                                <b>¥</b>${indexGoods.get(status.index + 4 ).goods_price}
+                            </em><br/>
+                            <h5>${indexGoods.get(status.index + 4 ).goods_name}</h5>
+                        </a>
                     </div>
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 5)}">
                     <div class="col-md-2">
-                        <img src="${indexGoods.get(status.index + 5 ).goods_images}" class="img-thumbnail image_style">
-                        <em style="color: red">
-                            <b>¥</b>${indexGoods.get(status.index + 5 ).goods_price}
-                        </em><br/>
-                        <h5>${indexGoods.get(status.index + 5 ).goods_name}</h5>
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank" style="text-decoration: none;">
+                            <img src="${indexGoods.get(status.index + 5 ).goods_images}"
+                                 class="img-thumbnail image_style">
+                            <em style="color: red">
+                                <b>¥</b>${indexGoods.get(status.index + 5 ).goods_price}
+                            </em><br/>
+                            <h5>${indexGoods.get(status.index + 5 ).goods_name}</h5>
+                        </a>
                     </div>
                 </c:if>
 

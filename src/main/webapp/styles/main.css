@@ -835,3 +835,16 @@
     height: 165px;
     width: 165px
 }
+
+/*
+    商品详细
+*/
+.detailed_simple_desc {
+    font-size: 14px;
+    color: #dd2727;
+}
+.detailed_name{
+    color: #1C826C;
+    font-size: 28px;
+    margin-top: 40px;
+}
