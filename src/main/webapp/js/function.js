@@ -913,9 +913,18 @@ function redirectReleaseGoods() {
 /*
  * 商品收藏按钮切换
  */
-function CollectionGoods() {
+function CollectionGoods(id) {
     var btnName = document.getElementById("btn_name").innerText;
     if (btnName == "收藏商品"){
+        $.post(
+            "/show_goods_details/collection",
+            {
+                goods_id:id
+            },
+            function (data){
+              alert("返回值== " + data);
+            }
+        );
         document.getElementById("btn_name").innerHTML = "取消收藏";
     }else {
         document.getElementById("btn_name").innerHTML = "收藏商品";

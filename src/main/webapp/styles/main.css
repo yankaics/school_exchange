@@ -848,3 +848,8 @@
     font-size: 28px;
     margin-top: 40px;
 }
+/*没登陆收藏样式*/
+.collectionLoginStyle{
+    text-decoration: none;
+    color: white;
+}

@@ -86,7 +86,7 @@
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 4)}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 4).id}" target="_blank" style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 4 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">
@@ -98,7 +98,7 @@
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 5)}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 5).id}" target="_blank" style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 5 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">

@@ -4,6 +4,7 @@ import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.QiniuService;
+import com.schoolexchange.www.service.RequestUrlSecurity;
 import com.schoolexchange.www.service.SellGoodsService;
 import com.schoolexchange.www.service.UserService;
 import org.apache.commons.codec.EncoderException;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +29,9 @@ import java.util.Date;
  */
 @Controller
 public class SellGoodsController {
+
+    @Autowired
+    private RequestUrlSecurity requestUrlSecurity;
 
     @Autowired
     private UserService userService;
@@ -170,23 +175,34 @@ public class SellGoodsController {
         model.addAttribute("user", user);
         String userName = (String) request.getSession().getAttribute("sx_user_name");
         //判断收藏商品状态
-        if (null == userName){
+        if (null == userName) {
             //显示登录状态 1还没登录
             model.addAttribute("isLogin", 1);
             //显示 "收藏商品" 状态  1 还没收藏
-            model.addAttribute("collection_status",1);
-        }else {
+            model.addAttribute("collection_status", 1);
+        } else {
             //0 表示已经登录
             model.addAttribute("isLogin", 0);
             //查询数据库判断是否收藏
-            if (sellGoodsService.isCollectionGoods(userName,sell_goods_id)){
+            if (sellGoodsService.isCollectionGoods(userName, sell_goods_id)) {
                 //显示 "收藏商品" 状态  0 已经收藏
-                model.addAttribute("collection_status",0);
-            }else {
-                model.addAttribute("collection_status",1);
+                model.addAttribute("collection_status", 0);
+            } else {
+                model.addAttribute("collection_status", 1);
             }
         }
         return "sell_goods_detailed";
+    }
 
+    @RequestMapping(value = "/show_goods_details/collection")
+    public void collectionGoods(String str_goods_id, Model model,
+                                HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("=============未登录======");
+        response.getWriter().write("ok");
+    }
+
+    @RequestMapping(value = "/encryptCollectionUrl")
+    public String collectionToLogin(String requestUrl) throws Exception {
+        return "redirect:/to_login?requestUrl=" + requestUrlSecurity.encrypt(requestUrl);
     }
 }

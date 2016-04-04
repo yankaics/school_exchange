@@ -62,6 +62,7 @@
             <mvc:mapping path="auth_user"/>
             <mvc:mapping path="/account/**"/>
             <mvc:mapping path="/to_release_goods/**"/>
+            <mvc:mapping path="/show_goods_details/**"/>
             <bean class="com.schoolexchange.www.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

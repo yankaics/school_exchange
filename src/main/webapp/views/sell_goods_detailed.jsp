@@ -26,21 +26,26 @@
                     </div>
                 </div>
                 <div class="col-md-3" style="margin-left: 0">
-                    <button class="btn btn-danger" onclick="CollectionGoods()">
-                        <span id="btn_name">
-                            <c:if test="${1 == isLogin }">
-                                收藏商品
-                            </c:if>
-                            <c:if test="${0 == isLogin}">
-                                <c:if test="${0 == collection_status}">
-                                    取消收藏
-                                </c:if>
-                                <c:if test="${1 == collection_status}">
-                                    收藏商品
-                                </c:if>
-                            </c:if>
-                        </span>
-                    </button>
+
+                    <c:if test="${1 == isLogin }">
+                        <button class="btn btn-danger">
+                            <a href="/encryptCollectionUrl?requestUrl=sell_goods?detail=${sell_goods.id}"
+                               class="collectionLoginStyle">收藏商品</a>
+                        </button>
+                    </c:if>
+
+                    <c:if test="${0 == isLogin}">
+                        <button class="btn btn-danger" onclick="CollectionGoods(${sell_goods.id})">
+                                    <span id="btn_name">
+                                        <c:if test="${0 == collection_status}">
+                                            取消收藏
+                                        </c:if>
+                                        <c:if test="${1 == collection_status}">
+                                            收藏商品
+                                        </c:if>
+                                    </span>
+                        </button>
+                    </c:if>
                     <div>
                         <script>window._bd_share_config = {
                             "common": {
