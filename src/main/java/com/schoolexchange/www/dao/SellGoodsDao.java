@@ -42,4 +42,13 @@ public interface SellGoodsDao {
      * @return 返回查询SellGoods的集合
      */
     List<SellGoodsToUser> sellGoodsQuery(String hql);
+
+    /**
+     * 通过用户名和商品id查询该商品是否被收藏
+     *
+     * @param userName 用户名
+     * @param goodId   商品id
+     * @return
+     */
+    List<Object[]> queryCollection(String userName, Integer goodId);
 }

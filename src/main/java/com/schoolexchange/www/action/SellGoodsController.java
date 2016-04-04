@@ -147,7 +147,8 @@ public class SellGoodsController {
      * @param sell_goods_id_str 出售商品id
      */
     @RequestMapping(value = "/sell_goods")
-    public String checkSellGoodsDetail(@RequestParam("detail") String sell_goods_id_str, Model model) throws AuthException, EncoderException {
+    public String checkSellGoodsDetail(@RequestParam("detail") String sell_goods_id_str, Model model,
+                                       HttpServletRequest request) throws AuthException, EncoderException {
         Integer sell_goods_id;
         //判断是否是字符
         try {
@@ -167,6 +168,24 @@ public class SellGoodsController {
         User user = userService.getUserByUserId(sellGoods.getUser_id());
         model.addAttribute("sell_goods", sellGoods);
         model.addAttribute("user", user);
+        String userName = (String) request.getSession().getAttribute("sx_user_name");
+        //判断收藏商品状态
+        if (null == userName){
+            //显示登录状态 1还没登录
+            model.addAttribute("isLogin", 1);
+            //显示 "收藏商品" 状态  1 还没收藏
+            model.addAttribute("collection_status",1);
+        }else {
+            //0 表示已经登录
+            model.addAttribute("isLogin", 0);
+            //查询数据库判断是否收藏
+            if (sellGoodsService.isCollectionGoods(userName,sell_goods_id)){
+                //显示 "收藏商品" 状态  0 已经收藏
+                model.addAttribute("collection_status",0);
+            }else {
+                model.addAttribute("collection_status",1);
+            }
+        }
         return "sell_goods_detailed";
 
     }

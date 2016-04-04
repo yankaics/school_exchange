@@ -71,5 +71,15 @@ public class SellGoodsDaoImpl implements SellGoodsDao {
         return (List<SellGoodsToUser>) sessionFactory.openSession().createQuery(hql).list();
     }
 
+    @Override
+    public List<Object[]> queryCollection(String userName, Integer goodId) {
+        String hql = "select c.id,c.goods_id from Collection c , User u where u.id=c.user_id and u.user_name=?0 and c.goods_id=?1";
+
+        return sessionFactory.openSession().createQuery(hql)
+                .setParameter("0",userName)
+                .setParameter("1",goodId)
+                .list();
+    }
+
 
 }

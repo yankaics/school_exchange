@@ -26,7 +26,21 @@
                     </div>
                 </div>
                 <div class="col-md-3" style="margin-left: 0">
-                    <button class="btn btn-danger">收藏商品</button>
+                    <button class="btn btn-danger" onclick="CollectionGoods()">
+                        <span id="btn_name">
+                            <c:if test="${1 == isLogin }">
+                                收藏商品
+                            </c:if>
+                            <c:if test="${0 == isLogin}">
+                                <c:if test="${0 == collection_status}">
+                                    取消收藏
+                                </c:if>
+                                <c:if test="${1 == collection_status}">
+                                    收藏商品
+                                </c:if>
+                            </c:if>
+                        </span>
+                    </button>
                     <div>
                         <script>window._bd_share_config = {
                             "common": {
@@ -50,7 +64,7 @@
             <div class="detailed_name">${sell_goods.goods_name}</div>
             <!--商品简单介绍-->
             <div class="detailed_simple_desc">
-               ${sell_goods.goods_desc}
+                ${sell_goods.goods_desc}
             </div>
             <div style="margin-top: 20px">
                 <ul class="list-group" style="">
@@ -66,10 +80,18 @@
                         </h3>
                     </li>
                     <li class="list-group-item">
-                        <h3><span class="label label-info">&nbsp;&nbsp;&nbsp;&nbsp;发布者</span>&nbsp;&nbsp;${user.user_name}</h3>
+                        <h3><span
+                                class="label label-info">&nbsp;&nbsp;&nbsp;&nbsp;发布者</span>&nbsp;&nbsp;${user.user_name}
+                        </h3>
                     </li>
                     <li class="list-group-item">
-                        <h3><span class="label label-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标签</span>&nbsp;&nbsp;${sell_goods.goods_type}
+                        <h3><span class="label label-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标签</span>&nbsp;&nbsp;
+                            <c:if test="${0 == sell_goods.goods_type.length()}">
+                                无
+                            </c:if>
+                            <c:if test="${0 != sell_goods.goods_type.length()}">
+                                ${sell_goods.goods_type}
+                            </c:if>
                         </h3>
                     </li>
                     <li class="list-group-item">
@@ -77,7 +99,14 @@
                         </h3>
                     </li>
                     <li class="list-group-item">
-                        <h3><span class="label label-info">联系方式</span>&nbsp;&nbsp;${sell_goods.contact}</h3>
+                        <h3><span class="label label-info">联系方式</span>&nbsp;&nbsp;
+                            <c:if test="${0 == sell_goods.contact.length()}">
+                                无
+                            </c:if>
+                            <c:if test="${0 != sell_goods.contact.length()}">
+                                ${sell_goods.contact}
+                            </c:if>
+                        </h3>
                     </li>
                     <li class="list-group-item">
                         <h3>

@@ -910,3 +910,15 @@ function redirectReleaseGoods() {
     location.href = "/to_release_goods";
 }
 
+/*
+ * 商品收藏按钮切换
+ */
+function CollectionGoods() {
+    var btnName = document.getElementById("btn_name").innerText;
+    if (btnName == "收藏商品"){
+        document.getElementById("btn_name").innerHTML = "取消收藏";
+    }else {
+        document.getElementById("btn_name").innerHTML = "收藏商品";
+    }
+}
+

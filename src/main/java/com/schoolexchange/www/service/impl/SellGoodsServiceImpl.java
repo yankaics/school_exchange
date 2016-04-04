@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -153,13 +154,26 @@ public class SellGoodsServiceImpl implements SellGoodsService {
      */
     public SellGoods getSellGoodsDetailed(Integer sell_goods_id) {
         List<SellGoods> list = sellGoodsDao.getAllGoods();
-        if (null != list){
+        if (null != list) {
             for (SellGoods goods : list) {
                 if (sell_goods_id.equals(goods.getId()))
                     return goods;
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean isCollectionGoods(String userName, Integer goodsId) {
+        List<Object[]> list = sellGoodsDao.queryCollection(userName, goodsId);
+
+        if (0 == list.size()) {
+            return false;
+        } else {
+            //获取查询的数据
+            /*System.out.println("====id==" + list.get(0)[0] + "==goodId=" + list.get(0)[1]);*/
+            return true;
+        }
     }
 
 
