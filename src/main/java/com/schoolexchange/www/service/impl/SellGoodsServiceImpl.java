@@ -2,6 +2,7 @@ package com.schoolexchange.www.service.impl;
 
 import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.dao.UserDao;
+import com.schoolexchange.www.entity.Collection;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.SellGoodsToUser;
 import com.schoolexchange.www.entity.User;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -174,6 +174,14 @@ public class SellGoodsServiceImpl implements SellGoodsService {
             /*System.out.println("====id==" + list.get(0)[0] + "==goodId=" + list.get(0)[1]);*/
             return true;
         }
+    }
+
+    @Override
+    public void addCollection(Integer goodsId, Integer userId) {
+        Collection collection = new Collection();
+        collection.setGoods_id(goodsId);
+        collection.setId(userId);
+        sellGoodsDao.saveCollection(collection);
     }
 
 

@@ -197,7 +197,6 @@ public class SellGoodsController {
     @RequestMapping(value = "/show_goods_details/collection")
     public void collectionGoods(String str_goods_id, Model model,
                                 HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("=============未登录======");
         response.getWriter().write("ok");
     }
 

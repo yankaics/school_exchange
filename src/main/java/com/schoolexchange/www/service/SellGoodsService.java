@@ -77,10 +77,19 @@ public interface SellGoodsService {
     SellGoods getSellGoodsDetailed(Integer sell_goods_id);
 
     /**
-     *通过用户名和商品id判断该商品是否已经收藏
+     * 通过用户名和商品id判断该商品是否已经收藏
+     *
      * @param userName 用户名
      * @param goodsId  商品id
      * @return true 已经收藏，否则还没收藏
      */
     boolean isCollectionGoods(String userName, Integer goodsId);
+
+    /**
+     * 添加收藏
+     *
+     * @param goodsId 商品id
+     * @param userId  用户id
+     */
+    void addCollection(Integer goodsId, Integer userId);
 }
