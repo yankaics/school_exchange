@@ -194,10 +194,30 @@ public class SellGoodsController {
         return "sell_goods_detailed";
     }
 
+    /**
+     * 收藏商品
+     *
+     * @param str_goods_id 货物id
+     * @param type         收藏状态  1收藏 2取消收藏
+     */
     @RequestMapping(value = "/show_goods_details/collection")
-    public void collectionGoods(String str_goods_id, Model model,
+    public void collectionGoods(@RequestParam(value = "goods_id") String str_goods_id, String type,
                                 HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.getWriter().write("ok");
+
+        String userName = (String) request.getSession().getAttribute("sx_user_name");
+        Integer userId = userService.getUserIdByUserName(userName);
+        if (null != userId && null != type) {
+            if (type.equals("1")) {
+                //收藏
+                sellGoodsService.addCollection(Integer.parseInt(str_goods_id), userId);
+            } else {
+                //取消收藏
+                sellGoodsService.cancelCollection(Integer.parseInt(str_goods_id), userId);
+            }
+            response.getWriter().write("yes");
+        } else {
+            response.getWriter().write("no");
+        }
     }
 
     @RequestMapping(value = "/encryptCollectionUrl")

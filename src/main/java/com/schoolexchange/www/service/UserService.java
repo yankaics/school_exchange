@@ -206,4 +206,12 @@ public interface UserService {
      * @return 成功返回用户的的所有信息，否则返回NULL
      */
     User getUserByUserId(Integer user_id);
+
+    /**
+     * 通过用户名获取用户id
+     *
+     * @param userName 用户名
+     * @return 返回用户id
+     */
+    Integer getUserIdByUserName(String userName);
 }

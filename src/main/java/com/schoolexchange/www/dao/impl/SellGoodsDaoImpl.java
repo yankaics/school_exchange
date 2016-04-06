@@ -4,6 +4,8 @@ import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.entity.Collection;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.SellGoodsToUser;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -77,14 +79,24 @@ public class SellGoodsDaoImpl implements SellGoodsDao {
         String hql = "select c.id,c.goods_id from Collection c , User u where u.id=c.user_id and u.user_name=?0 and c.goods_id=?1";
 
         return sessionFactory.openSession().createQuery(hql)
-                .setParameter("0",userName)
-                .setParameter("1",goodId)
+                .setParameter("0", userName)
+                .setParameter("1", goodId)
                 .list();
     }
 
     @Override
     public void saveCollection(Collection collection) {
         sessionFactory.openSession().save(collection);
+    }
+
+    @Override
+    public void deleteCollection(Integer goodsId, Integer userId) {
+        Session session = sessionFactory.openSession();
+        String hql = "delete Collection  where goods_id=?0 and  user_id=?1";
+        Query q = session.createQuery(hql);
+        q.setInteger("0", goodsId);
+        q.setInteger("1", userId);
+        q.executeUpdate();
     }
 
 

@@ -59,4 +59,12 @@ public interface SellGoodsDao {
      * @param collection 收藏实体类
      */
     void saveCollection(Collection collection);
+
+    /**
+     * 取消收藏,直接删除collection表
+     *
+     * @param goodsId 商品id
+     * @param userId  用户id
+     */
+    void deleteCollection(Integer goodsId, Integer userId);
 }

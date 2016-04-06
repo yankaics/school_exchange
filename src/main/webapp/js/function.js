@@ -919,14 +919,29 @@ function CollectionGoods(id) {
         $.post(
             "/show_goods_details/collection",
             {
-                goods_id:id
+                goods_id:id,
+                type:"1"
             },
             function (data){
-              alert("返回值== " + data);
+              if (data != "yes"){
+                  document.getElementById("btn_name").innerHTML = "收藏商品";
+              }
             }
         );
         document.getElementById("btn_name").innerHTML = "取消收藏";
     }else {
+        $.post(
+            "/show_goods_details/collection",
+            {
+                goods_id:id,
+                type:"2"
+            },
+            function (data){
+                if (data != "yes"){
+                    document.getElementById("btn_name").innerHTML = "取消收藏";
+                }
+            }
+        );
         document.getElementById("btn_name").innerHTML = "收藏商品";
     }
 }

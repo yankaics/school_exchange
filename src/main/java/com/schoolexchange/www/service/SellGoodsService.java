@@ -92,4 +92,12 @@ public interface SellGoodsService {
      * @param userId  用户id
      */
     void addCollection(Integer goodsId, Integer userId);
+
+    /**
+     * 取消收藏
+     *
+     * @param goodId 商品id
+     * @param userId 用户id
+     */
+    void cancelCollection(Integer goodId, Integer userId);
 }

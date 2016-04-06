@@ -180,8 +180,13 @@ public class SellGoodsServiceImpl implements SellGoodsService {
     public void addCollection(Integer goodsId, Integer userId) {
         Collection collection = new Collection();
         collection.setGoods_id(goodsId);
-        collection.setId(userId);
+        collection.setUser_id(userId);
         sellGoodsDao.saveCollection(collection);
+    }
+
+    @Override
+    public void cancelCollection(Integer goodId, Integer userId) {
+        sellGoodsDao.deleteCollection(goodId,userId);
     }
 
 
