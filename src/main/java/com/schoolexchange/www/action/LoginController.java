@@ -8,6 +8,8 @@ import com.schoolexchange.www.service.RequestUrlSecurity;
 import com.schoolexchange.www.service.SellGoodsService;
 import com.schoolexchange.www.service.UserService;
 import org.apache.commons.codec.EncoderException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,8 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
+
+    private static final Logger loogger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;
@@ -79,6 +83,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/")
     public String index(HttpSession session, Model model) throws AuthException, EncoderException {
+        loogger.info("index visit log.............");
         String sx_university = userService.getUserUniversity(session);
         if (sx_university == null) {
             session.setAttribute("sx_university", "烟台大学文经学院");
