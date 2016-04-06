@@ -1,6 +1,7 @@
 package com.schoolexchange.www.dao.impl;
 
 import com.schoolexchange.www.dao.SellGoodsDao;
+import com.schoolexchange.www.entity.Collection;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.SellGoodsToUser;
 import org.hibernate.SessionFactory;
@@ -79,6 +80,11 @@ public class SellGoodsDaoImpl implements SellGoodsDao {
                 .setParameter("0",userName)
                 .setParameter("1",goodId)
                 .list();
+    }
+
+    @Override
+    public void saveCollection(Collection collection) {
+        sessionFactory.openSession().save(collection);
     }
 
 

@@ -1,5 +1,6 @@
 package com.schoolexchange.www.dao;
 
+import com.schoolexchange.www.entity.Collection;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.SellGoodsToUser;
 
@@ -51,4 +52,11 @@ public interface SellGoodsDao {
      * @return
      */
     List<Object[]> queryCollection(String userName, Integer goodId);
+
+    /**
+     * 增加收藏记录
+     *
+     * @param collection 收藏实体类
+     */
+    void saveCollection(Collection collection);
 }
