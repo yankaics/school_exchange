@@ -915,29 +915,29 @@ function redirectReleaseGoods() {
  */
 function CollectionGoods(id) {
     var btnName = document.getElementById("btn_name").innerText;
-    if (btnName == "收藏商品"){
+    if (btnName == "收藏商品") {
         $.post(
             "/show_goods_details/collection",
             {
-                goods_id:id,
-                type:"1"
+                goods_id: id,
+                type: "1"
             },
-            function (data){
-              if (data != "yes"){
-                  document.getElementById("btn_name").innerHTML = "收藏商品";
-              }
+            function (data) {
+                if (data != "yes") {
+                    document.getElementById("btn_name").innerHTML = "收藏商品";
+                }
             }
         );
         document.getElementById("btn_name").innerHTML = "取消收藏";
-    }else {
+    } else {
         $.post(
             "/show_goods_details/collection",
             {
-                goods_id:id,
-                type:"2"
+                goods_id: id,
+                type: "2"
             },
-            function (data){
-                if (data != "yes"){
+            function (data) {
+                if (data != "yes") {
                     document.getElementById("btn_name").innerHTML = "取消收藏";
                 }
             }
@@ -946,3 +946,10 @@ function CollectionGoods(id) {
     }
 }
 
+/*
+ *留言
+ */
+function toMessage(userName) {
+    console.log('用户名== ' + userName);
+    location.href = "/show_goods_details/message?publish=" + userName;
+}

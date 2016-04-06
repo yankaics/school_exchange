@@ -224,4 +224,10 @@ public class SellGoodsController {
     public String collectionToLogin(String requestUrl) throws Exception {
         return "redirect:/to_login?requestUrl=" + requestUrlSecurity.encrypt(requestUrl);
     }
+
+    @RequestMapping(value = "/show_goods_details/message")
+    public String leaveToMessage(String publish){
+        System.out.println("发布者== " + publish);
+        return "leaveToMessage";
+    }
 }
