@@ -195,7 +195,7 @@ public class SellGoodsController {
     }
 
     /**
-     * 收藏商品
+     * 收藏或取消商品
      *
      * @param str_goods_id 货物id
      * @param type         收藏状态  1收藏 2取消收藏
