@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>留言</title>
@@ -18,7 +20,7 @@
     <div class="row" style="margin-top: 50px">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-                <p class="bg-danger ms_result" id="ms_result">向shadow留言成功!!</p>
+            <p class="bg-danger ms_result" id="ms_result">向shadow留言成功!!</p>
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -27,7 +29,7 @@
         <div class="col-md-8">
             <div class="form-group">
                 <label for="receiver" class="fontStyle">接受者:</label>
-                <input type="text" class="form-control" id="receiver" value="shadow" readonly>
+                <input type="text" class="form-control" id="receiver" value="${publish}" readonly>
             </div>
             <div class="form-group">
                 <label for="content" class="fontStyle"><span id="span_content">内容</span></label>

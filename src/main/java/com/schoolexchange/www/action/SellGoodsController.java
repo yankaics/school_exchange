@@ -41,6 +41,7 @@ public class SellGoodsController {
 
     @Autowired
     private MessageService messageService;
+
     /**
      * 跳转到发布或编辑商品界面
      *
@@ -225,8 +226,8 @@ public class SellGoodsController {
     }
 
     @RequestMapping(value = "/show_goods_details/message")
-    public String leaveToMessage(String publish, @RequestParam(value = "goodsId") String str_goodsId) {
-        System.out.println("发布者== " + publish + "===商品id= " + str_goodsId);
+    public String leaveToMessage(String publish, Model model) {
+        model.addAttribute("publish", publish);
         return "leaveToMessage";
     }
 
@@ -241,8 +242,8 @@ public class SellGoodsController {
         System.out.println("当前用户" + userName + "id==" + userId + "==接受者" + receiver + "===id" + receiverId);
         if (userId.equals(receiverId)) {
             response.getWriter().write("no");
-        }else {
-            messageService.addMessage(userId,receiverId,content);
+        } else {
+            messageService.addMessage(userId, receiverId, content);
             response.getWriter().write("ok");
         }
 
