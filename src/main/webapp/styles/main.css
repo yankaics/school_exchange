@@ -843,13 +843,33 @@
     font-size: 14px;
     color: #dd2727;
 }
-.detailed_name{
+
+.detailed_name {
     color: #1C826C;
     font-size: 28px;
     margin-top: 40px;
 }
+
 /*没登陆收藏样式*/
-.collectionLoginStyle{
+.collectionLoginStyle {
     text-decoration: none;
     color: white;
+}
+
+/*
+留言样式
+*/
+.fontStyle {
+    font-weight: bold;
+}
+
+.sendBtn {
+    width: 100%;
+}
+
+.ms_result {
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+    display: none;
 }

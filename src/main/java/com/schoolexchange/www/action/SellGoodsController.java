@@ -3,10 +3,7 @@ package com.schoolexchange.www.action;
 import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
-import com.schoolexchange.www.service.QiniuService;
-import com.schoolexchange.www.service.RequestUrlSecurity;
-import com.schoolexchange.www.service.SellGoodsService;
-import com.schoolexchange.www.service.UserService;
+import com.schoolexchange.www.service.*;
 import org.apache.commons.codec.EncoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +39,8 @@ public class SellGoodsController {
     @Autowired
     private QiniuService qiniuService;
 
+    @Autowired
+    private MessageService messageService;
     /**
      * 跳转到发布或编辑商品界面
      *
@@ -226,8 +225,26 @@ public class SellGoodsController {
     }
 
     @RequestMapping(value = "/show_goods_details/message")
-    public String leaveToMessage(String publish){
-        System.out.println("发布者== " + publish);
+    public String leaveToMessage(String publish, @RequestParam(value = "goodsId") String str_goodsId) {
+        System.out.println("发布者== " + publish + "===商品id= " + str_goodsId);
         return "leaveToMessage";
+    }
+
+    @RequestMapping(value = "/show_goods_details/sendMessage")
+    public void sendMessage(String receiver, String content, HttpServletResponse response,
+                            HttpServletRequest request) throws IOException {
+        //获取当前用户id
+        String userName = (String) request.getSession().getAttribute("sx_user_name");
+        Integer userId = userService.getUserIdByUserName(userName);
+        //获取接受留言的用户id
+        Integer receiverId = userService.getUserIdByUserName(receiver);
+        System.out.println("当前用户" + userName + "id==" + userId + "==接受者" + receiver + "===id" + receiverId);
+        if (userId.equals(receiverId)) {
+            response.getWriter().write("no");
+        }else {
+            messageService.addMessage(userId,receiverId,content);
+            response.getWriter().write("ok");
+        }
+
     }
 }

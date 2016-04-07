@@ -949,7 +949,48 @@ function CollectionGoods(id) {
 /*
  *留言
  */
-function toMessage(userName) {
+function toMessage(userName, goodsId) {
     console.log('用户名== ' + userName);
-    location.href = "/show_goods_details/message?publish=" + userName;
+    location.href = "/show_goods_details/message?publish=" + userName + "&goodsId=" + goodsId;
+}
+/**
+ * ajax异步发送留言
+ */
+function sendMessage() {
+    var receiver = document.getElementById("receiver").value;
+    var content = document.getElementById("content").value;
+    content = $.trim(content);
+    if (0 == content.length) {
+        document.getElementById("span_content").innerHTML = "<span style='color: red'>内容不能为空</span>";
+    } else {
+        if (content.length > 200) {
+            document.getElementById("span_content").innerHTML = "<span style='color: red'>内容不能超过200字</span>";
+        } else {
+            document.getElementById("span_content").innerHTML = '内容';
+            $('#sendBtn').attr({
+                "disabled": "disabled"
+            });
+            document.getElementById("span_btn").innerText = '发送中...';
+            $.post(
+                "/show_goods_details/sendMessage",
+                {
+                    receiver:receiver,
+                    content:content
+                },
+                function(data){
+                    if(data == "ok"){
+                        $('#sendBtn').removeAttr("disabled");//将按钮可用
+                        document.getElementById("span_btn").innerText = '发送';
+                        $('#ms_result').show();
+                    }else {
+                        alert("不能给自己留言");
+                        document.getElementById("span_btn").innerText = '发送';
+                    }
+
+                }
+            );
+
+        }
+    }
+
 }

@@ -115,7 +115,7 @@
                     </li>
                     <li class="list-group-item">
                         <h3>
-                            <button class="btn btn-danger" style="width: 100%" onclick="toMessage('${user.user_name}')">给他留言</button>
+                            <button class="btn btn-danger" style="width: 100%" onclick="toMessage('${user.user_name}','${sell_goods.id}')">给他留言</button>
                         </h3>
                     </li>
                 </ul>

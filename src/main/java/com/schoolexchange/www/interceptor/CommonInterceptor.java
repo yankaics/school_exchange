@@ -21,6 +21,12 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestUrl = request.getRequestURI();
+        String userName = request.getParameter("publish");
+        String strGoodsId= request.getParameter("goodsId");
+        if (null != userName && null != strGoodsId){
+            System.out.println(userName + "========" + strGoodsId);
+            requestUrl +="?publish=" + userName + "&goodsId=" + strGoodsId;
+        }
         HttpSession session = request.getSession();
         if (null == session.getAttribute("sx_user_name")) {
             response.sendRedirect("/to_login?requestUrl=" + requestUrlSecurity.encrypt(requestUrl));
