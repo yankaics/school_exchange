@@ -1,5 +1,6 @@
 package com.schoolexchange.www.action;
 
+import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.User;
@@ -19,6 +20,8 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by shadow
@@ -247,5 +250,23 @@ public class SellGoodsController {
             response.getWriter().write("ok");
         }
 
+    }
+
+    @RequestMapping(value = "/getUnreadMessage")
+    public void getUnreadMessage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        /*Thread.sleep(3000);*/
+        Map<Map<String,String>,Map<String,String>> map = new HashMap<>();
+        Map<String,String> map1 = new HashMap<>();
+        map1.put("name","张三");
+        Map<String,String> map2 = new HashMap<>();
+        map2.put("content", "亲，能不能便宜一点!!");
+        map.put(map1,map2);
+        Map<String,String> map3 = new HashMap<>();
+        map1.put("name","shadow");
+        Map<String,String> map4 = new HashMap<>();
+        map2.put("content", "hello shadow");
+        map.put(map3,map4);
+        Gson gson = new Gson();
+        response.getWriter().write(gson.toJson(map));
     }
 }

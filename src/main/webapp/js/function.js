@@ -318,7 +318,22 @@ function selectUniversity() {
 }
 /*获取焦点获取未读的消息*/
 function get_unread_message() {
-    $(".message_div").show();
+    $(".message_div").show().empty();
+    $(".message_div").append('<h5>正在加载。。。。请稍等</h5>');
+    $.post(
+        "/getUnreadMessage",
+        function(data){
+            var obj=eval(data);
+            alert("返回的json== " + JSON.stringify(obj));
+            $(".message_div").show().empty();
+            $(".message_div").append('<div class="look_all_message"><a href="#" class="list-group-item" style="background: #2BB8AA" onclick="show_sideBar(6,\'#my_message\');" onmouseover="get_unread_message()">查看所有未读消息</a></div>');
+            $(".message_div").append('<a href="#" class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">谷歌在企业云市场可以说是一鼓作气，重击企业市场。。。 <div>from 张三的评论</div> </a>');
+            $(".message_div").append('<a href="#" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">尽管iPhone先出，但是不甘落后且一直奋起直追的Android。。。 <div>from Shadow的留言</div> </a>');
+            $(".message_div").append('<a href="#" class="list-group-item list-group-item-warning" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">Porta acconsectetur ac <div>from Shadow的评论</div> </a>');
+            $(".message_div").append('<a href="#" class="list-group-item list-group-item-danger" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">Vestibulumat eros <div>from 张三的留言</div> </a>');
+        },
+        "json"
+    );
 }
 
 /*失去焦点关闭未读消息*/
