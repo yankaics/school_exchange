@@ -1,5 +1,7 @@
 package com.schoolexchange.www.entity;
 
+import java.util.Date;
+
 /**
  * Created by shadow on 2015/11/16.
  * Message:留言表
@@ -22,6 +24,17 @@ public class Message {
 
     //消息状态=>0表示未读，1表示已读
     private Integer message_state;
+
+    //发布日期
+    private Date publishDate;
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
 
     public Integer getId() {
         return id;
