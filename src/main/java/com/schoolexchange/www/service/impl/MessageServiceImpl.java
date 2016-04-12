@@ -6,6 +6,8 @@ import com.schoolexchange.www.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by shadow on 2016/4/7.
  * MessageService实现
@@ -23,6 +25,7 @@ public class MessageServiceImpl implements MessageService {
         message.setAccept_user_id(receiverId);
         message.setMessage_content(content);
         message.setMessage_state(0);
+        message.setPublishDate(new Date());
         messageDao.saveMessage(message);
     }
 }
