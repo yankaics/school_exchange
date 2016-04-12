@@ -78,19 +78,19 @@
             <div class="list-group message_div" onmouseout="close_unread_message();">
                 <div class="look_all_message"><a href="#" class="list-group-item" style="background: #2BB8AA" onclick="show_sideBar(6,'#my_message');"
                                                  onmouseover="get_unread_message()">查看所有未读消息</a></div>
-                <a href="#" class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">谷歌在企业云市场可以说是一鼓作气，重击企业市场。。。
-                    <div>from 张三的评论</div>
+                <a href="#" id="mess_one" class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">
+                    <div id="name_one"></div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">尽管iPhone先出，但是不甘落后且一直奋起直追的Android。。。
-                    <div>from Shadow的留言</div>
+                <a href="#" id="mess_two" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">
+                    <div id="name_two"></div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-warning" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">Porta ac
-                    consectetur ac
-                    <div>from Shadow的评论</div>
+                <a href="#" id="mess_three" class="list-group-item list-group-item-warning" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">
+
+                    <div id="name_three"></div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-danger" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">Vestibulum
-                    at eros
-                    <div>from 张三的留言</div>
+                <a href="#" id="mess_four" class="list-group-item list-group-item-danger" onmouseover="get_unread_message()" onclick="show_sideBar(6,'#my_message');">
+
+                    <div id="name_four"></div>
                 </a>
             </div>
         </div>

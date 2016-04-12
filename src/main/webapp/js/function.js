@@ -322,17 +322,56 @@ function get_unread_message() {
     $(".message_div").append('<h5>正在加载。。。。请稍等</h5>');
     $.post(
         "/getUnreadMessage",
-        function(data){
-            var obj=eval(data);
-            alert("返回的json== " + JSON.stringify(obj));
-            $(".message_div").show().empty();
-            $(".message_div").append('<div class="look_all_message"><a href="#" class="list-group-item" style="background: #2BB8AA" onclick="show_sideBar(6,\'#my_message\');" onmouseover="get_unread_message()">查看所有未读消息</a></div>');
-            $(".message_div").append('<a href="#" class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">谷歌在企业云市场可以说是一鼓作气，重击企业市场。。。 <div>from 张三的评论</div> </a>');
-            $(".message_div").append('<a href="#" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">尽管iPhone先出，但是不甘落后且一直奋起直追的Android。。。 <div>from Shadow的留言</div> </a>');
-            $(".message_div").append('<a href="#" class="list-group-item list-group-item-warning" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">Porta acconsectetur ac <div>from Shadow的评论</div> </a>');
-            $(".message_div").append('<a href="#" class="list-group-item list-group-item-danger" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');">Vestibulumat eros <div>from 张三的留言</div> </a>');
-        },
-        "json"
+        function (data) {
+            if (data == "no") {
+                alert("还没登录");
+            } else {
+                var obj = eval(data);
+                $(".message_div").show().empty();
+                if (0 == obj.length) {
+                    $(".message_div").append('<div class="look_all_message"><a href="#" class="list-group-item" style="background: #2BB8AA" onclick="show_sideBar(6,\'#my_message\');" onmouseover="get_unread_message()">暂无消息</a></div>');
+                } else {
+                    $(".message_div").append('<div class="look_all_message"><a href="#" class="list-group-item" style="background: #2BB8AA" onclick="show_sideBar(6,\'#my_message\');" onmouseover="get_unread_message()">查看所有未读消息</a></div>');
+                    if (1 == obj.length) {
+                        $(".message_div").append('<a href="#"  class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_one"></p><div id="name_one"></div></a>');
+                    }
+                    if (2 == obj.length) {
+                        $(".message_div").append('<a href="#"  class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_one"></p><div id="name_one"></div></a>');
+                        $(".message_div").append('<a href="#" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_two"></p><div id="name_two"></div> </a>');
+                    }
+                    if (3 == obj.length) {
+                        $(".message_div").append('<a href="#"  class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_one"></p><div id="name_one"></div></a>');
+                        $(".message_div").append('<a href="#" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_two"></p><div id="name_two"></div> </a>');
+                        $(".message_div").append('<a href="#" class="list-group-item list-group-item-warning" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_three"></p><div id="name_three"></div> </a>');
+                    }
+                    if (4 == obj.length) {
+                        $(".message_div").append('<a href="#"  class="list-group-item list-group-item-success" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_one"></p><div id="name_one"></div></a>');
+                        $(".message_div").append('<a href="#" class="list-group-item list-group-item-info" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_two"></p><div id="name_two"></div> </a>');
+                        $(".message_div").append('<a href="#" class="list-group-item list-group-item-warning" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_three"></p><div id="name_three"></div> </a>');
+                        $(".message_div").append('<a href="#" class="list-group-item list-group-item-danger" onmouseover="get_unread_message()" onclick="show_sideBar(6,\'#my_message\');"><p id="mess_four"></p><div id="name_four"></div> </a>');
+                    }
+                    for (var i = 0; i < obj.length; i++) {
+                        /*alert(decodeURI(obj[i].name) + "==========" + decodeURI(obj[i].content));*/
+                        if (0 == i) {
+                            document.getElementById("mess_one").innerText = decodeURIComponent(obj[i].content);
+                            document.getElementById("name_one").innerText = "from " + decodeURIComponent(obj[i].name) + "的评论";
+                        }
+                        if (1 == i) {
+                            document.getElementById("mess_two").innerText = decodeURIComponent(obj[i].content);
+                            document.getElementById("name_two").innerText = "from " + decodeURIComponent(obj[i].name) + "的评论";
+                        }
+                        if (2 == i) {
+                            document.getElementById("mess_three").innerText = decodeURIComponent(obj[i].content);
+                            document.getElementById("name_three").innerText = "from " + decodeURIComponent(obj[i].name) + "的评论";
+                        }
+                        if (3 == i) {
+                            document.getElementById("mess_four").innerText = decodeURIComponent(obj[i].content);
+                            document.getElementById("name_four").innerText = "from " + decodeURIComponent(obj[i].name) + "的评论";
+                        }
+                    }
+                }
+            }
+        }
     );
 }
 
@@ -989,15 +1028,15 @@ function sendMessage() {
             $.post(
                 "/show_goods_details/sendMessage",
                 {
-                    receiver:receiver,
-                    content:content
+                    receiver: receiver,
+                    content: content
                 },
-                function(data){
-                    if(data == "ok"){
+                function (data) {
+                    if (data == "ok") {
                         $('#sendBtn').removeAttr("disabled");//将按钮可用
                         document.getElementById("span_btn").innerText = '发送';
                         $('#ms_result').show();
-                    }else {
+                    } else {
                         alert("不能给自己留言");
                         document.getElementById("span_btn").innerText = '发送';
                     }

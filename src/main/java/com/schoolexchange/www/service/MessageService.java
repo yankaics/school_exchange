@@ -1,5 +1,10 @@
 package com.schoolexchange.www.service;
 
+import com.schoolexchange.www.entity.UnreadMessage;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 /**
  * Created by shadow on 2016/4/7.
  * 留言业务
@@ -15,4 +20,12 @@ public interface MessageService {
      * @see com.schoolexchange.www.action.SellGoodsController
      */
     void addMessage(Integer userId, Integer receiverId, String content);
+
+    /**
+     * 查询用户未读信息
+     *
+     * @param userId 用户id
+     * @return 返回未读信息集合
+     */
+    List<UnreadMessage> getUnreadMessage(Integer userId) throws UnsupportedEncodingException;
 }

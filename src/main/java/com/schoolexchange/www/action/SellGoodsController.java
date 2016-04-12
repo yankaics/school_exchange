@@ -3,6 +3,7 @@ package com.schoolexchange.www.action;
 import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoods;
+import com.schoolexchange.www.entity.UnreadMessage;
 import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.*;
 import org.apache.commons.codec.EncoderException;
@@ -18,10 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by shadow
@@ -254,19 +254,27 @@ public class SellGoodsController {
 
     @RequestMapping(value = "/getUnreadMessage")
     public void getUnreadMessage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        /*Thread.sleep(3000);*/
-        Map<Map<String,String>,Map<String,String>> map = new HashMap<>();
-        Map<String,String> map1 = new HashMap<>();
-        map1.put("name","张三");
-        Map<String,String> map2 = new HashMap<>();
-        map2.put("content", "亲，能不能便宜一点!!");
-        map.put(map1,map2);
-        Map<String,String> map3 = new HashMap<>();
-        map1.put("name","shadow");
-        Map<String,String> map4 = new HashMap<>();
-        map2.put("content", "hello shadow");
-        map.put(map3,map4);
+        String user_name = (String) request.getSession().getAttribute("sx_user_name");
+        if (null != user_name) {
+            Integer userId = userService.getUserIdByUserName(user_name);
+            List<UnreadMessage> list = messageService.getUnreadMessage(userId);
+            Gson gson = new Gson();
+            response.getWriter().write(gson.toJson(list));
+        } else {
+            //session过期,提醒登录
+            response.getWriter().write("no");
+        }
+
+       /* String name = "张三";
+        name = URLEncoder.encode(name,"utf8");
+        String content = "什么情况 ,出现bug了, 一直    , 显示乱码。".replace(" ","");
+        content =URLEncoder.encode(content,"utf8");
+        UnreadMessage r2 = new UnreadMessage(name,content);
+        List<UnreadMessage> list = new ArrayList<>();
+        list.add(r2);
         Gson gson = new Gson();
-        response.getWriter().write(gson.toJson(map));
+        messageService.getUnreadMessage(1);
+        response.getWriter().write(gson.toJson(list));*/
     }
+
 }
