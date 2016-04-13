@@ -115,7 +115,9 @@
                     </li>
                     <li class="list-group-item">
                         <h3>
-                            <button class="btn btn-danger" style="width: 100%" onclick="toMessage('${user.user_name}','${sell_goods.id}')">给他留言</button>
+                            <button class="btn btn-danger" style="width: 100%"
+                                    onclick="toMessage('${user.user_name}','${sell_goods.id}')">给他留言
+                            </button>
                         </h3>
                     </li>
                 </ul>
@@ -125,11 +127,12 @@
     </div>
 
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div style="text-align: center">商品详细信息</div>
+        <div class="col-md-12">
+            <div class="jumbotron" style="background-color: #bbd6af">
+                <h4 style="text-align: center">商品详情</h4>
+                <p>${sell_goods.goods_info}</p>
+            </div>
         </div>
-        <div class="col-md-1"></div>
     </div>
 
     <div class="row">
