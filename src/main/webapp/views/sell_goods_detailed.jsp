@@ -144,7 +144,7 @@
             <!--表情盒子-->
             <div id="Smohan_FaceBox">
                 <span id="sell_goods_id_span" style="display: none">${sell_goods.id}</span>
-                <p class="bg-danger" id="ms_result" style="line-height: 10px;text-align: center;font-weight: bold;">内容不能空</p>
+                <p class="bg-danger comments_error" id="comments_error" style="width: 100%;display: none"></p>
                 <textarea name="text" id="Smohan_text" class="smohan_text"></textarea>
                 <p>
                     <a href="javascript:void(0)" class="face" title="表情"></a>
@@ -154,14 +154,14 @@
             <!--发布评论框-->
             <div id="publish_comments"></div>
             <div class="every_comments">
-                <a class="comment_author">东东东<span>2016-04-13</span></a>
+                <a class="comment_author"> <span>东东东</span> <span class="comment_date">2016-04-13</span></a>
                         <span>
                             萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
                             萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
                         </span>
             </div>
             <div class="every_comments">
-                <a class="comment_author">东东东<span>2016-04-13</span></a>
+                <a class="comment_author"> <span>东东东</span> <span class="comment_date">2016-04-13</span></a>
                         <span>
                             萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
                         </span>
@@ -183,14 +183,10 @@
         //解析表情  $('#Zones').replaceface($('#Zones').html());
     });
     function showComments() {
+        //格式化日期
+        var now = new Date();
+        var fnow = now.getFullYear() + "-" +(now.getMonth() + 1) + "-" + now.getDate();
         if (checkComments()){
-            $('#publish_comments').fadeIn(360);
-            $("#publish_comments").prepend("<div class='every_comments'>" +
-                    "<a class='comment_author'>shadow<span>2016-04-13</span></a>" +
-                    "<span class='comment_content'>" +
-                    getFace($('#Smohan_text').val()) +
-                    "</span>" +
-                    "</div>");
             //获取商品id
             var goodsId = document.getElementById("sell_goods_id_span").innerText;
             $.post(
@@ -200,7 +196,20 @@
                         commentContent:getFace($('#Smohan_text').val())
                     },
                     function(data){
-                        /* alert(data);*/
+                        if ("no" == data){
+                            //登录过期
+                            document.getElementById("comments_error").innerText = "登录已过期，请登录";
+                            $('#comments_error').show();
+                        }else {
+                            $('#publish_comments').fadeIn(360);
+                            $("#publish_comments").prepend("<div class='every_comments'>" +
+                                    "<a class='comment_author'> <span id='authorName'></span><span class='comment_date'>"+fnow+"</span></a>" +
+                                    "<span class='comment_content'>" +
+                                    getFace($('#Smohan_text').val()) +
+                                    "</span>" +
+                                    "</div>");
+                            document.getElementById("authorName").innerText = data;
+                        }
                     }
             );
         }

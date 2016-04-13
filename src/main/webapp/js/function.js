@@ -1053,10 +1053,17 @@ function sendMessage() {
 *检测评论内容
 */
 function checkComments(){
-    var coment = document.getElementById("Smohan_text").value;
-    if (0 == coment.length || ""==coment){
-        
+    var comment = document.getElementById("Smohan_text").value;
+    if (0 == comment.length || "" == comment){
+        document.getElementById("comments_error").innerText = "评论不能为空";
+        $(".comments_error").show();
         return false;
     }
+    if (comment.length > 500){
+        document.getElementById("comments_error").innerText = "评论文字太长了";
+        $(".comments_error").show();
+        return false;
+    }
+    $(".comments_error").hide();
     return true;
 }

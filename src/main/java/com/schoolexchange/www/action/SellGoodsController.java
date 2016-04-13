@@ -270,10 +270,12 @@ public class SellGoodsController {
     public void addComments(HttpServletRequest request, HttpServletResponse response,
                             @RequestParam(value = "goodsId") String str_goodId, String commentContent) throws Exception{
         String user_name = (String) request.getSession().getAttribute("sx_user_name");
-        System.out.println("商品id==" + str_goodId);
-        System.out.println("评论内容== " + commentContent);
         if (null != user_name) {
-            response.getWriter().write("yes");
+            Integer userId = userService.getUserIdByUserName(user_name);
+            Integer goodsId = Integer.parseInt(str_goodId);
+            messageService.addComments(userId,goodsId,commentContent);
+            //成功返回评论用户名
+            response.getWriter().write(user_name);
         } else {
             //session过期,提醒登录
             response.getWriter().write("no");

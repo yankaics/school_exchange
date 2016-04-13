@@ -1,6 +1,7 @@
 package com.schoolexchange.www.service.impl;
 
 import com.schoolexchange.www.dao.MessageDao;
+import com.schoolexchange.www.entity.GoodsComments;
 import com.schoolexchange.www.entity.Message;
 import com.schoolexchange.www.entity.UnreadMessage;
 import com.schoolexchange.www.service.MessageService;
@@ -45,5 +46,15 @@ public class MessageServiceImpl implements MessageService {
             messages.add(new UnreadMessage(name, content));
         }
         return messages;
+    }
+
+    @Override
+    public void addComments(Integer userId, Integer goodId, String commentContent) {
+        GoodsComments comments = new GoodsComments();
+        comments.setUser_id(userId);
+        comments.setSell_goods_id(goodId);
+        comments.setComment_content(commentContent);
+        comments.setComment_time(new Date());
+        messageDao.addComment(comments);
     }
 }

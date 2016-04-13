@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Created by shadow on 2016/4/7.
- * 留言业务
+ * 消息(主要是评论和留言)
  */
 public interface MessageService {
 
@@ -28,4 +28,13 @@ public interface MessageService {
      * @return 返回未读信息集合
      */
     List<UnreadMessage> getUnreadMessage(Integer userId) throws UnsupportedEncodingException;
+
+    /**
+     * 评论
+     *
+     * @param userId         用户id
+     * @param goodId         商品id
+     * @param commentContent 评论内容
+     */
+    void addComments(Integer userId, Integer goodId, String commentContent);
 }

@@ -873,3 +873,9 @@
     font-weight: bold;
     display: none;
 }
+
+.comments_error {
+    line-height: 10px;
+    text-align: center;
+    font-weight: bold;
+}
