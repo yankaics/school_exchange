@@ -15,7 +15,7 @@
                         not-null="true"/>
               <property name="comment_content" column="comment_content" type="java.lang.String"
                         not-null="true"/>
-              <property name="commnet_count" column="goods_contact" type="java.lang.Integer"
+              <property name="commnet_count" column="goods_count" type="java.lang.Integer"
                         not-null="true"/>
        </class>
 </hibernate-mapping>
