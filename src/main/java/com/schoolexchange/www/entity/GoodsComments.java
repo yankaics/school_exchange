@@ -8,7 +8,8 @@ import java.util.Date;
  */
 public class GoodsComments {
 
-    public GoodsComments(){}
+    public GoodsComments() {
+    }
 
     //id自增
     private Integer id;
@@ -24,9 +25,6 @@ public class GoodsComments {
 
     //评论内容
     private String comment_content;
-
-    //评论总数
-    private int commnet_count;
 
     public Integer getId() {
         return id;
@@ -68,11 +66,4 @@ public class GoodsComments {
         this.comment_content = comment_content;
     }
 
-    public int getCommnet_count() {
-        return commnet_count;
-    }
-
-    public void setCommnet_count(int commnet_count) {
-        this.commnet_count = commnet_count;
-    }
 }
