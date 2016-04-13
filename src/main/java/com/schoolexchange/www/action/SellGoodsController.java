@@ -268,12 +268,14 @@ public class SellGoodsController {
 
     @RequestMapping(value = "/add_comments")
     public void addComments(HttpServletRequest request, HttpServletResponse response,
-                            @RequestParam(value = "goodsId") String str_goodId, String commentContent) throws Exception{
+                            @RequestParam(value = "goodsId") String str_goodId, String commentContent) throws Exception {
         String user_name = (String) request.getSession().getAttribute("sx_user_name");
         if (null != user_name) {
             Integer userId = userService.getUserIdByUserName(user_name);
             Integer goodsId = Integer.parseInt(str_goodId);
-            messageService.addComments(userId,goodsId,commentContent);
+            messageService.addComments(userId, goodsId, commentContent);
+            //重新编码
+            user_name = URLEncoder.encode(user_name, "utf8");
             //成功返回评论用户名
             response.getWriter().write(user_name);
         } else {

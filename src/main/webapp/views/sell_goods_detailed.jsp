@@ -208,7 +208,7 @@
                                     getFace($('#Smohan_text').val()) +
                                     "</span>" +
                                     "</div>");
-                            document.getElementById("authorName").innerText = data;
+                            document.getElementById("authorName").innerText = decodeURIComponent(data);
                         }
                     }
             );
