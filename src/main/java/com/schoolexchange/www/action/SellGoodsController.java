@@ -264,17 +264,20 @@ public class SellGoodsController {
             //session过期,提醒登录
             response.getWriter().write("no");
         }
+    }
 
-       /* String name = "张三";
-        name = URLEncoder.encode(name,"utf8");
-        String content = "什么情况 ,出现bug了, 一直    , 显示乱码。".replace(" ","");
-        content =URLEncoder.encode(content,"utf8");
-        UnreadMessage r2 = new UnreadMessage(name,content);
-        List<UnreadMessage> list = new ArrayList<>();
-        list.add(r2);
-        Gson gson = new Gson();
-        messageService.getUnreadMessage(1);
-        response.getWriter().write(gson.toJson(list));*/
+    @RequestMapping(value = "/add_comments")
+    public void addComments(HttpServletRequest request, HttpServletResponse response,
+                            @RequestParam(value = "goodsId") String str_goodId, String commentContent) throws Exception{
+        String user_name = (String) request.getSession().getAttribute("sx_user_name");
+        System.out.println("商品id==" + str_goodId);
+        System.out.println("评论内容== " + commentContent);
+        if (null != user_name) {
+            response.getWriter().write("yes");
+        } else {
+            //session过期,提醒登录
+            response.getWriter().write("no");
+        }
     }
 
 }

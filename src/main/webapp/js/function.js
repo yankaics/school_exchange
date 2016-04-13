@@ -1048,3 +1048,15 @@ function sendMessage() {
     }
 
 }
+
+/*
+*检测评论内容
+*/
+function checkComments(){
+    var coment = document.getElementById("Smohan_text").value;
+    if (0 == coment.length || ""==coment){
+        
+        return false;
+    }
+    return true;
+}

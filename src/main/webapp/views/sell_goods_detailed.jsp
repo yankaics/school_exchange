@@ -143,6 +143,8 @@
             <h4 style="text-align: center">所有评论</h4>
             <!--表情盒子-->
             <div id="Smohan_FaceBox">
+                <span id="sell_goods_id_span" style="display: none">${sell_goods.id}</span>
+                <p class="bg-danger" id="ms_result" style="line-height: 10px;text-align: center;font-weight: bold;">内容不能空</p>
                 <textarea name="text" id="Smohan_text" class="smohan_text"></textarea>
                 <p>
                     <a href="javascript:void(0)" class="face" title="表情"></a>
@@ -181,13 +183,28 @@
         //解析表情  $('#Zones').replaceface($('#Zones').html());
     });
     function showComments() {
-        $('#publish_comments').fadeIn(360);
-        $("#publish_comments").prepend("<div class='every_comments'>" +
-                "<a class='comment_author'>shadow<span>2016-04-13</span></a>" +
-                "<span class='comment_content'>" +
-                getFace($('#Smohan_text').val()) +
-                "</span>" +
-                "</div>");
+        if (checkComments()){
+            $('#publish_comments').fadeIn(360);
+            $("#publish_comments").prepend("<div class='every_comments'>" +
+                    "<a class='comment_author'>shadow<span>2016-04-13</span></a>" +
+                    "<span class='comment_content'>" +
+                    getFace($('#Smohan_text').val()) +
+                    "</span>" +
+                    "</div>");
+            //获取商品id
+            var goodsId = document.getElementById("sell_goods_id_span").innerText;
+            $.post(
+                    "/add_comments",
+                    {
+                        goodsId:goodsId,
+                        commentContent:getFace($('#Smohan_text').val())
+                    },
+                    function(data){
+                        /* alert(data);*/
+                    }
+            );
+        }
+
     }
 </script>
 </body>
