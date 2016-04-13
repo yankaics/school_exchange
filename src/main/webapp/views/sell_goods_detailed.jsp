@@ -141,7 +141,17 @@
         <div class="col-md-12">
 
             <h4 style="text-align: center">所有评论</h4>
-            <div class="comment_list">
+            <!--表情盒子-->
+            <div id="Smohan_FaceBox">
+                <textarea name="text" id="Smohan_text" class="smohan_text"></textarea>
+                <p>
+                    <a href="javascript:void(0)" class="face" title="表情"></a>
+                    <button class="button" id="Smohan_Showface" onclick="showComments()">发布评论</button>
+                </p>
+            </div>
+            <!--发布评论框-->
+            <div id="publish_comments"></div>
+            <div class="every_comments">
                 <a class="comment_author">东东东<span>2016-04-13</span></a>
                         <span>
                             萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
@@ -157,8 +167,28 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery-1.11.3.min.js"></script>
+
 <script src="../js/function.js"></script>
+<script src="../js/jquery-1.8.2.min.js"></script>
 <script src="../js/comments.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("a.face").smohanfacebox({
+            Event: "click",	//触发事件
+            divid: "Smohan_FaceBox", //外层DIV ID
+            textid: "Smohan_text" //文本框 ID
+        });
+        //解析表情  $('#Zones').replaceface($('#Zones').html());
+    });
+    function showComments() {
+        $('#publish_comments').fadeIn(360);
+        $("#publish_comments").prepend("<div class='every_comments'>" +
+                "<a class='comment_author'>shadow<span>2016-04-13</span></a>" +
+                "<span class='comment_content'>" +
+                getFace($('#Smohan_text').val()) +
+                "</span>" +
+                "</div>");
+    }
+</script>
 </body>
 </html>
