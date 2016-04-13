@@ -13,6 +13,7 @@
     <title>商品详情</title>
     <link rel="stylesheet" href="../styles/bootstrap.css">
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/comments.css">
 </head>
 <body>
 <%@include file="top.jsp" %>
@@ -134,18 +135,30 @@
             </div>
         </div>
     </div>
-
+    <%--显示评论--%>
     <div class="row">
-        <!--评论-->
-        <div class="col-md-1"></div>
-        <div class="col-md-10" style="text-align: center">
-            <!--评论-->
-            评论系统
+        <!--显示评论-->
+        <div class="col-md-12">
+
+            <h4 style="text-align: center">所有评论</h4>
+            <div class="comment_list">
+                <a class="comment_author">东东东<span>2016-04-13</span></a>
+                        <span>
+                            萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
+                            萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
+                        </span>
+            </div>
+            <div class="every_comments">
+                <a class="comment_author">东东东<span>2016-04-13</span></a>
+                        <span>
+                            萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
+                        </span>
+            </div>
         </div>
-        <div class="col-md-1"></div>
     </div>
 </div>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/function.js"></script>
+<script src="../js/comments.js"></script>
 </body>
 </html>
