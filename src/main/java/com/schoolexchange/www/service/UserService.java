@@ -214,4 +214,12 @@ public interface UserService {
      * @return 返回用户id
      */
     Integer getUserIdByUserName(String userName);
+
+    /**
+     * 通过用户id获取用户名
+     *
+     * @param userId 用户id
+     * @return 用户名或null
+     */
+    String getUserNameByUserId(Integer userId);
 }

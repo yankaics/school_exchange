@@ -1,5 +1,6 @@
 package com.schoolexchange.www.service;
 
+import com.schoolexchange.www.entity.GoodsCommentsVo;
 import com.schoolexchange.www.entity.UnreadMessage;
 
 import java.io.UnsupportedEncodingException;
@@ -37,4 +38,12 @@ public interface MessageService {
      * @param commentContent 评论内容
      */
     void addComments(Integer userId, Integer goodId, String commentContent);
+
+    /**
+     * 查询该商品的所有评论
+     *
+     * @param goodId 商品id
+     * @return 商品评论集合
+     */
+    List<GoodsCommentsVo> queryAllCommentsById(Integer goodId);
 }

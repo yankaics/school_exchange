@@ -2,6 +2,7 @@ package com.schoolexchange.www.action;
 
 import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
+import com.schoolexchange.www.entity.GoodsCommentsVo;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.UnreadMessage;
 import com.schoolexchange.www.entity.User;
@@ -194,6 +195,9 @@ public class SellGoodsController {
                 model.addAttribute("collection_status", 1);
             }
         }
+        //查询商品所有评论
+        List<GoodsCommentsVo> commentsList = messageService.queryAllCommentsById(sell_goods_id);
+        model.addAttribute("commentsList", commentsList);
         return "sell_goods_detailed";
     }
 

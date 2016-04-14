@@ -60,4 +60,12 @@ public interface UserDao {
      * @param user 用户信息
      */
     void updateUserGoodsCount(User user);
+
+    /**
+     * 查询用户名
+     *
+     * @param userId 用户id
+     * @return
+     */
+    List<String> queryUserName(Integer userId);
 }

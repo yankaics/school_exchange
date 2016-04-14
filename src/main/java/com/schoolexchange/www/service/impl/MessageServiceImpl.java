@@ -2,9 +2,11 @@ package com.schoolexchange.www.service.impl;
 
 import com.schoolexchange.www.dao.MessageDao;
 import com.schoolexchange.www.entity.GoodsComments;
+import com.schoolexchange.www.entity.GoodsCommentsVo;
 import com.schoolexchange.www.entity.Message;
 import com.schoolexchange.www.entity.UnreadMessage;
 import com.schoolexchange.www.service.MessageService;
+import com.schoolexchange.www.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageDao messageDao;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public void addMessage(Integer userId, Integer receiverId, String content) {
@@ -56,5 +61,19 @@ public class MessageServiceImpl implements MessageService {
         comments.setComment_content(commentContent);
         comments.setComment_time(new Date());
         messageDao.addComment(comments);
+    }
+
+    @Override
+    public List<GoodsCommentsVo> queryAllCommentsById(Integer goodId) {
+        List<GoodsCommentsVo> list = new ArrayList<>();
+        List<GoodsComments> gc = messageDao.queryGoodsComments(goodId);
+        if (0 != gc.size()) {
+            for (GoodsComments c : gc) {
+                list.add(new GoodsCommentsVo(userService.getUserNameByUserId(c.getUser_id()), c.getComment_content(), c.getComment_time()));
+            }
+        } else {
+            return null;
+        }
+        return list;
     }
 }

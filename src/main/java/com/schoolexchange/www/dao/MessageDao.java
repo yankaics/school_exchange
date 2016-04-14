@@ -32,4 +32,12 @@ public interface MessageDao {
      * @param comments 评论实体类
      */
     void addComment(GoodsComments comments);
+
+    /**
+     * 查询评论表
+     *
+     * @param goodId 商品id
+     * @return 返回评论表集合
+     */
+    List<GoodsComments> queryGoodsComments(Integer goodId);
 }

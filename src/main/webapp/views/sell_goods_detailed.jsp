@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page isELIgnored="false" %>
 <html>
 <head>
@@ -153,19 +154,16 @@
             </div>
             <!--发布评论框-->
             <div id="publish_comments"></div>
-            <div class="every_comments">
-                <a class="comment_author"> <span>东东东</span> <span class="comment_date">2016-04-13</span></a>
+            <c:forEach items="${commentsList}" var='cm'>
+                <div class="every_comments">
+                    <a class="comment_author"> <span>${cm.cName}</span>
+                        <span class="comment_date"><fmt:formatDate value="${cm.createDate}" pattern="yyyy-MM-dd" /></span>
+                    </a>
                         <span>
-                            萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
-                            萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
+                           ${cm.content}
                         </span>
-            </div>
-            <div class="every_comments">
-                <a class="comment_author"> <span>东东东</span> <span class="comment_date">2016-04-13</span></a>
-                        <span>
-                            萨达是的发送到发送到发送到发送到发送到发送到发送到法萨芬的asdfsadf阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到发送到非
-                        </span>
-            </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>

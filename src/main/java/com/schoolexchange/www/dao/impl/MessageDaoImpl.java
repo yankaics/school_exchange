@@ -36,4 +36,14 @@ public class MessageDaoImpl implements MessageDao {
     public void addComment(GoodsComments comments) {
         sessionFactory.openSession().save(comments);
     }
+
+    @Override
+    public List<GoodsComments> queryGoodsComments(Integer goodId) {
+        String hql = "from GoodsComments gc where gc.sell_goods_id=?0 order by gc.comment_time desc";
+
+        return sessionFactory.openSession().createQuery(hql)
+                                           .setParameter("0",goodId)
+                                           .list();
+
+    }
 }

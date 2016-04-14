@@ -129,4 +129,12 @@ public class UserDaoImpl implements UserDao {
                 .executeUpdate();
     }
 
+    @Override
+    public List<String> queryUserName(Integer userId) {
+        String hql = "select u.user_name from User u where u.id=?0";
+        return sessionFactory.openSession().createQuery(hql)
+                .setParameter("0", userId)
+                .list();
+    }
+
 }
