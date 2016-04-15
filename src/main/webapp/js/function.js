@@ -312,6 +312,19 @@ function selectUniversity() {
     if (university != "切换学校") {
         document.getElementById("span_university").innerText = university;
         /*Ajax异步把学校设置到session中,并刷新首页*/
+        $.post(
+            "/selectUniversity",
+            {
+                selectUniversity: university
+            },
+            function(data){
+                if ("no" == data){
+                    alert("选择出错");
+                }else {
+                    location.href = "/";
+                }
+            }
+        );
 
     }
 
@@ -1050,16 +1063,16 @@ function sendMessage() {
 }
 
 /*
-*检测评论内容
-*/
-function checkComments(){
+ *检测评论内容
+ */
+function checkComments() {
     var comment = document.getElementById("Smohan_text").value;
-    if (0 == comment.length || "" == comment){
+    if (0 == comment.length || "" == comment) {
         document.getElementById("comments_error").innerText = "评论不能为空";
         $(".comments_error").show();
         return false;
     }
-    if (comment.length > 500){
+    if (comment.length > 500) {
         document.getElementById("comments_error").innerText = "评论文字太长了";
         $(".comments_error").show();
         return false;

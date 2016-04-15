@@ -147,4 +147,11 @@ public class LoginController {
         }
     }
 
+    @RequestMapping(value = "/selectUniversity")
+    public void selectUniversity(HttpServletRequest request, HttpServletResponse response,
+                                String selectUniversity) throws IOException {
+        request.getSession().setAttribute("sx_university", selectUniversity);
+        response.getWriter().write("yes");
+    }
+
 }
