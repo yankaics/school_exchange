@@ -227,17 +227,33 @@ public class SellGoodsController {
         }
     }
 
+    /**
+     * 收藏未登录，跳转到登录
+     *
+     * @param requestUrl 收藏url缓存
+     */
     @RequestMapping(value = "/encryptCollectionUrl")
     public String collectionToLogin(String requestUrl) throws Exception {
         return "redirect:/to_login?requestUrl=" + requestUrlSecurity.encrypt(requestUrl);
     }
 
+    /**
+     * 跳转到留言界面
+     *
+     * @param publish 发送给的用户
+     */
     @RequestMapping(value = "/show_goods_details/message")
     public String leaveToMessage(String publish, Model model) {
         model.addAttribute("publish", publish);
         return "leaveToMessage";
     }
 
+    /**
+     * 保存留言到数据库
+     *
+     * @param receiver 接收者
+     * @param content  留言内容
+     */
     @RequestMapping(value = "/show_goods_details/sendMessage")
     public void sendMessage(String receiver, String content, HttpServletResponse response,
                             HttpServletRequest request) throws IOException {
@@ -256,6 +272,9 @@ public class SellGoodsController {
 
     }
 
+    /**
+     * 获取未读消息
+     */
     @RequestMapping(value = "/getUnreadMessage")
     public void getUnreadMessage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String user_name = (String) request.getSession().getAttribute("sx_user_name");
@@ -270,6 +289,13 @@ public class SellGoodsController {
         }
     }
 
+    /**
+     * 添加评论
+     *
+     * @param str_goodId     商品id
+     * @param commentContent 评论内容
+     * @throws Exception
+     */
     @RequestMapping(value = "/add_comments")
     public void addComments(HttpServletRequest request, HttpServletResponse response,
                             @RequestParam(value = "goodsId") String str_goodId, String commentContent) throws Exception {
