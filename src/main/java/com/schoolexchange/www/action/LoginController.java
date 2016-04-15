@@ -150,8 +150,15 @@ public class LoginController {
     @RequestMapping(value = "/selectUniversity")
     public void selectUniversity(HttpServletRequest request, HttpServletResponse response,
                                 String selectUniversity) throws IOException {
-        request.getSession().setAttribute("sx_university", selectUniversity);
-        response.getWriter().write("yes");
+        String sessionUniversity = (String) request.getSession().getAttribute("sx_university");
+        if (sessionUniversity.equals(selectUniversity)){
+            //选择的学校和当前session中一样，不需要跳转
+            response.getWriter().write("no");
+        }else {
+            request.getSession().setAttribute("sx_university", selectUniversity);
+            response.getWriter().write("yes");
+        }
+
     }
 
 }

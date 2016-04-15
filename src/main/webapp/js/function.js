@@ -317,10 +317,8 @@ function selectUniversity() {
             {
                 selectUniversity: university
             },
-            function(data){
-                if ("no" == data){
-                    alert("选择出错");
-                }else {
+            function (data) {
+                if ("yes" == data) {
                     location.href = "/";
                 }
             }
