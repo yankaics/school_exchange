@@ -46,4 +46,12 @@ public interface MessageService {
      * @return 商品评论集合
      */
     List<GoodsCommentsVo> queryAllCommentsById(Integer goodId);
+
+    /**
+     * 查询用户未读信息统计
+     *
+     * @param userId 用户id
+     * @return 消息统计
+     */
+    int queryUnreadMessageCount(Integer userId);
 }

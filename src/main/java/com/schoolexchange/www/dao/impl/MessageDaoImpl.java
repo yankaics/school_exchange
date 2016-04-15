@@ -42,8 +42,18 @@ public class MessageDaoImpl implements MessageDao {
         String hql = "from GoodsComments gc where gc.sell_goods_id=?0 order by gc.comment_time desc";
 
         return sessionFactory.openSession().createQuery(hql)
-                                           .setParameter("0",goodId)
-                                           .list();
+                .setParameter("0", goodId)
+                .list();
+
+    }
+
+    @Override
+    public int unreadMessageCount(Integer userId) {
+        String hql = "select count(*) from Message m where m.accept_user_id=?0 and m.message_state=0";
+        Long count =  (Long) sessionFactory.openSession().createQuery(hql)
+                .setParameter("0", userId)
+                .list().get(0);
+        return count.intValue();
 
     }
 }

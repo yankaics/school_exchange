@@ -172,6 +172,23 @@
             });
         });
     });
+    //获取未读消息个数
+    window.onload = function () {
+        var messageCount = document.getElementById("message_count");
+        if (messageCount != undefined){
+            $.post(
+                    "/queryMessageCount",
+                    function(data){
+                        if ("no" == data){
+                            messageCount.innerText = '0';
+                        }else {
+                            messageCount.innerText = data;
+                        }
+
+                    }
+            );
+        }
+    }
 </script>
 </body>
 </html>

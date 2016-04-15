@@ -76,4 +76,9 @@ public class MessageServiceImpl implements MessageService {
         }
         return list;
     }
+
+    @Override
+    public int queryUnreadMessageCount(Integer userId) {
+        return messageDao.unreadMessageCount(userId);
+    }
 }

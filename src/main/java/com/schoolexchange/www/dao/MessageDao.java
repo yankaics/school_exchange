@@ -40,4 +40,12 @@ public interface MessageDao {
      * @return 返回评论表集合
      */
     List<GoodsComments> queryGoodsComments(Integer goodId);
+
+    /**
+     * 查询消息统计
+     *
+     * @param userId 用户id
+     * @return 消息统计
+     */
+    int unreadMessageCount(Integer userId);
 }

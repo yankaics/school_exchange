@@ -72,7 +72,7 @@
             <div class="message">
                 <button class="btn btn-primary" style="background: #2BB8AA" type="button" onclick="show_sideBar(6,'#my_message');"
                         onmouseover="get_unread_message()" onmouseout="close_unread_message()">
-                    未读消息 <span class="badge">4</span>
+                    未读消息 <span class="badge" id="message_count"></span>
                 </button>
             </div>
             <div class="list-group message_div" onmouseout="close_unread_message();">
