@@ -1,10 +1,14 @@
 package com.schoolexchange.www.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by shadow on 2015/11/16.
  * Collection:收藏表
  */
-public class Collection {
+public class Collection implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public Collection(){}
 

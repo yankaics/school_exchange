@@ -1,9 +1,13 @@
 package com.schoolexchange.www.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by shadow on 16-2-28.
  */
-public class SellGoodsToUser {
+public class SellGoodsToUser implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 

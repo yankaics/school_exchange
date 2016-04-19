@@ -1,12 +1,15 @@
 package com.schoolexchange.www.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by shadow on 2015/11/16.
  * Message:留言表
  */
-public class Message {
+public class Message implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     public Message(){}
 

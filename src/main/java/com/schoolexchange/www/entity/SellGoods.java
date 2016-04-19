@@ -1,12 +1,16 @@
 package com.schoolexchange.www.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by shadow on 2015/11/16.
  * SellGoods:商品表
  */
-public class SellGoods {
+public class SellGoods implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     //id自增
     private Integer id;
 

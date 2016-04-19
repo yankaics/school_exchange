@@ -1,12 +1,15 @@
 package com.schoolexchange.www.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/4/14.
  * 商品评论Vo
  */
-public class GoodsCommentsVo {
+public class GoodsCommentsVo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     //评论名
     private String cName;

@@ -1,10 +1,14 @@
 package com.schoolexchange.www.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by shadow on 2015/11/16.
  *  Praise:点赞表
  */
-public class Praise {
+public class Praise implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     public Praise(){}
 
