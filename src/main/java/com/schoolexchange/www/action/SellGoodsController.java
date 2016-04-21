@@ -314,4 +314,10 @@ public class SellGoodsController {
         }
     }
 
+    @RequestMapping(value = "/searchGoods")
+    public String searchGoods(String searchContent){
+        System.out.println("搜索内容===" + searchContent);
+        return "search_result";
+    }
+
 }

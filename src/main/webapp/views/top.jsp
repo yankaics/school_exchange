@@ -22,8 +22,8 @@
         <!--搜索-->
         <div class="col-md-4">
             <div class="top_search">
-                <form class="form-search">
-                    <input type="text" id="search_content" placeholder="请输入商品名" size="30">
+                <form class="form-search" action="/searchGoods">
+                    <input type="text" id="search_content" placeholder="请输入商品名" size="30" name="searchContent">
                     <button type="submit">搜索</button>
                 </form>
             </div>
