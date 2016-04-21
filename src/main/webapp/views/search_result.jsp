@@ -19,20 +19,33 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="text-align: center;font-weight: bold;font-size: 16px;margin-top: 20px">检索结果</div>
+            <div class="alert alert-success" role="alert"
+                 style="text-align: center;font-weight: bold;font-size: 16px;margin-top: 20px">检索结果
+            </div>
         </div>
     </div>
 
     <div class="row">
-            <div class="col-md-2">
-                <a href="#" target="_blank" style="text-decoration: none;">
-                    <img src="../images/test01.jpg" class="img-thumbnail image_style">
-                    <em style="color: red">
-                        <b>¥</b>100
-                    </em><br/>
-                    <h5 style="color: black">java核心技术</h5>
-                </a>
+        <c:if test="${1 == result}">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="text-align: center;font-weight: bold;font-size: 16px;margin-top: 20px">
+                没有找到与"<span style="color:#FD7C28">${searchContent}</span>" 相关的商品
             </div>
+            <div class="col-md-3"></div>
+        </c:if>
+        <c:if test="${0 == result}">
+            <c:forEach items="${resultCollection}" var="goods">
+                <div class="col-md-2">
+                    <a href="/sell_goods?detail=${goods.id}" target="_blank" style="text-decoration: none;">
+                        <img src="${goods.goods_images}" class="img-thumbnail image_style">
+                        <em style="color: red">
+                            <b>¥</b>${goods.goods_price}
+                        </em><br/>
+                        <h5 style="color: black">${goods.goods_name}</h5>
+                    </a>
+                </div>
+            </c:forEach>
+        </c:if>
     </div>
 </div>
 <script src="../js/jquery-1.11.3.min.js"></script>

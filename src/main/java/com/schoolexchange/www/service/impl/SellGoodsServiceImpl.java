@@ -186,7 +186,13 @@ public class SellGoodsServiceImpl implements SellGoodsService {
 
     @Override
     public void cancelCollection(Integer goodId, Integer userId) {
-        sellGoodsDao.deleteCollection(goodId,userId);
+        sellGoodsDao.deleteCollection(goodId, userId);
+    }
+
+    @Override
+    public List<SellGoodsToUser> searchResult(String searchContent, String university) {
+        String hql = "select new com.schoolexchange.www.entity.SellGoodsToUser(sg.id,sg.goods_name,sg.goods_price,sg.goods_images) from SellGoods sg, User u where sg.user_id=u.id and u.user_university= '" + university + "' and sg.goods_name like '%" + searchContent + "%' order by sg.create_time desc";
+        return sellGoodsDao.sellGoodsQuery(hql);
     }
 
 

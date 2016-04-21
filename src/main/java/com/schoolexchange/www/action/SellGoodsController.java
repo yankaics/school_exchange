@@ -2,10 +2,7 @@ package com.schoolexchange.www.action;
 
 import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
-import com.schoolexchange.www.entity.GoodsCommentsVo;
-import com.schoolexchange.www.entity.SellGoods;
-import com.schoolexchange.www.entity.UnreadMessage;
-import com.schoolexchange.www.entity.User;
+import com.schoolexchange.www.entity.*;
 import com.schoolexchange.www.service.*;
 import org.apache.commons.codec.EncoderException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -315,8 +312,26 @@ public class SellGoodsController {
     }
 
     @RequestMapping(value = "/searchGoods")
-    public String searchGoods(String searchContent){
-        System.out.println("搜索内容===" + searchContent);
+    public String searchGoods(HttpServletRequest request, String searchContent, Model model) throws AuthException, EncoderException {
+        String university = (String) request.getSession().getAttribute("sx_university");
+        List<SellGoodsToUser> list = sellGoodsService.searchResult(searchContent, university);
+        qiniuService.setAccessKey("Zm0x_pMEfrKAWYlzSAnMXvdEXuOP3kaCFhBebuf4");
+        qiniuService.setSecretKey("Ypu9e__2WJxsL-MoUTGqUR4EyexVMdXd_DT-4Olx");
+        qiniuService.setDomain("7xo7z2.com1.z0.glb.clouddn.com");
+        qiniuService.setBucketName("schoolexchange");
+        if (list.size() != 0){
+            for (SellGoodsToUser stu : list) {
+                String goodsUrl = qiniuService.getDownloadFileUrl(stu.getGoods_images());
+                stu.setGoods_images(goodsUrl);
+            }
+        }
+        if (0 == list.size()){
+            model.addAttribute("result",1);
+        }else {
+            model.addAttribute("result",0);
+            model.addAttribute("resultCollection",list);
+        }
+        model.addAttribute("searchContent", searchContent);
         return "search_result";
     }
 

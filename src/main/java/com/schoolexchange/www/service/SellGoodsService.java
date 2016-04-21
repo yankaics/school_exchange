@@ -100,4 +100,13 @@ public interface SellGoodsService {
      * @param userId 用户id
      */
     void cancelCollection(Integer goodId, Integer userId);
+
+    /**
+     * 获取搜索结果
+     *
+     * @param searchContent 搜索内容
+     * @param university    所属大学
+     * @return 返回分页查询的结果集SellGoods
+     */
+    List<SellGoodsToUser> searchResult(String searchContent, String university);
 }
