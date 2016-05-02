@@ -1084,7 +1084,28 @@ function checkComments() {
     $(".comments_error").hide();
     return true;
 }
-
+/**
+ * 跳转到我的收藏
+ */
 function toRedirectMyCollection() {
     window.location.href = "/to_redirect_myCollection";
 }
+
+function cancelMyCollection(id) {
+    var span_id = "#" + id;
+    $(span_id).attr({"disabled": "disabled"});
+    $.post(
+        "/show_goods_details/collection",
+        {
+            goods_id: id,
+            type: "2"
+        },
+        function (data) {
+            if (data != "yes") {
+                alert("取消收藏出错了");
+            }
+        }
+    );
+    document.getElementById(id).innerText = "已取消收藏";
+}
+

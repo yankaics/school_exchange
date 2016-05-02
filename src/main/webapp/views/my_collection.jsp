@@ -28,7 +28,9 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <c:if test="${1 == isCollection}">
-                <h3>还没有收藏的商品</h3>
+                <div style="margin-top: 50px;">
+                    <h3 style="color: red">您没有收藏的商品</h3>
+                </div>
             </c:if>
             <c:if test="${0 == isCollection}">
                 <table class="table table-hover" style="margin-top: 30px">
@@ -45,7 +47,7 @@
                                 </a>
                             </td>
                             <td style="text-align: center">
-                                <button class="btn btn-danger">取消收藏</button>
+                                <button class="btn btn-danger" id="${collection.good_id}" onclick="cancelMyCollection(${collection.good_id})"> <span id="${collection.good_id}">取消收藏</span> </button>
                             </td>
                         </tr>
                     </c:forEach>
