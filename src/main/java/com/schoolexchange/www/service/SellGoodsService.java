@@ -1,5 +1,6 @@
 package com.schoolexchange.www.service;
 
+import com.schoolexchange.www.entity.MyCollection;
 import com.schoolexchange.www.entity.SellGoods;
 import com.schoolexchange.www.entity.SellGoodsToUser;
 import com.schoolexchange.www.entity.User;
@@ -118,4 +119,11 @@ public interface SellGoodsService {
      * @return 当前大学的商品总页数
      */
     int totalPageCount(String university, int maxResult);
+
+    /**
+     * 获取我的收藏
+     *
+     * @param user_id 用户id
+     */
+    List<MyCollection> getMyCollection(Integer user_id);
 }

@@ -419,6 +419,12 @@ function getSideNumber() {
             background: "gray"
         });
     }
+    //我的收藏颜色加深
+    if (3 == chooseStatus) {
+        $("#my_collection").css({
+            background: "gray"
+        });
+    }
     if (8 == chooseStatus) {
         $("#account_set").css({
             background: "gray"
@@ -1077,4 +1083,8 @@ function checkComments() {
     }
     $(".comments_error").hide();
     return true;
+}
+
+function toRedirectMyCollection() {
+    window.location.href = "/to_redirect_myCollection";
 }

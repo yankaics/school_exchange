@@ -22,7 +22,7 @@
             </div>
         </div>
         <div id="my_collection" class="item" onmouseover="deepen_div('#my_collection');"
-             onmouseout="noDeepen_div('#my_collection');">
+             onmouseout="noDeepen_div('#my_collection');" onclick="toRedirectMyCollection()">
                 <span>
                     <i class="glyphicon glyphicon-heart"></i>
                 </span>

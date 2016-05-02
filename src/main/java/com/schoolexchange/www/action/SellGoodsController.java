@@ -311,6 +311,11 @@ public class SellGoodsController {
         }
     }
 
+    /**
+     * 商品检索
+     *
+     * @param searchContent 搜索内容
+     */
     @RequestMapping(value = "/searchGoods")
     public String searchGoods(HttpServletRequest request, String searchContent, Model model) throws AuthException, EncoderException {
         String university = (String) request.getSession().getAttribute("sx_university");
@@ -319,20 +324,41 @@ public class SellGoodsController {
         qiniuService.setSecretKey("Ypu9e__2WJxsL-MoUTGqUR4EyexVMdXd_DT-4Olx");
         qiniuService.setDomain("7xo7z2.com1.z0.glb.clouddn.com");
         qiniuService.setBucketName("schoolexchange");
-        if (list.size() != 0){
+        if (list.size() != 0) {
             for (SellGoodsToUser stu : list) {
                 String goodsUrl = qiniuService.getDownloadFileUrl(stu.getGoods_images());
                 stu.setGoods_images(goodsUrl);
             }
         }
-        if (0 == list.size()){
-            model.addAttribute("result",1);
-        }else {
-            model.addAttribute("result",0);
-            model.addAttribute("resultCollection",list);
+        if (0 == list.size()) {
+            model.addAttribute("result", 1);
+        } else {
+            model.addAttribute("result", 0);
+            model.addAttribute("resultCollection", list);
         }
         model.addAttribute("searchContent", searchContent);
         return "search_result";
+    }
+
+    /**
+     * 跳转到我的收藏界面
+     */
+    @RequestMapping(value = "/to_redirect_myCollection")
+    public String toRedirectMyCollection(HttpServletRequest request, Model model) {
+        String userName = (String) request.getSession().getAttribute("sx_user_name");
+        Integer userId = userService.getUserIdByUserName(userName);
+        List<MyCollection> list = sellGoodsService.getMyCollection(userId);
+        //0表示有收藏，1还没有收藏
+        int isCollection = 0;
+        if (0 == list.size()) {
+            isCollection = 1;
+        }
+
+        model.addAttribute("isCollection", isCollection);
+        if (0 != list.size()) {
+            model.addAttribute("myCollections", list);
+        }
+        return "my_collection";
     }
 
 }

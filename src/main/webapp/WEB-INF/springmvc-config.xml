@@ -18,10 +18,10 @@
     <!--resource元素则指定SpringMVC哪些静态资源需要单独处理(不通过Dispatcher servlet)-->
     <mvc:resources mapping="/styles/**" location="/styles/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
-    <mvc:resources mapping="/images/**" location="/images/" />
-    <mvc:resources mapping="/editor/**" location="/editor/" />
-    <mvc:resources mapping="/fonts/**" location="/fonts/" />
-   <!-- <mvc:resources mapping="/views/**" location="/"/>-->
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/editor/**" location="/editor/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+    <!-- <mvc:resources mapping="/views/**" location="/"/>-->
     <!-- <mvc:interceptors>
          <mvc:interceptor>
              <mvc:mapping path="/*"/>
@@ -63,6 +63,7 @@
             <mvc:mapping path="/account/**"/>
             <mvc:mapping path="/to_release_goods/**"/>
             <mvc:mapping path="/show_goods_details/**"/>
+            <mvc:mapping path="/to_redirect_myCollection"/>
             <bean class="com.schoolexchange.www.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

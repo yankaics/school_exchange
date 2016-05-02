@@ -57,7 +57,7 @@
                     <ul class="personal_center" onmouseout="close_personal_center()">
                         <li onmouseover="show_personal_center()"><a href="#" onclick="show_sideBar(8,'#account_set');"><span
                                 class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;账号设置</a></li>
-                        <li onmouseover="show_personal_center()"><a href="#" onclick="show_sideBar(3,'#my_collection');"> <span
+                        <li onmouseover="show_personal_center()"><a href="#" onclick="toRedirectMyCollection()"> <span
                                 class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;收藏商品</a></li>
                         <li onmouseover="show_personal_center()"><a href="#" onclick="show_sideBar(4,'#already_release');"><span
                                 class="glyphicon glyphicon-triangle-left"></span>&nbsp;&nbsp;已发布商品</a></li>

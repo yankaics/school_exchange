@@ -2,10 +2,7 @@ package com.schoolexchange.www.service.impl;
 
 import com.schoolexchange.www.dao.SellGoodsDao;
 import com.schoolexchange.www.dao.UserDao;
-import com.schoolexchange.www.entity.Collection;
-import com.schoolexchange.www.entity.SellGoods;
-import com.schoolexchange.www.entity.SellGoodsToUser;
-import com.schoolexchange.www.entity.User;
+import com.schoolexchange.www.entity.*;
 import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.SellGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -201,10 +198,23 @@ public class SellGoodsServiceImpl implements SellGoodsService {
         List<SellGoodsToUser> list = sellGoodsDao.sellGoodsQuery(hql);
         int all = list.size();
         if (0 == all % maxResult) {
-            return all/maxResult;
-        }else {
-            return all/maxResult + 1;
+            return all / maxResult;
+        } else {
+            return all / maxResult + 1;
         }
+    }
+
+    @Override
+    public List<MyCollection> getMyCollection(Integer user_id) {
+        List<Object[]> list = sellGoodsDao.queryMyCollection(user_id);
+        List<MyCollection> myCollections = new ArrayList<>();
+        if (list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                MyCollection collection = new MyCollection((Integer) list.get(i)[0], (String) list.get(i)[1]);
+                myCollections.add(collection);
+            }
+        }
+        return myCollections;
     }
 
 

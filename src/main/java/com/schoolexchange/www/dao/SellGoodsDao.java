@@ -49,7 +49,6 @@ public interface SellGoodsDao {
      *
      * @param userName 用户名
      * @param goodId   商品id
-     * @return
      */
     List<Object[]> queryCollection(String userName, Integer goodId);
 
@@ -67,4 +66,11 @@ public interface SellGoodsDao {
      * @param userId  用户id
      */
     void deleteCollection(Integer goodsId, Integer userId);
+
+    /**
+     * 查询我的商品收藏
+     *
+     * @param user_id 当前用户id
+     */
+    List<Object[]> queryMyCollection(Integer user_id);
 }
