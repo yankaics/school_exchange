@@ -109,4 +109,13 @@ public interface SellGoodsService {
      * @return 返回分页查询的结果集SellGoods
      */
     List<SellGoodsToUser> searchResult(String searchContent, String university);
+
+    /**
+     * 获取总页数
+     *
+     * @param university 大学
+     * @param maxResult  每页显示的页数
+     * @return 当前大学的商品总页数
+     */
+    int totalPageCount(String university, int maxResult);
 }

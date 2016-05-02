@@ -134,7 +134,7 @@ public class SellGoodsServiceImpl implements SellGoodsService {
     public List<SellGoodsToUser> getPageContent(int pageNo, int maxResult, String university) {
         String hql = "select new com.schoolexchange.www.entity.SellGoodsToUser(sg.id,sg.goods_name,sg.goods_price,sg.goods_images) from SellGoods sg, User u where sg.user_id=u.id and u.user_university= '" + university + "' order by sg.create_time desc";
         List<SellGoodsToUser> list = sellGoodsDao.sellGoodsQuery(hql);
-        int start = (pageNo - 1) * 30;
+        int start = (pageNo - 1) * maxResult;
         int end = (start + maxResult - 1) <= list.size() - 1 ? (start + maxResult - 1) : (list.size() - 1);
         List<SellGoodsToUser> sellGoodsToUsers = new ArrayList<SellGoodsToUser>();
         if (0 != list.size()) {
@@ -193,6 +193,18 @@ public class SellGoodsServiceImpl implements SellGoodsService {
     public List<SellGoodsToUser> searchResult(String searchContent, String university) {
         String hql = "select new com.schoolexchange.www.entity.SellGoodsToUser(sg.id,sg.goods_name,sg.goods_price,sg.goods_images) from SellGoods sg, User u where sg.user_id=u.id and u.user_university= '" + university + "' and sg.goods_name like '%" + searchContent + "%' order by sg.create_time desc";
         return sellGoodsDao.sellGoodsQuery(hql);
+    }
+
+    @Override
+    public int totalPageCount(String university, int maxResult) {
+        String hql = "select new com.schoolexchange.www.entity.SellGoodsToUser(sg.id,sg.goods_name,sg.goods_price,sg.goods_images) from SellGoods sg, User u where sg.user_id=u.id and u.user_university= '" + university + "' order by sg.create_time desc";
+        List<SellGoodsToUser> list = sellGoodsDao.sellGoodsQuery(hql);
+        int all = list.size();
+        if (0 == all % maxResult) {
+            return all/maxResult;
+        }else {
+            return all/maxResult + 1;
+        }
     }
 
 

@@ -39,7 +39,8 @@
             <%--${status.count}:${indexGoods.get(status.count-1).goods_name}--%>
             <div class="row">
                 <div class="col-md-2">
-                    <a href="/sell_goods?detail=${indexGoods.get(status.index).id}" target="_blank" style="text-decoration: none;">
+                    <a href="/sell_goods?detail=${indexGoods.get(status.index).id}" target="_blank"
+                       style="text-decoration: none;">
                         <img src="${indexGoods.get(status.index).goods_images}" class="img-thumbnail image_style">
                         <em style="color: red">
                             <b>¥</b>${indexGoods.get(status.index).goods_price}
@@ -49,7 +50,8 @@
                 </div>
                 <c:if test="${indexGoods.size() > (status.index + 1 )}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 1).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 1).id}" target="_blank"
+                           style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 1 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">
@@ -62,7 +64,8 @@
 
                 <c:if test="${indexGoods.size() > (status.index + 2)}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 2).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 2).id}" target="_blank"
+                           style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 2 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">
@@ -74,7 +77,8 @@
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 3)}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 3).id}" target="_blank"
+                           style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 3 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">
@@ -86,7 +90,8 @@
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 4)}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 4).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 4).id}" target="_blank"
+                           style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 4 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">
@@ -98,7 +103,8 @@
                 </c:if>
                 <c:if test="${indexGoods.size() > (status.index + 5)}">
                     <div class="col-md-2">
-                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 5).id}" target="_blank" style="text-decoration: none;">
+                        <a href="/sell_goods?detail=${indexGoods.get(status.index + 5).id}" target="_blank"
+                           style="text-decoration: none;">
                             <img src="${indexGoods.get(status.index + 5 ).goods_images}"
                                  class="img-thumbnail image_style">
                             <em style="color: red">
@@ -116,35 +122,40 @@
 
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-7" style="text-align: center">
+        <div class="col-md-3">
             <nav>
                 <ul class="pagination pagination-lg">
                     <li>
-                        <a href="#" aria-label="Previous">
+                        <a href="/?pageNo=${pageNo-1}" aria-label="Previous">
                             <span aria-hidden="true">&lt;上一页</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li class="disabled"><a href="#">....</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">下一页&gt;</span>
                         </a>
                     </li>
                 </ul>
 
             </nav>
         </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <nav>
+                <ul class="pagination pagination-lg">
+                    <li>
+                        <a href="/?pageNo=${pageNo+1}" aria-label="Next">
+                            <span aria-hidden="true">下一页&gt;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <div class="col-md-1">
             <div style="margin-top: 35px;float: left">
-                共<span style="color: green">100</span>页
+                第<span style="color: green">${pageNo}</span>页
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <div style="margin-top: 35px;float: left">
+                共<span style="color: green">${totalPage}</span>页
+            </div>
+        </div>
     </div>
 </div>
 <p id="back-to-top" style="display: block;"><a href="#top"><span></span>回到顶部</a></p>
@@ -175,13 +186,13 @@
     //获取未读消息个数
     window.onload = function () {
         var messageCount = document.getElementById("message_count");
-        if (messageCount != undefined){
+        if (messageCount != undefined) {
             $.post(
                     "/queryMessageCount",
-                    function(data){
-                        if ("no" == data){
+                    function (data) {
+                        if ("no" == data) {
                             messageCount.innerText = '0';
-                        }else {
+                        } else {
                             messageCount.innerText = data;
                         }
 

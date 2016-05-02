@@ -82,7 +82,7 @@ public class LoginController {
      * @param model 存放大学
      */
     @RequestMapping(value = "/")
-    public String index(HttpSession session, Model model) throws AuthException, EncoderException {
+    public String index(HttpSession session, Model model, @RequestParam(value = "pageNo", required = false) String str_pageNo) throws AuthException, EncoderException {
         loogger.info("index visit log.............");
         String sx_university = userService.getUserUniversity(session);
         if (sx_university == null) {
@@ -91,7 +91,20 @@ public class LoginController {
         } else {
             model.addAttribute("sx_university", sx_university);
         }
-        List<SellGoodsToUser> list = sellGoodsService.getPageContent(1, 30, (String) session.getAttribute("sx_university"));
+        //每页显示总数
+        int count = 2;
+        //总页数
+        int totalPage = sellGoodsService.totalPageCount(sx_university, count);
+        //页码
+        int pageNo = null == str_pageNo ? 1 : Integer.parseInt(str_pageNo);
+        if (pageNo > totalPage) {
+            pageNo = totalPage;
+        }
+        if (pageNo < 1) {
+            pageNo = 1;
+        }
+        System.out.println("总页数== " + totalPage);
+        List<SellGoodsToUser> list = sellGoodsService.getPageContent(pageNo, count, (String) session.getAttribute("sx_university"));
         for (SellGoodsToUser sellGoodsToUser : list) {
             qiniuService.setAccessKey("Zm0x_pMEfrKAWYlzSAnMXvdEXuOP3kaCFhBebuf4");
             qiniuService.setSecretKey("Ypu9e__2WJxsL-MoUTGqUR4EyexVMdXd_DT-4Olx");
@@ -100,7 +113,8 @@ public class LoginController {
             String goodsUrl = qiniuService.getDownloadFileUrl(sellGoodsToUser.getGoods_images());
             sellGoodsToUser.setGoods_images(goodsUrl);
         }
-
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("totalPage", totalPage);
         model.addAttribute("indexGoods", list);
        /* System.out.println("结果=====" + sellGoodsService.getUniversityGoodsCount(0, "烟台大学文经学院"));*/
         return "index";
@@ -149,12 +163,12 @@ public class LoginController {
 
     @RequestMapping(value = "/selectUniversity")
     public void selectUniversity(HttpServletRequest request, HttpServletResponse response,
-                                String selectUniversity) throws IOException {
+                                 String selectUniversity) throws IOException {
         String sessionUniversity = (String) request.getSession().getAttribute("sx_university");
-        if (sessionUniversity.equals(selectUniversity)){
+        if (sessionUniversity.equals(selectUniversity)) {
             //选择的学校和当前session中一样，不需要跳转
             response.getWriter().write("no");
-        }else {
+        } else {
             request.getSession().setAttribute("sx_university", selectUniversity);
             response.getWriter().write("yes");
         }
