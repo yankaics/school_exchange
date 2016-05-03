@@ -425,6 +425,13 @@ function getSideNumber() {
             background: "gray"
         });
     }
+
+    if (6 == chooseStatus) {
+
+        $("#my_message").css({
+            background: "gray"
+        });
+    }
     if (8 == chooseStatus) {
         $("#account_set").css({
             background: "gray"
@@ -1109,3 +1116,6 @@ function cancelMyCollection(id) {
     document.getElementById(id).innerText = "已取消收藏";
 }
 
+function toRedirectMyMessage() {
+    window.location.href = "/to_redirect_my_message";
+}

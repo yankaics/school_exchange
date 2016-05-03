@@ -48,7 +48,7 @@ public class MessageServiceImpl implements MessageService {
         for (int i = 0; i < size; i++) {
             String name = URLEncoder.encode(list.get(i)[0].toString().replace(" ", ""), "utf8");
             String content = URLEncoder.encode(list.get(i)[1].toString().replace(" ", ""), "utf8");
-            messages.add(new UnreadMessage(name, content));
+            messages.add(new UnreadMessage(name, content,null));
         }
         return messages;
     }
@@ -80,5 +80,15 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int queryUnreadMessageCount(Integer userId) {
         return messageDao.unreadMessageCount(userId);
+    }
+
+    @Override
+    public List<UnreadMessage> getMyMessage(Integer userId) {
+        List<UnreadMessage> messages = new ArrayList<>();
+        List<Object[]> lists = messageDao.getMyMessage(userId);
+        for (int i = 0; i < lists.size(); i++) {
+            messages.add(new UnreadMessage((String)lists.get(i)[0],(String)lists.get(i)[1],(Date) lists.get(i)[2]));
+        }
+        return messages;
     }
 }

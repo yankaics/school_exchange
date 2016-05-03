@@ -56,4 +56,12 @@ public class MessageDaoImpl implements MessageDao {
         return count.intValue();
 
     }
+
+    @Override
+    public List<Object[]> getMyMessage(Integer userId) {
+        String hql = "select u.user_name,m.message_content,m.publishDate from User u,Message m where u.id=m.send_user_id and m.accept_user_id=?0 order by m.publishDate DESC";
+        return sessionFactory.openSession().createQuery(hql)
+                .setParameter("0", userId)
+                .list();
+    }
 }

@@ -52,7 +52,7 @@
             </div>
         </div>
         <div id="my_message" class="item" onmouseover="deepen_div('#my_message');"
-             onmouseout="noDeepen_div('#my_message');">
+             onmouseout="noDeepen_div('#my_message');" onclick="toRedirectMyMessage()">
                 <span>
                     <i class="glyphicon glyphicon-comment"></i>
                 </span>

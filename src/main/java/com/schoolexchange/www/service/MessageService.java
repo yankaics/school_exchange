@@ -54,4 +54,12 @@ public interface MessageService {
      * @return 消息统计
      */
     int queryUnreadMessageCount(Integer userId);
+
+    /**
+     * 查询我的消息
+     *
+     * @param userId 用户id
+     * @return 我的消息实体类集合
+     */
+    List<UnreadMessage> getMyMessage(Integer userId);
 }

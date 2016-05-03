@@ -48,4 +48,12 @@ public interface MessageDao {
      * @return 消息统计
      */
     int unreadMessageCount(Integer userId);
+
+    /**
+     * 获取我的所有消息,按时间排序
+     *
+     * @param userId 用户id
+     * @return 返回我的消息结果集合
+     */
+    List<Object[]> getMyMessage(Integer userId);
 }
