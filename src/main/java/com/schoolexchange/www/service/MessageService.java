@@ -62,4 +62,11 @@ public interface MessageService {
      * @return 我的消息实体类集合
      */
     List<UnreadMessage> getMyMessage(Integer userId);
+
+    /**
+     * 标记全部信息已读
+     *
+     * @param userId 用户id
+     */
+    void marksAllMessage(Integer userId);
 }

@@ -91,4 +91,9 @@ public class MessageServiceImpl implements MessageService {
         }
         return messages;
     }
+
+    @Override
+    public void marksAllMessage(Integer userId) {
+        messageDao.updateMessageStatus(userId);
+    }
 }

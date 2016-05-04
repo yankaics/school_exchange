@@ -50,7 +50,7 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public int unreadMessageCount(Integer userId) {
         String hql = "select count(*) from Message m where m.accept_user_id=?0 and m.message_state=0";
-        Long count =  (Long) sessionFactory.openSession().createQuery(hql)
+        Long count = (Long) sessionFactory.openSession().createQuery(hql)
                 .setParameter("0", userId)
                 .list().get(0);
         return count.intValue();
@@ -63,5 +63,13 @@ public class MessageDaoImpl implements MessageDao {
         return sessionFactory.openSession().createQuery(hql)
                 .setParameter("0", userId)
                 .list();
+    }
+
+    @Override
+    public void updateMessageStatus(Integer userId) {
+        String hql = "update Message m set m.message_state = 1 where m.accept_user_id=?0";
+        sessionFactory.openSession().createQuery(hql)
+                .setParameter("0", userId)
+                .executeUpdate();
     }
 }

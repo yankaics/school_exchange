@@ -64,6 +64,7 @@
             <mvc:mapping path="/to_release_goods/**"/>
             <mvc:mapping path="/show_goods_details/**"/>
             <mvc:mapping path="/to_redirect_myCollection"/>
+            <mvc:mapping path="/to_redirect_my_message"/>
             <bean class="com.schoolexchange.www.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

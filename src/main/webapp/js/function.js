@@ -1115,7 +1115,27 @@ function cancelMyCollection(id) {
     );
     document.getElementById(id).innerText = "已取消收藏";
 }
-
+/**
+ * 跳转到我的信息页面
+ */
 function toRedirectMyMessage() {
     window.location.href = "/to_redirect_my_message";
+}
+/**
+ * 全部标记已读
+ */
+function marksAllRead(){
+
+    $.post(
+        "/marksAllRead",
+        function(data){
+            if ("no" == data){
+                alert("登录过期了，请重新登录");
+            }else {
+                $("#readMessage").attr({"disabled": "disabled"});
+                document.getElementById("btn_span").innerText = "无未读消息";
+            }
+
+        }
+    );
 }

@@ -60,4 +60,17 @@ public class MessageController {
         }
         return "my_message";
     }
+
+    @RequestMapping(value = "/marksAllRead")
+    public void marksAllRead(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String user_name = (String) request.getSession().getAttribute("sx_user_name");
+        if (null == user_name) {
+            response.getWriter().write("no");
+        } else {
+            Integer userId = userService.getUserIdByUserName(user_name);
+            messageService.marksAllMessage(userId);
+            response.getWriter().write("yes");
+        }
+
+    }
 }

@@ -27,14 +27,24 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div style="float: right;margin-top: 30px">
-                <button class="btn btn-success btn-lg" style="background: #2BB8AA">全部标记为已读</button>
-            </div>
-            <div style="clear: both"></div>
+
             <c:if test="${status == 1}">
-                还没有消息
+                <div style="margin-top: 40px">
+                    <span style="text-align: center;font-weight: bold;font-size: 20px">
+                    还没有消息
+                    </span>
+                </div>
             </c:if>
             <c:if test="${status == 0}">
+                <div style="float: right;margin-top: 30px">
+                    <button class="btn btn-success btn-lg" style="background: #2BB8AA; display: none" id="readMessage" onclick="marksAllRead()">
+                        <span id="btn_span">全部标记为已读</span>
+                    </button>
+                    <button class="btn btn-success btn-lg" style="background: #2BB8AA;display: none" id="no_readMessage"
+                            disabled>无未读消息
+                    </button>
+                </div>
+                <div style="clear: both"></div>
                 <table class="table table-hover" style="margin-top: 20px">
                     <tr>
                         <td style="text-align: center"><h4 style="font-weight: bold">内容</h4></td>
@@ -51,7 +61,7 @@
                             </td>
                             <td style="text-align: center">
                                 <button class="btn btn-danger"><span>
-                                    <fmt:formatDate value="${message.publishDate}" pattern="yyyy-MM-dd HH:mm" />
+                                    <fmt:formatDate value="${message.publishDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </span></button>
                             </td>
                         </tr>
@@ -65,5 +75,31 @@
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/function.js"></script>
+<script>
+    //获取未读消息个数
+    window.onload = function () {
+        var messageCount = document.getElementById("message_count");
+        if (messageCount != undefined) {
+            $.post(
+                    "/queryMessageCount",
+                    function (data) {
+                        if ("no" == data) {
+                            messageCount.innerText = '0';
+
+                        } else {
+                            messageCount.innerText = data;
+                            if (0 == data) {
+                                $("#no_readMessage").show();
+                            } else {
+                                $("#readMessage").show();
+                            }
+
+                        }
+
+                    }
+            );
+        }
+    }
+</script>
 </body>
 </html>

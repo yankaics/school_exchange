@@ -56,4 +56,11 @@ public interface MessageDao {
      * @return 返回我的消息结果集合
      */
     List<Object[]> getMyMessage(Integer userId);
+
+    /**
+     * 修改用户信息状态
+     *
+     * @param userId 用户id
+     */
+    void updateMessageStatus(Integer userId);
 }
