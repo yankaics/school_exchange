@@ -11,5 +11,7 @@
                   not-null="true"/>
         <property name="goodsId" column="goods_id" type="java.lang.Integer"
                   not-null="true"/>
+        <property name="bDate" column="b_date" type="java.util.Date"
+                  not-null="true"/>
     </class>
 </hibernate-mapping>

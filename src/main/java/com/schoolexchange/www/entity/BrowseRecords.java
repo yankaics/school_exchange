@@ -1,6 +1,7 @@
 package com.schoolexchange.www.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by shadow on 2016/5/4.
@@ -13,7 +14,10 @@ public class BrowseRecords implements Serializable {
     private Integer id;         //id自增
     private Integer userId;     //用户id
     private Integer goodsId;    //商品id
-    public BrowseRecords(){}
+    private Date bDate;         //浏览日期
+
+    public BrowseRecords() {
+    }
 
     public Integer getId() {
         return id;
@@ -37,5 +41,13 @@ public class BrowseRecords implements Serializable {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public Date getbDate() {
+        return bDate;
+    }
+
+    public void setbDate(Date bDate) {
+        this.bDate = bDate;
     }
 }
