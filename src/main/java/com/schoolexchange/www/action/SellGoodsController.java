@@ -203,11 +203,9 @@ public class SellGoodsController {
         if (sessionUserName != null) {
             Integer userId = userService.getUserIdByUserName(sessionUserName);
             if (browseRecordService.isExistRecord(userId, sell_goods_id)) {
-                System.out.println("====true======");
                 //已经浏览过了
                 browseRecordService.updateMyRecord(userId, sell_goods_id);
             } else {
-                System.out.println("=====false====");
                 //第一次浏览，保存浏览记录
                 browseRecordService.saveBrowseRecord(userId, sell_goods_id);
             }

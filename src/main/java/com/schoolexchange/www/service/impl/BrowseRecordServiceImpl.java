@@ -32,7 +32,6 @@ public class BrowseRecordServiceImpl implements BrowseRecordService {
         browseRecords.setUserId(userId);
         browseRecords.setGoodsId(goodsId);
         Number c = browseRecordDao.queryCount(browseRecords);
-        System.out.println("====Number====" + c);
         if (0 == c.intValue()) {
             return false;
         } else {
