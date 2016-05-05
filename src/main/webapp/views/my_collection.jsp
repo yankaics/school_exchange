@@ -42,12 +42,15 @@
                     <c:forEach items="${myCollections}" var="collection">
                         <tr>
                             <td style="text-align: center">
-                                <a href="/sell_goods?detail=${collection.good_id}" target="_blank" style="text-decoration: none;color: #0f0f0f">
-                                    ${collection.goods_name}
+                                <a href="/sell_goods?detail=${collection.good_id}" target="_blank"
+                                   style="text-decoration: none;color: #0f0f0f">
+                                        ${collection.goods_name}
                                 </a>
                             </td>
                             <td style="text-align: center">
-                                <button class="btn btn-danger" id="${collection.good_id}" onclick="cancelMyCollection(${collection.good_id})"> <span id="${collection.good_id}">取消收藏</span> </button>
+                                <button class="btn btn-danger" id="${collection.good_id}"
+                                        onclick="cancelMyCollection(${collection.good_id})"><span
+                                        id="${collection.good_id}">取消收藏</span></button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -60,5 +63,32 @@
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/function.js"></script>
+<script>
+    //获取未读消息个数
+    window.onload = function () {
+        getSideNumber();
+        var messageCount = document.getElementById("message_count");
+        if (messageCount != undefined) {
+            $.post(
+                    "/queryMessageCount",
+                    function (data) {
+                        if ("no" == data) {
+                            messageCount.innerText = '0';
+
+                        } else {
+                            messageCount.innerText = data;
+                            if (0 == data) {
+                                $("#no_readMessage").show();
+                            } else {
+                                $("#readMessage").show();
+                            }
+
+                        }
+
+                    }
+            );
+        }
+    }
+</script>
 </body>
 </html>

@@ -432,6 +432,12 @@ function getSideNumber() {
             background: "gray"
         });
     }
+    if (7 == chooseStatus) {
+
+        $("#foot_print").css({
+            background: "gray"
+        });
+    }
     if (8 == chooseStatus) {
         $("#account_set").css({
             background: "gray"
@@ -1124,18 +1130,24 @@ function toRedirectMyMessage() {
 /**
  * 全部标记已读
  */
-function marksAllRead(){
+function marksAllRead() {
 
     $.post(
         "/marksAllRead",
-        function(data){
-            if ("no" == data){
+        function (data) {
+            if ("no" == data) {
                 alert("登录过期了，请重新登录");
-            }else {
+            } else {
                 $("#readMessage").attr({"disabled": "disabled"});
                 document.getElementById("btn_span").innerText = "无未读消息";
             }
 
         }
     );
+}
+/**
+ * 跳转到我的浏览足迹
+ */
+function toRedirectMyBrowseRecord() {
+    window.location.href = "/to_redirect_myBrowseRecord";
 }

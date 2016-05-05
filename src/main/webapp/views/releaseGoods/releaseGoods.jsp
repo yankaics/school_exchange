@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../styles/bootstrap.css">
     <link rel="stylesheet" href="../../styles/main.css">
 </head>
-<body onload="getSideNumber()">
+<body>
 <%@include file="../top.jsp" %>
 <div class="container" style="margin-top: 20px">
     <span id="sp" style="display: none">1</span>
@@ -268,6 +268,33 @@
     var endMonth = end.getMonth();
     ++endMonth;
     document.getElementById('goods_deadline').value = (end.getFullYear() + '-' + endMonth + '-' + end.getDate());
+</script>
+<script>
+    //获取未读消息个数
+    window.onload = function () {
+        getSideNumber();
+        var messageCount = document.getElementById("message_count");
+        if (messageCount != undefined) {
+            $.post(
+                    "/queryMessageCount",
+                    function (data) {
+                        if ("no" == data) {
+                            messageCount.innerText = '0';
+
+                        } else {
+                            messageCount.innerText = data;
+                            if (0 == data) {
+                                $("#no_readMessage").show();
+                            } else {
+                                $("#readMessage").show();
+                            }
+
+                        }
+
+                    }
+            );
+        }
+    }
 </script>
 </body>
 </html>

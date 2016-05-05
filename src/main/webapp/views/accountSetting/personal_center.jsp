@@ -224,7 +224,31 @@
 
     // 在 value 中有默认值
     $('#date_b').cxCalendar();
+    //获取未读消息个数
+    window.onload = function () {
+        getSideNumber();
+        var messageCount = document.getElementById("message_count");
+        if (messageCount != undefined) {
+            $.post(
+                    "/queryMessageCount",
+                    function (data) {
+                        if ("no" == data) {
+                            messageCount.innerText = '0';
 
+                        } else {
+                            messageCount.innerText = data;
+                            if (0 == data) {
+                                $("#no_readMessage").show();
+                            } else {
+                                $("#readMessage").show();
+                            }
+
+                        }
+
+                    }
+            );
+        }
+    }
 </script>
 </body>
 </html>

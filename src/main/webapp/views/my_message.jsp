@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../styles/bootstrap.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body onload="getSideNumber()">
+<body>
 <%@include file="top.jsp" %>
 <div class="container">
     <span id="sp" style="display: none">6</span>
@@ -78,6 +78,7 @@
 <script>
     //获取未读消息个数
     window.onload = function () {
+        getSideNumber();
         var messageCount = document.getElementById("message_count");
         if (messageCount != undefined) {
             $.post(
