@@ -43,6 +43,9 @@ public class SellGoodsController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private BrowseRecordService browseRecordService;
+
     /**
      * 跳转到发布或编辑商品界面
      *
@@ -195,6 +198,20 @@ public class SellGoodsController {
         //查询商品所有评论
         List<GoodsCommentsVo> commentsList = messageService.queryAllCommentsById(sell_goods_id);
         model.addAttribute("commentsList", commentsList);
+        //获取session用户id
+        String sessionUserName = (String) request.getSession().getAttribute("sx_user_name");
+        if (sessionUserName != null) {
+            Integer userId = userService.getUserIdByUserName(sessionUserName);
+            if (browseRecordService.isExistRecord(userId, sell_goods_id)) {
+                System.out.println("====true======");
+                //已经浏览过了
+                browseRecordService.updateMyRecord(userId, sell_goods_id);
+            } else {
+                System.out.println("=====false====");
+                //第一次浏览，保存浏览记录
+                browseRecordService.saveBrowseRecord(userId, sell_goods_id);
+            }
+        }
         return "sell_goods_detailed";
     }
 
