@@ -34,6 +34,7 @@
                 <value>com/schoolexchange/www/entity/Praise.hbm.xml</value>
                 <value>com/schoolexchange/www/entity/Collection.hbm.xml</value>
                 <value>com/schoolexchange/www/entity/Message.hbm.xml</value>
+                <value>com/schoolexchange/www/entity/BrowseRecords.hbm.xml</value>
             </list>
         </property>
         <!--定义Hibernate SessionFactory的属性-->
