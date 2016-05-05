@@ -62,7 +62,7 @@
             </div>
         </div>
         <div id="foot_print" class="item" onmouseover="deepen_div('#foot_print');"
-             onmouseout="noDeepen_div('#foot_print');">
+             onmouseout="noDeepen_div('#foot_print');" onclick="toRedirectMyBrowseRecord()">
                 <span>
                     <i class="glyphicon glyphicon-eye-open"></i>
                 </span>
