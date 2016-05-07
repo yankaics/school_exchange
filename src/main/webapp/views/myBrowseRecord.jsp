@@ -33,17 +33,33 @@
                     <td style="text-align: center"><h4 style="font-weight: bold">浏览商品名</h4></td>
                     <td style="text-align: center"><h4 style="font-weight: bold">时间</h4></td>
                 </tr>
-                <tr>
-                    <td style="text-align: center">
-                        <span>java编程思想</span>
-                    </td>
+                <c:if test="${list.size() == 0}">
+                    <div style="margin-top: 40px">
+                    <span style="text-align: center;font-weight: bold;font-size: 20px">
+                            最近暂无浏览记录
+                    </span>
+                    </div>
+                </c:if>
+                <c:if test="${list.size() != 0}">
+                    <c:forEach items="${list}" var="br">
+                        <tr>
+                            <td style="text-align: center">
+                                <a href="/sell_goods?detail=${br.goodsId}" target="_blank"
+                                   style="text-decoration: none;color: #0f0f0f">
+                                        ${br.goodsName}
+                                </a>
+                            </td>
 
-                    <td style="text-align: center">
-                        <button class="btn btn-danger">
-                            <span>2016-05-06</span>
-                        </button>
-                    </td>
-                </tr>
+                            <td style="text-align: center">
+                                <button class="btn btn-danger">
+                                    <span>
+                                        <fmt:formatDate value="${br.bDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
             </table>
         </div>
     </div>

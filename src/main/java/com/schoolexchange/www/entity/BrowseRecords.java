@@ -16,6 +16,8 @@ public class BrowseRecords implements Serializable {
     private Integer goodsId;    //商品id
     private Date bDate;         //浏览日期
 
+    private String goodsName;   //商品名
+
     public BrowseRecords() {
     }
 
@@ -49,5 +51,13 @@ public class BrowseRecords implements Serializable {
 
     public void setbDate(Date bDate) {
         this.bDate = bDate;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 }
