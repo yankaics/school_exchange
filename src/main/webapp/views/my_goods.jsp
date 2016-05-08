@@ -28,26 +28,26 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <table class="table table-hover" style="margin-top: 20px">
-                <tr>
-                    <td style="text-align: center"><h4 style="font-weight: bold">浏览商品名</h4></td>
-                    <td style="text-align: center"><h4 style="font-weight: bold">时间</h4></td>
-                    <td style="text-align: center"><h4 style="font-weight: bold">操作</h4></td>
-                </tr>
-                <c:if test="${list.size() == 0}">
-                    <div style="margin-top: 40px">
+            <c:if test="${list.size() == 0}">
+                <div style="margin-top: 40px">
                      <span style="text-align: center;font-weight: bold;font-size: 20px">
-                             最近暂无浏览记录
+                             您还没有发布任何商品
                      </span>
-                    </div>
-                </c:if>
-                <c:if test="${list.size() != 0}">
+                </div>
+            </c:if>
+            <c:if test="${list.size() != 0}">
+                <table class="table table-hover" style="margin-top: 20px">
+                    <tr>
+                        <td style="text-align: center"><h4 style="font-weight: bold">浏览商品名</h4></td>
+                        <td style="text-align: center"><h4 style="font-weight: bold">时间</h4></td>
+                        <td style="text-align: center"><h4 style="font-weight: bold">操作</h4></td>
+                    </tr>
                     <c:forEach items="${list}" var="sg">
                         <tr>
                             <td style="text-align: center">
                                 <a href="/sell_goods?detail=${sg.id}" target="_blank"
                                    style="text-decoration: none;color: #0f0f0f">
-                                    ${sg.goods_name}
+                                        ${sg.goods_name}
                                 </a>
                             </td>
 
@@ -66,9 +66,10 @@
                             </td>
                         </tr>
                     </c:forEach>
-                </c:if>
+                </table>
+            </c:if>
 
-            </table>
+
         </div>
     </div>
 </div>

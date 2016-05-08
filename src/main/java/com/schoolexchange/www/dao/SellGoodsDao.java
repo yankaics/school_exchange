@@ -73,4 +73,6 @@ public interface SellGoodsDao {
      * @param user_id 当前用户id
      */
     List<Object[]> queryMyCollection(Integer user_id);
+
+    void deleteGoodsById(Integer goodsId);
 }

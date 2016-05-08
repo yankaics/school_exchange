@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -388,4 +389,17 @@ public class SellGoodsController {
         return "my_goods";
     }
 
+    @RequestMapping("/deleteMyGoods")
+    public void deleteMyGoods(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "goodsId") String strGoodsId) throws IOException {
+        PrintWriter pw = response.getWriter();
+        String userName = (String) request.getSession().getAttribute("sx_user_name");
+        if (null == userName) {
+            pw.write("no");
+        } else {
+            //执行删除
+            Integer goodsId = Integer.parseInt(strGoodsId);
+            sellGoodsService.deleteMyGoodsById(goodsId);
+            pw.write("yes");
+        }
+    }
 }

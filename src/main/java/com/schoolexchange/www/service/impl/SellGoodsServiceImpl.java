@@ -229,5 +229,10 @@ public class SellGoodsServiceImpl implements SellGoodsService {
         return myGoods;
     }
 
+    @Override
+    public void deleteMyGoodsById(Integer goodsId) {
+        sellGoodsDao.deleteGoodsById(goodsId);
+    }
+
 
 }

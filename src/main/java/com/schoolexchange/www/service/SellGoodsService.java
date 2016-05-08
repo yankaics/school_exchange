@@ -134,4 +134,11 @@ public interface SellGoodsService {
      * @return 商品集合
      */
     List<SellGoods> getMyReleaseGoods(Integer userId);
+
+    /**
+     * 根据商品id删除商品
+     *
+     * @param goodsId 商品id
+     */
+    void deleteMyGoodsById(Integer goodsId);
 }

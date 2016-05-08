@@ -1172,7 +1172,19 @@ function deleteGoods(id) {
     var msg = "您真的确定要删除该商品?";
     if (confirm(msg) == true) {
         //执行删除
-        alert("删除的id==" + id);
+        $.post(
+            "/deleteMyGoods",
+            {
+                goodsId:id
+            },
+            function(data){
+                if ("no" == data){
+                    alert("还没登录，删除失败");
+                }else {
+                    window.location.href = "/to_redirect_my_goods";
+                }
+            }
+        );
         return true;
     } else {
         return false;

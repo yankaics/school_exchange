@@ -103,8 +103,16 @@ public class SellGoodsDaoImpl implements SellGoodsDao {
     public List<Object[]> queryMyCollection(Integer user_id) {
         String hql = "select c.goods_id,sg.goods_name from Collection c , SellGoods sg where  c.goods_id=sg.id and c.user_id=?0 ";
         return sessionFactory.openSession().createQuery(hql)
-                .setParameter("0",user_id)
+                .setParameter("0", user_id)
                 .list();
+    }
+
+    @Override
+    public void deleteGoodsById(Integer goodsId) {
+        String hql = "delete  SellGoods sg where sg.id=?0";
+        sessionFactory.openSession().createQuery(hql)
+                .setParameter("0", goodsId)
+                .executeUpdate();
     }
 
 
