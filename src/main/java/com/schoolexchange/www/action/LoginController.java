@@ -3,6 +3,7 @@ package com.schoolexchange.www.action;
 import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
 import com.schoolexchange.www.entity.SellGoodsToUser;
+import com.schoolexchange.www.entity.User;
 import com.schoolexchange.www.service.QiniuService;
 import com.schoolexchange.www.service.RequestUrlSecurity;
 import com.schoolexchange.www.service.SellGoodsService;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,4 +177,15 @@ public class LoginController {
 
     }
 
+    @RequestMapping(value = "/getMyHeadPic")
+    public void queryMyHeadPic(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        PrintWriter pw = response.getWriter();
+        String userName= (String) request.getSession().getAttribute("sx_user_name");
+        if (null == userName){
+            pw.write("no");
+        }else {
+            User user = userService.getCurrentUser(request.getSession());
+            pw.write(user.getUser_faces());
+        }
+    }
 }

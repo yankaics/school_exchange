@@ -50,7 +50,7 @@
             <div class="personal_avatar">
                 <div id="personal_center" onmouseover="show_personal_center()" onmouseout="close_personal_center()"
                      style="cursor: pointer">
-                    <img src="../images/csdn.jpg" class="img-circle" style="width: 50px;height: 50px">
+                    <img src="../images/csdn.jpg" class="img-circle" style="width: 50px;height: 50px" id="myHeadPic">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </div>
                 <div>
