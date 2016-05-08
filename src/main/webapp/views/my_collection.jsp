@@ -67,6 +67,15 @@
     //获取未读消息个数
     window.onload = function () {
         getSideNumber();
+        //获取当前用户头像
+        $.post(
+                "/getMyHeadPic",
+                function (data) {
+                    if ("no" != data) {
+                        document.getElementById("myHeadPic").src = "http://7xo7z2.com1.z0.glb.clouddn.com/" + data;
+                    }
+                }
+        );
         var messageCount = document.getElementById("message_count");
         if (messageCount != undefined) {
             $.post(
