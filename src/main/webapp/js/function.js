@@ -425,7 +425,12 @@ function getSideNumber() {
             background: "gray"
         });
     }
-
+    //我发布的商品
+    if (4 == chooseStatus) {
+        $("#already_release").css({
+            background: "gray"
+        });
+    }
     if (6 == chooseStatus) {
 
         $("#my_message").css({
@@ -1150,4 +1155,26 @@ function marksAllRead() {
  */
 function toRedirectMyBrowseRecord() {
     window.location.href = "/to_redirect_myBrowseRecord";
+}
+/**
+ * 跳转到我发布的商品
+ */
+function toRedirectMyGoods() {
+    window.location.href = "/to_redirect_my_goods";
+}
+
+/**
+ *删除商品
+ *
+ * @param id 商品id
+ */
+function deleteGoods(id) {
+    var msg = "您真的确定要删除该商品?";
+    if (confirm(msg) == true) {
+        //执行删除
+        alert("删除的id==" + id);
+        return true;
+    } else {
+        return false;
+    }
 }

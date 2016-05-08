@@ -126,4 +126,12 @@ public interface SellGoodsService {
      * @param user_id 用户id
      */
     List<MyCollection> getMyCollection(Integer user_id);
+
+    /**
+     * 返回我发布的商品集合
+     *
+     * @param userId 用户id
+     * @return 商品集合
+     */
+    List<SellGoods> getMyReleaseGoods(Integer userId);
 }

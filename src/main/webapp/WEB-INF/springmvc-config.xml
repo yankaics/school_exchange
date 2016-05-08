@@ -66,6 +66,7 @@
             <mvc:mapping path="/to_redirect_myCollection"/>
             <mvc:mapping path="/to_redirect_my_message"/>
             <mvc:mapping path="/to_redirect_myBrowseRecord"/>
+            <mvc:mapping path="/to_redirect_my_goods"/>
             <bean class="com.schoolexchange.www.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

@@ -217,5 +217,17 @@ public class SellGoodsServiceImpl implements SellGoodsService {
         return myCollections;
     }
 
+    @Override
+    public List<SellGoods> getMyReleaseGoods(Integer userId) {
+        List<SellGoods> myGoods = new ArrayList<>();
+        List<SellGoods> list = sellGoodsDao.getAllGoods();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUser_id().equals(userId)) {
+                myGoods.add(list.get(i));
+            }
+        }
+        return myGoods;
+    }
+
 
 }

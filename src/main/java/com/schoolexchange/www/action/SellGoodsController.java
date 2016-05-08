@@ -376,4 +376,16 @@ public class SellGoodsController {
         return "my_collection";
     }
 
+    /**
+     * 跳转到我发布的商品
+     */
+    @RequestMapping(value = "/to_redirect_my_goods")
+    public String toRedirectMyGoods(HttpServletRequest request, Model model) {
+        String userName = (String) request.getSession().getAttribute("sx_user_name");
+        Integer userId = userService.getUserIdByUserName(userName);
+        List<SellGoods> list = sellGoodsService.getMyReleaseGoods(userId);
+        model.addAttribute("list", list);
+        return "my_goods";
+    }
+
 }

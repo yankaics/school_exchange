@@ -32,7 +32,7 @@
             </div>
         </div>
         <div id="already_release" class="item" onmouseover="deepen_div('#already_release');"
-             onmouseout="noDeepen_div('#already_release');">
+             onmouseout="noDeepen_div('#already_release');" onclick="toRedirectMyGoods()">
                 <span>
                     <i class="glyphicon glyphicon-triangle-left"></i>
                 </span>
