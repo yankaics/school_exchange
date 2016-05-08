@@ -25,9 +25,9 @@
                 <div class="nav_top_all">
                     <a href="#all">所有商品</a>
                 </div>
-                <div class="nav_top_want">
+                <%--<div class="nav_top_want">
                     <a href="#want">求购商品</a>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
