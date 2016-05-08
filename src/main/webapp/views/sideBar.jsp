@@ -11,7 +11,7 @@
                 发布商品
             </div>
         </div>
-        <div id="buy_goods" class="item" onmouseover="deepen_div('#buy_goods');"
+       <%-- <div id="buy_goods" class="item" onmouseover="deepen_div('#buy_goods');"
              onmouseout="noDeepen_div('#buy_goods');">
                 <span>
                     <i class="glyphicon glyphicon-backward"></i>
@@ -20,7 +20,7 @@
             <div>
                 求购商品
             </div>
-        </div>
+        </div>--%>
         <div id="my_collection" class="item" onmouseover="deepen_div('#my_collection');"
              onmouseout="noDeepen_div('#my_collection');" onclick="toRedirectMyCollection()">
                 <span>
@@ -41,7 +41,7 @@
                 已发布商品
             </div>
         </div>
-        <div id="already_buy" class="item" onmouseover="deepen_div('#already_buy');"
+       <%-- <div id="already_buy" class="item" onmouseover="deepen_div('#already_buy');"
              onmouseout="noDeepen_div('#already_buy');">
                 <span>
                     <i class="glyphicon glyphicon-triangle-right"></i>
@@ -50,7 +50,7 @@
             <div>
                 已求购商品
             </div>
-        </div>
+        </div>--%>
         <div id="my_message" class="item" onmouseover="deepen_div('#my_message');"
              onmouseout="noDeepen_div('#my_message');" onclick="toRedirectMyMessage()">
                 <span>

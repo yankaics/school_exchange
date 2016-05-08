@@ -36,8 +36,8 @@
             <div class="list-group" style="" id="release_and_buy" onmouseout="close_release_buy_goods()">
                 <a href="/to_release_goods" class="list-group-item list-group-item-success"
                    onmouseover="show_release_buy_goods()" onclick="show_sideBar(1,'#release_goods');">发布</a>
-                <a href="#" class="list-group-item list-group-item-success"
-                   onmouseover="show_release_buy_goods()" onclick="show_sideBar(2,'#buy_goods');">求购</a>
+                <a href="/to_redirect_myCollection" class="list-group-item list-group-item-success"
+                   onmouseover="show_release_buy_goods()" onclick="show_sideBar(2,'#buy_goods');">收藏</a>
             </div>
 
         </div>

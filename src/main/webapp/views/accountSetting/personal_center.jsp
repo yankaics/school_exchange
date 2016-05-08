@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../styles/bootstrap.css">
     <link rel="stylesheet" href="../../styles/main.css">
 </head>
-<body onload="getSideNumber()">
+<body>
 <div class="container">
     <div class="row">
         <div class="col-md-5"></div>
