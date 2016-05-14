@@ -94,7 +94,7 @@ public class LoginController {
             model.addAttribute("sx_university", sx_university);
         }
         //每页显示总数
-        int count = 2;
+        int count = 12;
         //总页数
         int totalPage = sellGoodsService.totalPageCount(sx_university, count);
         //页码
